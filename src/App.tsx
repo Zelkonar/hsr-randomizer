@@ -125,6 +125,27 @@ function App() {
             All Characters
             <span className="block h-px flex-1 bg-white/10" />
           </p>
+          <div className="mb-4 flex justify-center">
+            <div className="relative inline-block group">
+              <button
+                type="button"
+                aria-describedby="allchars-hint"
+                className="w-8 h-8 rounded-full border border-white/10 bg-white/3 flex items-center justify-center text-sm font-bold text-white/90 hover:bg-white/5 focus:outline-none focus:ring-2 focus:ring-sky-400/40"
+              >
+                ?
+              </button>
+
+              <div
+                id="allchars-hint"
+                role="tooltip"
+                className="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 w-max max-w-xs opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-150"
+              >
+                <div className="px-3 py-2 rounded bg-gray-900/95">
+                  <span className="text-sm italic text-gray-300">Click a card to blacklist</span>
+                </div>
+              </div>
+            </div>
+          </div>
           <CharacterGrid
             characters={CHARACTERS}
             selectedIds={selectedIds}
