@@ -17,7 +17,7 @@ export function TeamView({
                 Your Team
                 <span className="block h-px flex-1 bg-white/10" />
             </p>
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+            <div className="grid grid-cols-2 gap-6 sm:grid-cols-4">
                 {team.members.map((member) => (
                     <CharacterCard
                         key={member.id}
@@ -29,6 +29,9 @@ export function TeamView({
                         imageFit="cover"
                     />
                 ))}
+            </div>
+            <div>
+                HELLO
             </div>
         </section>
     );

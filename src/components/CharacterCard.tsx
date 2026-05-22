@@ -69,7 +69,7 @@ function CharacterCardImpl({
       ].join(" ")}
       style={
         selected
-          ? { boxShadow: `0 0 24px 2px ${el.hex}55, 0 4px 24px rgba(0,0,0,0.5)` }
+          ? { boxShadow: `0 0 30px 5px ${el.hex}55, 0 4px 24px rgba(0,0,0,0.5)` }
           : undefined
       }
     >
@@ -78,7 +78,7 @@ function CharacterCardImpl({
         <img src={src} alt={displayName(character.name)} loading="lazy" className={imgClass} />
 
         {/* Bottom gradient overlay for text legibility */}
-        <div className={`absolute inset-0 bg-gradient-to-t ${GRADIENT}`} />
+        <div className={`absolute inset-0 bg-gradient-to-tr ${GRADIENT}`} />
 
         {/* Rarity stars — bottom left over the image */}
         <span
@@ -110,14 +110,6 @@ function CharacterCardImpl({
             </svg>
           )}
         </button>
-
-        {/* Selected indicator */}
-        {selected && (
-          <div
-            className="absolute inset-0 rounded-xl ring-2 ring-inset pointer-events-none"
-            style={{ borderColor: el.hex }}
-          />
-        )}
       </div>
 
       {/* Info strip */}
