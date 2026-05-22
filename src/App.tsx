@@ -3,7 +3,7 @@ import { CHARACTERS } from "./data/characters";
 import { CharacterGrid } from "./components/CharacterGrid";
 import { CharacterCard } from "./components/CharacterCard";
 import { useRoster } from "./hooks/useRoster";
-import { rollAndBuildTeam } from "./lib/randomize";
+import { rollAndBuildTeam, applyFilter, familyKey } from "./lib/randomize";
 import type { Team } from "./types/character";
 
 function App() {
@@ -16,6 +16,14 @@ function App() {
     });
     setTeam(team);
   }
+
+  // Determine whether there are enough available character *families* to randomize a full team.
+  const remainingAfterBlacklist = applyFilter(CHARACTERS, {
+    excludeIds: [...roster.blacklist],
+  });
+  const families = new Set(remainingAfterBlacklist.map((c) => familyKey(c)));
+  const availableCount = families.size;
+  const canRandomize = availableCount >= 4;
 
   const selectedIds = team
     ? new Set(team.members.map((m) => m.id))
@@ -62,16 +70,30 @@ function App() {
 
         {/* Randomize button */}
         <div className="flex justify-center">
-          <button
-            onClick={handleRandomize}
-            className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full px-10 py-3 font-bold uppercase tracking-widest text-sm transition-all duration-300 bg-white/5 border border-white/20 hover:border-sky-400/60 hover:bg-sky-500/10 hover:text-sky-300 hover:shadow-lg hover:shadow-sky-500/20 active:scale-95"
-          >
-            {/* Subtle animated shimmer */}
-            <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/5 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
-            <span>✦</span>
-            <span>Randomize</span>
-            <span>✦</span>
-          </button>
+          <div className="flex flex-col items-center">
+            <button
+              onClick={handleRandomize}
+              disabled={!canRandomize}
+              className={[
+                "group relative inline-flex items-center gap-2 overflow-hidden rounded-full px-10 py-3 font-bold uppercase tracking-widest text-sm transition-all duration-300 bg-white/5 border border-white/20",
+                canRandomize
+                  ? "hover:border-sky-400/60 hover:bg-sky-500/10 hover:text-sky-300 hover:shadow-lg hover:shadow-sky-500/20 active:scale-95"
+                  : "opacity-50 cursor-not-allowed",
+              ].join(" ")}
+            >
+              {/* Subtle animated shimmer */}
+              <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/5 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+              <span>✦</span>
+              <span>Randomize</span>
+              <span>✦</span>
+            </button>
+
+            {!canRandomize && (
+              <p className="mt-2 text-center text-sm text-rose-400">
+                Too many characters are blacklisted — add more characters to randomize.
+              </p>
+            )}
+          </div>
         </div>
 
         {/* Team display */}
