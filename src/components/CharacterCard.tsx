@@ -1,4 +1,5 @@
 import type { Character } from "../types/character";
+import { memo } from "react";
 import { getElementStyles } from "../utils/element";
 
 interface Props {
@@ -8,6 +9,10 @@ interface Props {
   onClick?: (character: Character) => void;
   /** Whether the user has blacklisted this character */
   blacklisted?: boolean;
+  /** Optional override URL for the image shown on the card (defaults to `character.icon`) */
+  imageSrc?: string;
+  /** How the image should be fit inside the card */
+  imageFit?: "contain" | "cover";
   /** Toggle blacklist state for this character by id */
   onToggleBlacklist?: (id: number) => void;
 }
@@ -24,16 +29,23 @@ function displayName(name: string): string {
   return name === "{NICKNAME}" ? "Trailblazer" : name;
 }
 
-export function CharacterCard({
+function CharacterCardImpl({
   character,
   selected = false,
   onClick,
   blacklisted = false,
   onToggleBlacklist,
+  imageSrc,
+  imageFit = "contain",
 }: Props) {
   const el = getElementStyles(character.element);
   const rarityBadge = RARITY_BADGE[character.rarity] ?? RARITY_BADGE[4];
   const stars = "★".repeat(character.rarity);
+  const src = imageSrc ?? character.preview;
+  const imgClass =
+    imageFit === "cover"
+      ? "h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+      : "h-full w-full object-contain object-center transition-transform duration-500 group-hover:scale-105 p-4";
 
   return (
     <article
@@ -63,12 +75,7 @@ export function CharacterCard({
     >
       {/* Portrait */}
       <div className="relative aspect-[3/4] w-full overflow-hidden bg-gray-800">
-        <img
-          src={character.portrait}
-          alt={displayName(character.name)}
-          loading="lazy"
-          className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-        />
+        <img src={src} alt={displayName(character.name)} loading="lazy" className={imgClass} />
 
         {/* Bottom gradient overlay for text legibility */}
         <div className={`absolute inset-0 bg-gradient-to-t ${GRADIENT}`} />
@@ -133,3 +140,5 @@ export function CharacterCard({
     </article>
   );
 }
+
+export const CharacterCard = memo(CharacterCardImpl);

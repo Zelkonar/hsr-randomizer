@@ -6,20 +6,21 @@ import { resolve } from "path";
 const INDEX_URL =
   "https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/index_min/en/characters.json";
 
+const SHA = '38b792b98bedc8c947a01c98a63c5b761c2f8ae9'
 const JSDELIVR_BASE =
-  "https://cdn.jsdelivr.net/gh/Mar-7th/StarRailRes@master";
+  "https://cdn.jsdelivr.net/gh/Mar-7th/StarRailRes@" + SHA;
 
 const OUT_PATH = resolve(process.cwd(), "src/data/characters.ts");
 
 const PATH_MAP: Record<string, string> = {
-  Knight:  "Preservation",
-  Rogue:   "The Hunt",
-  Mage:    "Erudition",
-  Shaman:  "Harmony",
+  Knight: "Preservation",
+  Rogue: "The Hunt",
+  Mage: "Erudition",
+  Shaman: "Harmony",
   Warlock: "Nihility",
   Warrior: "Destruction",
-  Priest:  "Abundance",
-  Memory:  "Remembrance",
+  Priest: "Abundance",
+  Memory: "Remembrance",
   Elation: "Elation",
 };
 
@@ -80,7 +81,7 @@ async function main() {
   ];
 
   for (const c of entries) {
-    const path    = mapPath(c.path);
+    const path = mapPath(c.path);
     const element = mapElement(c.element);
 
     lines.push(`  {`);

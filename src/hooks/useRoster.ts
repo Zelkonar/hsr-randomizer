@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo } from "react";
 
 const STORAGE_KEY = "hsr_blacklist";
 
@@ -19,6 +19,8 @@ function saveBlacklist(ids: Set<number>): void {
 export interface UseRosterReturn {
     /** IDs of characters the user has blacklisted. */
     blacklist: Set<number>;
+    /** Array form of the blacklist for stable prop usage. */
+    blacklistIds: number[];
     /** Whether a character is blacklisted. */
     isBlacklisted: (id: number) => boolean;
     /** Add a character to the blacklist. */
@@ -33,6 +35,8 @@ export interface UseRosterReturn {
 
 export function useRoster(): UseRosterReturn {
     const [blacklist, setBlacklist] = useState<Set<number>>(() => loadBlacklist());
+
+    const blacklistIds = useMemo(() => [...blacklist], [blacklist]);
 
     const update = useCallback((next: Set<number>) => {
         setBlacklist(next);
@@ -84,6 +88,7 @@ export function useRoster(): UseRosterReturn {
 
     return {
         blacklist,
+        blacklistIds,
         isBlacklisted,
         blacklistCharacter,
         unblacklistCharacter,

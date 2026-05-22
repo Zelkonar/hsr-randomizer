@@ -1,21 +1,22 @@
 import type { Character } from "../types/character";
+import { memo } from "react";
 import { CharacterCard } from "./CharacterCard";
 
 interface Props {
   characters: Character[];
-  selectedIds?: Set<number>;
+  selectedIds?: number[];
   onCardClick?: (character: Character) => void;
   /** IDs of blacklisted characters */
-  blacklist?: Set<number>;
+  blacklistIds?: number[];
   /** Toggle blacklist state for a character id */
   onToggleBlacklist?: (id: number) => void;
 }
 
-export function CharacterGrid({
+function CharacterGridImpl({
   characters,
   selectedIds,
   onCardClick,
-  blacklist,
+  blacklistIds,
   onToggleBlacklist,
 }: Props) {
   if (characters.length === 0) {
@@ -25,6 +26,9 @@ export function CharacterGrid({
       </div>
     );
   }
+
+  const blacklistSet = blacklistIds ? new Set(blacklistIds) : new Set<number>();
+  const selectedSet = selectedIds ? new Set(selectedIds) : new Set<number>();
 
   return (
     <div
@@ -41,12 +45,14 @@ export function CharacterGrid({
         <CharacterCard
           key={c.id}
           character={c}
-          selected={selectedIds?.has(c.id)}
+          selected={selectedSet.has(c.id)}
           onClick={onCardClick}
-          blacklisted={blacklist?.has(c.id)}
+          blacklisted={blacklistSet.has(c.id)}
           onToggleBlacklist={onToggleBlacklist}
         />
       ))}
     </div>
   );
 }
+
+export const CharacterGrid = memo(CharacterGridImpl);

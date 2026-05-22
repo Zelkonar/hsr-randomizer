@@ -6,7 +6,7 @@
 
 import type { Character } from "../types/character";
 
-const BASE = "https://cdn.jsdelivr.net/gh/Mar-7th/StarRailRes@master";
+const BASE = "https://cdn.jsdelivr.net/gh/Mar-7th/StarRailRes@38b792b98bedc8c947a01c98a63c5b761c2f8ae9";
 
 export const CHARACTERS: Character[] = [
   {
