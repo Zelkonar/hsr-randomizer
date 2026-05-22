@@ -40,7 +40,7 @@ function CharacterCardImpl({
   const imgClass =
     imageFit === "cover"
       ? "h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-      : "h-full w-full object-contain object-center transition-transform duration-500 group-hover:scale-105 p-4";
+      : "h-full w-full object-contain object-center transition-transform duration-500 group-hover:scale-105 p-1";
 
   return (
     <article
