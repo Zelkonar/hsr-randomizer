@@ -90,7 +90,7 @@ function App() {
 
             {!canRandomize && (
               <p className="mt-2 text-center text-sm text-rose-400">
-                Too many characters are blacklisted — add more characters to randomize.
+                Too many characters are blacklisted · add more characters to randomize.
               </p>
             )}
           </div>
