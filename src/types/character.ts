@@ -21,10 +21,10 @@ export interface Team {
   id: string;
   // Allow teams of 1–4 members.
   members:
-    | [Character]
-    | [Character, Character]
-    | [Character, Character, Character]
-    | [Character, Character, Character, Character];
+  | [Character]
+  | [Character, Character]
+  | [Character, Character, Character]
+  | [Character, Character, Character, Character];
   createdAt: number; // unix ms
   label?: string;
 }
@@ -33,5 +33,5 @@ export interface CharacterFilter {
   elements?: Element[];
   paths?: Path[];
   rarities?: Rarity[];
-  excludeIds?: string[];
+  excludeIds?: number[];
 }

@@ -2,19 +2,15 @@ import { useState } from "react";
 import { CHARACTERS } from "./data/characters";
 import { CharacterGrid } from "./components/CharacterGrid";
 import { CharacterCard } from "./components/CharacterCard";
-import { randomTeam } from "./lib/randomize";
+import { rollAndBuildTeam } from "./lib/randomize";
 import type { Team } from "./types/character";
 
 function App() {
   const [team, setTeam] = useState<Team | null>(null);
 
   function handleRandomize() {
-    const members = randomTeam(CHARACTERS);
-    setTeam({
-      id: crypto.randomUUID(),
-      members,
-      createdAt: Date.now(),
-    });
+    const team = rollAndBuildTeam(CHARACTERS, 4, {});
+    setTeam(team);
   }
 
   const selectedIds = team
