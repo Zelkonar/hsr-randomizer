@@ -13,6 +13,12 @@ npm install
 npm run dev
 ```
 
+### Character images (separate repo + jsDelivr)
+
+Images and sync scripts live in **[hsr-randomizer-assets](https://github.com/Zelkonar/hsr-randomizer-assets)**. This app only references jsDelivr URLs — see **[docs/assets.md](docs/assets.md)**.
+
+Quick flow: sync in assets repo → bump tag in `scripts/assets-cdn.config.ts` → `npm run generate:characters`.
+
 ### Deploying on Vercel
 
 Vercel runs `npm run build`, which automatically runs **`prebuild`** → `tsx scripts/write-version.ts` before `tsc` and `vite build`. You do not need to commit `src/data/version.ts` (it is gitignored and generated on every build).

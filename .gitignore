@@ -145,3 +145,4 @@ vite.config.ts.timestamp-*
 # custom
 .vscode/
 src/data/version.ts
+public/images/
