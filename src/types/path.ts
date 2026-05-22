@@ -1,0 +1,10 @@
+export type Path =
+  | "The Hunt"
+  | "Destruction"
+  | "Erudition"
+  | "Harmony"
+  | "Nihility"
+  | "Preservation"
+  | "Abundance"
+  | "Remembrance"
+  | "Elation"
