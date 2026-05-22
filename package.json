@@ -3,10 +3,14 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "engines": {
+    "node": ">=20.19.0"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "prebuild": "node scripts/write-version.ts",
+    "prebuild": "tsx scripts/write-version.ts",
+    "postinstall": "node scripts/install-native-bindings.mjs",
     "lint": "eslint .",
     "preview": "vite preview",
     "generate:characters": "tsx scripts/generate-characters.ts",
@@ -18,6 +22,16 @@
     "react-dom": "^19.2.6",
     "sharp": "^0.34.5",
     "tailwindcss": "^4.3.0"
+  },
+  "optionalDependencies": {
+    "@rolldown/binding-darwin-arm64": "1.0.2",
+    "@rolldown/binding-darwin-x64": "1.0.2",
+    "@rolldown/binding-win32-arm64-msvc": "1.0.2",
+    "@rolldown/binding-win32-x64-msvc": "1.0.2",
+    "@tailwindcss/oxide-darwin-arm64": "4.3.0",
+    "@tailwindcss/oxide-darwin-x64": "4.3.0",
+    "@tailwindcss/oxide-win32-arm64-msvc": "4.3.0",
+    "@tailwindcss/oxide-win32-x64-msvc": "4.3.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
