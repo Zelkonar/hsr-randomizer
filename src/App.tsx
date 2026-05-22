@@ -48,7 +48,6 @@ function App() {
           <TeamView
             team={team}
             isBlacklisted={roster.isBlacklisted}
-            toggleBlacklist={roster.toggleBlacklist}
           />
         )}
 
