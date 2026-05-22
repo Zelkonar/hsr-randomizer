@@ -92,7 +92,7 @@ async function main() {
     lines.push(`    rarity: ${c.rarity},`);
     lines.push(`    icon: \`\${BASE}/${c.icon}\`,`);
     lines.push(`    preview: \`\${BASE}/${c.preview}\`,`);
-    lines.push(`    portrait: \`\${BASE}/${c.portrait}\`,`);
+    lines.push(`    portrait: \`/images/portrait/${c.id}.webp\`,`);
     lines.push(`  },`);
   }
 

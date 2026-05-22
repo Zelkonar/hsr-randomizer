@@ -17,7 +17,7 @@ export const CHARACTERS: Character[] = [
     rarity: 4,
     icon: `${BASE}/icon/character/1001.png`,
     preview: `${BASE}/image/character_preview/1001.png`,
-    portrait: `${BASE}/image/character_portrait/1001.png`,
+    portrait: `/images/portrait/1001.webp`,
   },
   {
     id: 1002,
@@ -27,7 +27,7 @@ export const CHARACTERS: Character[] = [
     rarity: 4,
     icon: `${BASE}/icon/character/1002.png`,
     preview: `${BASE}/image/character_preview/1002.png`,
-    portrait: `${BASE}/image/character_portrait/1002.png`,
+    portrait: `/images/portrait/1002.webp`,
   },
   {
     id: 1003,
@@ -37,7 +37,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1003.png`,
     preview: `${BASE}/image/character_preview/1003.png`,
-    portrait: `${BASE}/image/character_portrait/1003.png`,
+    portrait: `/images/portrait/1003.webp`,
   },
   {
     id: 1004,
@@ -47,7 +47,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1004.png`,
     preview: `${BASE}/image/character_preview/1004.png`,
-    portrait: `${BASE}/image/character_portrait/1004.png`,
+    portrait: `/images/portrait/1004.webp`,
   },
   {
     id: 1005,
@@ -57,7 +57,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1005.png`,
     preview: `${BASE}/image/character_preview/1005.png`,
-    portrait: `${BASE}/image/character_portrait/1005.png`,
+    portrait: `/images/portrait/1005.webp`,
   },
   {
     id: 1006,
@@ -67,7 +67,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1006.png`,
     preview: `${BASE}/image/character_preview/1006.png`,
-    portrait: `${BASE}/image/character_portrait/1006.png`,
+    portrait: `/images/portrait/1006.webp`,
   },
   {
     id: 1008,
@@ -77,7 +77,7 @@ export const CHARACTERS: Character[] = [
     rarity: 4,
     icon: `${BASE}/icon/character/1008.png`,
     preview: `${BASE}/image/character_preview/1008.png`,
-    portrait: `${BASE}/image/character_portrait/1008.png`,
+    portrait: `/images/portrait/1008.webp`,
   },
   {
     id: 1009,
@@ -87,7 +87,7 @@ export const CHARACTERS: Character[] = [
     rarity: 4,
     icon: `${BASE}/icon/character/1009.png`,
     preview: `${BASE}/image/character_preview/1009.png`,
-    portrait: `${BASE}/image/character_portrait/1009.png`,
+    portrait: `/images/portrait/1009.webp`,
   },
   {
     id: 1013,
@@ -97,7 +97,7 @@ export const CHARACTERS: Character[] = [
     rarity: 4,
     icon: `${BASE}/icon/character/1013.png`,
     preview: `${BASE}/image/character_preview/1013.png`,
-    portrait: `${BASE}/image/character_portrait/1013.png`,
+    portrait: `/images/portrait/1013.webp`,
   },
   {
     id: 1014,
@@ -107,7 +107,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1014.png`,
     preview: `${BASE}/image/character_preview/1014.png`,
-    portrait: `${BASE}/image/character_portrait/1014.png`,
+    portrait: `/images/portrait/1014.webp`,
   },
   {
     id: 1015,
@@ -117,7 +117,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1015.png`,
     preview: `${BASE}/image/character_preview/1015.png`,
-    portrait: `${BASE}/image/character_portrait/1015.png`,
+    portrait: `/images/portrait/1015.webp`,
   },
   {
     id: 1101,
@@ -127,7 +127,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1101.png`,
     preview: `${BASE}/image/character_preview/1101.png`,
-    portrait: `${BASE}/image/character_portrait/1101.png`,
+    portrait: `/images/portrait/1101.webp`,
   },
   {
     id: 1102,
@@ -137,7 +137,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1102.png`,
     preview: `${BASE}/image/character_preview/1102.png`,
-    portrait: `${BASE}/image/character_portrait/1102.png`,
+    portrait: `/images/portrait/1102.webp`,
   },
   {
     id: 1103,
@@ -147,7 +147,7 @@ export const CHARACTERS: Character[] = [
     rarity: 4,
     icon: `${BASE}/icon/character/1103.png`,
     preview: `${BASE}/image/character_preview/1103.png`,
-    portrait: `${BASE}/image/character_portrait/1103.png`,
+    portrait: `/images/portrait/1103.webp`,
   },
   {
     id: 1104,
@@ -157,7 +157,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1104.png`,
     preview: `${BASE}/image/character_preview/1104.png`,
-    portrait: `${BASE}/image/character_portrait/1104.png`,
+    portrait: `/images/portrait/1104.webp`,
   },
   {
     id: 1105,
@@ -167,7 +167,7 @@ export const CHARACTERS: Character[] = [
     rarity: 4,
     icon: `${BASE}/icon/character/1105.png`,
     preview: `${BASE}/image/character_preview/1105.png`,
-    portrait: `${BASE}/image/character_portrait/1105.png`,
+    portrait: `/images/portrait/1105.webp`,
   },
   {
     id: 1106,
@@ -177,7 +177,7 @@ export const CHARACTERS: Character[] = [
     rarity: 4,
     icon: `${BASE}/icon/character/1106.png`,
     preview: `${BASE}/image/character_preview/1106.png`,
-    portrait: `${BASE}/image/character_portrait/1106.png`,
+    portrait: `/images/portrait/1106.webp`,
   },
   {
     id: 1107,
@@ -187,7 +187,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1107.png`,
     preview: `${BASE}/image/character_preview/1107.png`,
-    portrait: `${BASE}/image/character_portrait/1107.png`,
+    portrait: `/images/portrait/1107.webp`,
   },
   {
     id: 1108,
@@ -197,7 +197,7 @@ export const CHARACTERS: Character[] = [
     rarity: 4,
     icon: `${BASE}/icon/character/1108.png`,
     preview: `${BASE}/image/character_preview/1108.png`,
-    portrait: `${BASE}/image/character_portrait/1108.png`,
+    portrait: `/images/portrait/1108.webp`,
   },
   {
     id: 1109,
@@ -207,7 +207,7 @@ export const CHARACTERS: Character[] = [
     rarity: 4,
     icon: `${BASE}/icon/character/1109.png`,
     preview: `${BASE}/image/character_preview/1109.png`,
-    portrait: `${BASE}/image/character_portrait/1109.png`,
+    portrait: `/images/portrait/1109.webp`,
   },
   {
     id: 1110,
@@ -217,7 +217,7 @@ export const CHARACTERS: Character[] = [
     rarity: 4,
     icon: `${BASE}/icon/character/1110.png`,
     preview: `${BASE}/image/character_preview/1110.png`,
-    portrait: `${BASE}/image/character_portrait/1110.png`,
+    portrait: `/images/portrait/1110.webp`,
   },
   {
     id: 1111,
@@ -227,7 +227,7 @@ export const CHARACTERS: Character[] = [
     rarity: 4,
     icon: `${BASE}/icon/character/1111.png`,
     preview: `${BASE}/image/character_preview/1111.png`,
-    portrait: `${BASE}/image/character_portrait/1111.png`,
+    portrait: `/images/portrait/1111.webp`,
   },
   {
     id: 1112,
@@ -237,7 +237,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1112.png`,
     preview: `${BASE}/image/character_preview/1112.png`,
-    portrait: `${BASE}/image/character_portrait/1112.png`,
+    portrait: `/images/portrait/1112.webp`,
   },
   {
     id: 1201,
@@ -247,7 +247,7 @@ export const CHARACTERS: Character[] = [
     rarity: 4,
     icon: `${BASE}/icon/character/1201.png`,
     preview: `${BASE}/image/character_preview/1201.png`,
-    portrait: `${BASE}/image/character_portrait/1201.png`,
+    portrait: `/images/portrait/1201.webp`,
   },
   {
     id: 1202,
@@ -257,7 +257,7 @@ export const CHARACTERS: Character[] = [
     rarity: 4,
     icon: `${BASE}/icon/character/1202.png`,
     preview: `${BASE}/image/character_preview/1202.png`,
-    portrait: `${BASE}/image/character_portrait/1202.png`,
+    portrait: `/images/portrait/1202.webp`,
   },
   {
     id: 1203,
@@ -267,7 +267,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1203.png`,
     preview: `${BASE}/image/character_preview/1203.png`,
-    portrait: `${BASE}/image/character_portrait/1203.png`,
+    portrait: `/images/portrait/1203.webp`,
   },
   {
     id: 1204,
@@ -277,7 +277,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1204.png`,
     preview: `${BASE}/image/character_preview/1204.png`,
-    portrait: `${BASE}/image/character_portrait/1204.png`,
+    portrait: `/images/portrait/1204.webp`,
   },
   {
     id: 1205,
@@ -287,7 +287,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1205.png`,
     preview: `${BASE}/image/character_preview/1205.png`,
-    portrait: `${BASE}/image/character_portrait/1205.png`,
+    portrait: `/images/portrait/1205.webp`,
   },
   {
     id: 1206,
@@ -297,7 +297,7 @@ export const CHARACTERS: Character[] = [
     rarity: 4,
     icon: `${BASE}/icon/character/1206.png`,
     preview: `${BASE}/image/character_preview/1206.png`,
-    portrait: `${BASE}/image/character_portrait/1206.png`,
+    portrait: `/images/portrait/1206.webp`,
   },
   {
     id: 1207,
@@ -307,7 +307,7 @@ export const CHARACTERS: Character[] = [
     rarity: 4,
     icon: `${BASE}/icon/character/1207.png`,
     preview: `${BASE}/image/character_preview/1207.png`,
-    portrait: `${BASE}/image/character_portrait/1207.png`,
+    portrait: `/images/portrait/1207.webp`,
   },
   {
     id: 1208,
@@ -317,7 +317,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1208.png`,
     preview: `${BASE}/image/character_preview/1208.png`,
-    portrait: `${BASE}/image/character_portrait/1208.png`,
+    portrait: `/images/portrait/1208.webp`,
   },
   {
     id: 1209,
@@ -327,7 +327,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1209.png`,
     preview: `${BASE}/image/character_preview/1209.png`,
-    portrait: `${BASE}/image/character_portrait/1209.png`,
+    portrait: `/images/portrait/1209.webp`,
   },
   {
     id: 1210,
@@ -337,7 +337,7 @@ export const CHARACTERS: Character[] = [
     rarity: 4,
     icon: `${BASE}/icon/character/1210.png`,
     preview: `${BASE}/image/character_preview/1210.png`,
-    portrait: `${BASE}/image/character_portrait/1210.png`,
+    portrait: `/images/portrait/1210.webp`,
   },
   {
     id: 1211,
@@ -347,7 +347,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1211.png`,
     preview: `${BASE}/image/character_preview/1211.png`,
-    portrait: `${BASE}/image/character_portrait/1211.png`,
+    portrait: `/images/portrait/1211.webp`,
   },
   {
     id: 1212,
@@ -357,7 +357,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1212.png`,
     preview: `${BASE}/image/character_preview/1212.png`,
-    portrait: `${BASE}/image/character_portrait/1212.png`,
+    portrait: `/images/portrait/1212.webp`,
   },
   {
     id: 1213,
@@ -367,7 +367,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1213.png`,
     preview: `${BASE}/image/character_preview/1213.png`,
-    portrait: `${BASE}/image/character_portrait/1213.png`,
+    portrait: `/images/portrait/1213.webp`,
   },
   {
     id: 1214,
@@ -377,7 +377,7 @@ export const CHARACTERS: Character[] = [
     rarity: 4,
     icon: `${BASE}/icon/character/1214.png`,
     preview: `${BASE}/image/character_preview/1214.png`,
-    portrait: `${BASE}/image/character_portrait/1214.png`,
+    portrait: `/images/portrait/1214.webp`,
   },
   {
     id: 1215,
@@ -387,7 +387,7 @@ export const CHARACTERS: Character[] = [
     rarity: 4,
     icon: `${BASE}/icon/character/1215.png`,
     preview: `${BASE}/image/character_preview/1215.png`,
-    portrait: `${BASE}/image/character_portrait/1215.png`,
+    portrait: `/images/portrait/1215.webp`,
   },
   {
     id: 1217,
@@ -397,7 +397,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1217.png`,
     preview: `${BASE}/image/character_preview/1217.png`,
-    portrait: `${BASE}/image/character_portrait/1217.png`,
+    portrait: `/images/portrait/1217.webp`,
   },
   {
     id: 1218,
@@ -407,7 +407,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1218.png`,
     preview: `${BASE}/image/character_preview/1218.png`,
-    portrait: `${BASE}/image/character_portrait/1218.png`,
+    portrait: `/images/portrait/1218.webp`,
   },
   {
     id: 1220,
@@ -417,7 +417,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1220.png`,
     preview: `${BASE}/image/character_preview/1220.png`,
-    portrait: `${BASE}/image/character_portrait/1220.png`,
+    portrait: `/images/portrait/1220.webp`,
   },
   {
     id: 1221,
@@ -427,7 +427,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1221.png`,
     preview: `${BASE}/image/character_preview/1221.png`,
-    portrait: `${BASE}/image/character_portrait/1221.png`,
+    portrait: `/images/portrait/1221.webp`,
   },
   {
     id: 1222,
@@ -437,7 +437,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1222.png`,
     preview: `${BASE}/image/character_preview/1222.png`,
-    portrait: `${BASE}/image/character_portrait/1222.png`,
+    portrait: `/images/portrait/1222.webp`,
   },
   {
     id: 1223,
@@ -447,7 +447,7 @@ export const CHARACTERS: Character[] = [
     rarity: 4,
     icon: `${BASE}/icon/character/1223.png`,
     preview: `${BASE}/image/character_preview/1223.png`,
-    portrait: `${BASE}/image/character_portrait/1223.png`,
+    portrait: `/images/portrait/1223.webp`,
   },
   {
     id: 1224,
@@ -457,7 +457,7 @@ export const CHARACTERS: Character[] = [
     rarity: 4,
     icon: `${BASE}/icon/character/1224.png`,
     preview: `${BASE}/image/character_preview/1224.png`,
-    portrait: `${BASE}/image/character_portrait/1224.png`,
+    portrait: `/images/portrait/1224.webp`,
   },
   {
     id: 1225,
@@ -467,7 +467,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1225.png`,
     preview: `${BASE}/image/character_preview/1225.png`,
-    portrait: `${BASE}/image/character_portrait/1225.png`,
+    portrait: `/images/portrait/1225.webp`,
   },
   {
     id: 1301,
@@ -477,7 +477,7 @@ export const CHARACTERS: Character[] = [
     rarity: 4,
     icon: `${BASE}/icon/character/1301.png`,
     preview: `${BASE}/image/character_preview/1301.png`,
-    portrait: `${BASE}/image/character_portrait/1301.png`,
+    portrait: `/images/portrait/1301.webp`,
   },
   {
     id: 1302,
@@ -487,7 +487,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1302.png`,
     preview: `${BASE}/image/character_preview/1302.png`,
-    portrait: `${BASE}/image/character_portrait/1302.png`,
+    portrait: `/images/portrait/1302.webp`,
   },
   {
     id: 1303,
@@ -497,7 +497,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1303.png`,
     preview: `${BASE}/image/character_preview/1303.png`,
-    portrait: `${BASE}/image/character_portrait/1303.png`,
+    portrait: `/images/portrait/1303.webp`,
   },
   {
     id: 1304,
@@ -507,7 +507,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1304.png`,
     preview: `${BASE}/image/character_preview/1304.png`,
-    portrait: `${BASE}/image/character_portrait/1304.png`,
+    portrait: `/images/portrait/1304.webp`,
   },
   {
     id: 1305,
@@ -517,7 +517,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1305.png`,
     preview: `${BASE}/image/character_preview/1305.png`,
-    portrait: `${BASE}/image/character_portrait/1305.png`,
+    portrait: `/images/portrait/1305.webp`,
   },
   {
     id: 1306,
@@ -527,7 +527,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1306.png`,
     preview: `${BASE}/image/character_preview/1306.png`,
-    portrait: `${BASE}/image/character_portrait/1306.png`,
+    portrait: `/images/portrait/1306.webp`,
   },
   {
     id: 1307,
@@ -537,7 +537,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1307.png`,
     preview: `${BASE}/image/character_preview/1307.png`,
-    portrait: `${BASE}/image/character_portrait/1307.png`,
+    portrait: `/images/portrait/1307.webp`,
   },
   {
     id: 1308,
@@ -547,7 +547,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1308.png`,
     preview: `${BASE}/image/character_preview/1308.png`,
-    portrait: `${BASE}/image/character_portrait/1308.png`,
+    portrait: `/images/portrait/1308.webp`,
   },
   {
     id: 1309,
@@ -557,7 +557,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1309.png`,
     preview: `${BASE}/image/character_preview/1309.png`,
-    portrait: `${BASE}/image/character_portrait/1309.png`,
+    portrait: `/images/portrait/1309.webp`,
   },
   {
     id: 1310,
@@ -567,7 +567,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1310.png`,
     preview: `${BASE}/image/character_preview/1310.png`,
-    portrait: `${BASE}/image/character_portrait/1310.png`,
+    portrait: `/images/portrait/1310.webp`,
   },
   {
     id: 1312,
@@ -577,7 +577,7 @@ export const CHARACTERS: Character[] = [
     rarity: 4,
     icon: `${BASE}/icon/character/1312.png`,
     preview: `${BASE}/image/character_preview/1312.png`,
-    portrait: `${BASE}/image/character_portrait/1312.png`,
+    portrait: `/images/portrait/1312.webp`,
   },
   {
     id: 1313,
@@ -587,7 +587,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1313.png`,
     preview: `${BASE}/image/character_preview/1313.png`,
-    portrait: `${BASE}/image/character_portrait/1313.png`,
+    portrait: `/images/portrait/1313.webp`,
   },
   {
     id: 1314,
@@ -597,7 +597,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1314.png`,
     preview: `${BASE}/image/character_preview/1314.png`,
-    portrait: `${BASE}/image/character_portrait/1314.png`,
+    portrait: `/images/portrait/1314.webp`,
   },
   {
     id: 1315,
@@ -607,7 +607,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1315.png`,
     preview: `${BASE}/image/character_preview/1315.png`,
-    portrait: `${BASE}/image/character_portrait/1315.png`,
+    portrait: `/images/portrait/1315.webp`,
   },
   {
     id: 1317,
@@ -617,7 +617,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1317.png`,
     preview: `${BASE}/image/character_preview/1317.png`,
-    portrait: `${BASE}/image/character_portrait/1317.png`,
+    portrait: `/images/portrait/1317.webp`,
   },
   {
     id: 1321,
@@ -627,7 +627,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1321.png`,
     preview: `${BASE}/image/character_preview/1321.png`,
-    portrait: `${BASE}/image/character_portrait/1321.png`,
+    portrait: `/images/portrait/1321.webp`,
   },
   {
     id: 1401,
@@ -637,7 +637,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1401.png`,
     preview: `${BASE}/image/character_preview/1401.png`,
-    portrait: `${BASE}/image/character_portrait/1401.png`,
+    portrait: `/images/portrait/1401.webp`,
   },
   {
     id: 1402,
@@ -647,7 +647,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1402.png`,
     preview: `${BASE}/image/character_preview/1402.png`,
-    portrait: `${BASE}/image/character_portrait/1402.png`,
+    portrait: `/images/portrait/1402.webp`,
   },
   {
     id: 1403,
@@ -657,7 +657,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1403.png`,
     preview: `${BASE}/image/character_preview/1403.png`,
-    portrait: `${BASE}/image/character_portrait/1403.png`,
+    portrait: `/images/portrait/1403.webp`,
   },
   {
     id: 1404,
@@ -667,7 +667,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1404.png`,
     preview: `${BASE}/image/character_preview/1404.png`,
-    portrait: `${BASE}/image/character_portrait/1404.png`,
+    portrait: `/images/portrait/1404.webp`,
   },
   {
     id: 1405,
@@ -677,7 +677,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1405.png`,
     preview: `${BASE}/image/character_preview/1405.png`,
-    portrait: `${BASE}/image/character_portrait/1405.png`,
+    portrait: `/images/portrait/1405.webp`,
   },
   {
     id: 1406,
@@ -687,7 +687,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1406.png`,
     preview: `${BASE}/image/character_preview/1406.png`,
-    portrait: `${BASE}/image/character_portrait/1406.png`,
+    portrait: `/images/portrait/1406.webp`,
   },
   {
     id: 1407,
@@ -697,7 +697,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1407.png`,
     preview: `${BASE}/image/character_preview/1407.png`,
-    portrait: `${BASE}/image/character_portrait/1407.png`,
+    portrait: `/images/portrait/1407.webp`,
   },
   {
     id: 1408,
@@ -707,7 +707,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1408.png`,
     preview: `${BASE}/image/character_preview/1408.png`,
-    portrait: `${BASE}/image/character_portrait/1408.png`,
+    portrait: `/images/portrait/1408.webp`,
   },
   {
     id: 1409,
@@ -717,7 +717,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1409.png`,
     preview: `${BASE}/image/character_preview/1409.png`,
-    portrait: `${BASE}/image/character_portrait/1409.png`,
+    portrait: `/images/portrait/1409.webp`,
   },
   {
     id: 1410,
@@ -727,7 +727,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1410.png`,
     preview: `${BASE}/image/character_preview/1410.png`,
-    portrait: `${BASE}/image/character_portrait/1410.png`,
+    portrait: `/images/portrait/1410.webp`,
   },
   {
     id: 1412,
@@ -737,7 +737,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1412.png`,
     preview: `${BASE}/image/character_preview/1412.png`,
-    portrait: `${BASE}/image/character_portrait/1412.png`,
+    portrait: `/images/portrait/1412.webp`,
   },
   {
     id: 1413,
@@ -747,7 +747,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1413.png`,
     preview: `${BASE}/image/character_preview/1413.png`,
-    portrait: `${BASE}/image/character_portrait/1413.png`,
+    portrait: `/images/portrait/1413.webp`,
   },
   {
     id: 1414,
@@ -757,7 +757,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1414.png`,
     preview: `${BASE}/image/character_preview/1414.png`,
-    portrait: `${BASE}/image/character_portrait/1414.png`,
+    portrait: `/images/portrait/1414.webp`,
   },
   {
     id: 1415,
@@ -767,7 +767,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1415.png`,
     preview: `${BASE}/image/character_preview/1415.png`,
-    portrait: `${BASE}/image/character_portrait/1415.png`,
+    portrait: `/images/portrait/1415.webp`,
   },
   {
     id: 1501,
@@ -777,7 +777,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1501.png`,
     preview: `${BASE}/image/character_preview/1501.png`,
-    portrait: `${BASE}/image/character_portrait/1501.png`,
+    portrait: `/images/portrait/1501.webp`,
   },
   {
     id: 1502,
@@ -787,7 +787,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1502.png`,
     preview: `${BASE}/image/character_preview/1502.png`,
-    portrait: `${BASE}/image/character_portrait/1502.png`,
+    portrait: `/images/portrait/1502.webp`,
   },
   {
     id: 1504,
@@ -797,7 +797,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1504.png`,
     preview: `${BASE}/image/character_preview/1504.png`,
-    portrait: `${BASE}/image/character_portrait/1504.png`,
+    portrait: `/images/portrait/1504.webp`,
   },
   {
     id: 1505,
@@ -807,7 +807,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1505.png`,
     preview: `${BASE}/image/character_preview/1505.png`,
-    portrait: `${BASE}/image/character_portrait/1505.png`,
+    portrait: `/images/portrait/1505.webp`,
   },
   {
     id: 1506,
@@ -817,7 +817,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/1506.png`,
     preview: `${BASE}/image/character_preview/1506.png`,
-    portrait: `${BASE}/image/character_portrait/1506.png`,
+    portrait: `/images/portrait/1506.webp`,
   },
   {
     id: 8001,
@@ -827,7 +827,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/8001.png`,
     preview: `${BASE}/image/character_preview/8001.png`,
-    portrait: `${BASE}/image/character_portrait/8001.png`,
+    portrait: `/images/portrait/8001.webp`,
   },
   {
     id: 8002,
@@ -837,7 +837,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/8002.png`,
     preview: `${BASE}/image/character_preview/8002.png`,
-    portrait: `${BASE}/image/character_portrait/8002.png`,
+    portrait: `/images/portrait/8002.webp`,
   },
   {
     id: 8003,
@@ -847,7 +847,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/8003.png`,
     preview: `${BASE}/image/character_preview/8003.png`,
-    portrait: `${BASE}/image/character_portrait/8003.png`,
+    portrait: `/images/portrait/8003.webp`,
   },
   {
     id: 8004,
@@ -857,7 +857,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/8004.png`,
     preview: `${BASE}/image/character_preview/8004.png`,
-    portrait: `${BASE}/image/character_portrait/8004.png`,
+    portrait: `/images/portrait/8004.webp`,
   },
   {
     id: 8005,
@@ -867,7 +867,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/8005.png`,
     preview: `${BASE}/image/character_preview/8005.png`,
-    portrait: `${BASE}/image/character_portrait/8005.png`,
+    portrait: `/images/portrait/8005.webp`,
   },
   {
     id: 8006,
@@ -877,7 +877,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/8006.png`,
     preview: `${BASE}/image/character_preview/8006.png`,
-    portrait: `${BASE}/image/character_portrait/8006.png`,
+    portrait: `/images/portrait/8006.webp`,
   },
   {
     id: 8007,
@@ -887,7 +887,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/8007.png`,
     preview: `${BASE}/image/character_preview/8007.png`,
-    portrait: `${BASE}/image/character_portrait/8007.png`,
+    portrait: `/images/portrait/8007.webp`,
   },
   {
     id: 8008,
@@ -897,7 +897,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/8008.png`,
     preview: `${BASE}/image/character_preview/8008.png`,
-    portrait: `${BASE}/image/character_portrait/8008.png`,
+    portrait: `/images/portrait/8008.webp`,
   },
   {
     id: 8009,
@@ -907,7 +907,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/8009.png`,
     preview: `${BASE}/image/character_preview/8009.png`,
-    portrait: `${BASE}/image/character_portrait/8009.png`,
+    portrait: `/images/portrait/8009.webp`,
   },
   {
     id: 8010,
@@ -917,7 +917,7 @@ export const CHARACTERS: Character[] = [
     rarity: 5,
     icon: `${BASE}/icon/character/8010.png`,
     preview: `${BASE}/image/character_preview/8010.png`,
-    portrait: `${BASE}/image/character_portrait/8010.png`,
+    portrait: `/images/portrait/8010.webp`,
   },
 ];
 
