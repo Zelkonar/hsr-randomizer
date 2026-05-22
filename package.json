@@ -8,6 +8,7 @@
   },
   "scripts": {
     "dev": "vite",
+    "predev": "tsx scripts/write-version.ts",
     "build": "tsc -b && vite build",
     "prebuild": "tsx scripts/write-version.ts",
     "postinstall": "node scripts/install-native-bindings.mjs",

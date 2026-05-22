@@ -13,6 +13,12 @@ npm install
 npm run dev
 ```
 
+### Deploying on Vercel
+
+Vercel runs `npm run build`, which automatically runs **`prebuild`** → `tsx scripts/write-version.ts` before `tsc` and `vite build`. You do not need to commit `src/data/version.ts` (it is gitignored and generated on every build).
+
+Default project settings are enough: **Framework Preset: Vite**, **Build Command: `npm run build`**, **Output Directory: `dist`**.
+
 ### Windows notes
 
 - Use Node 20+ from [nodejs.org](https://nodejs.org/) or `nvm-windows`. The repo ships `.nvmrc` with `22`.
