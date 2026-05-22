@@ -10,3 +10,9 @@ export type Challenge =
     | "Anomoly Arbitration Knight 3"
     | "Anomoly Arbitration King"
     | "Anomoly Arbitration Plight"; // randomized plight for giga whales lmao
+
+export type ChallengeGroups =
+    | "Memory of Chaos"
+    | "Pure Fiction"
+    | "Apocalyptic Shadow"
+    | "Anomoly Arbitration"

@@ -821,7 +821,7 @@ export const CHARACTERS: Character[] = [
   },
   {
     id: 8001,
-    name: "{NICKNAME}",
+    name: "Trailblazer",
     element: "Physical",
     path: "Destruction",
     rarity: 5,
@@ -831,7 +831,7 @@ export const CHARACTERS: Character[] = [
   },
   {
     id: 8002,
-    name: "{NICKNAME}",
+    name: "Trailblazer",
     element: "Physical",
     path: "Destruction",
     rarity: 5,
@@ -841,7 +841,7 @@ export const CHARACTERS: Character[] = [
   },
   {
     id: 8003,
-    name: "{NICKNAME}",
+    name: "Trailblazer",
     element: "Fire",
     path: "Preservation",
     rarity: 5,
@@ -851,7 +851,7 @@ export const CHARACTERS: Character[] = [
   },
   {
     id: 8004,
-    name: "{NICKNAME}",
+    name: "Trailblazer",
     element: "Fire",
     path: "Preservation",
     rarity: 5,
@@ -861,7 +861,7 @@ export const CHARACTERS: Character[] = [
   },
   {
     id: 8005,
-    name: "{NICKNAME}",
+    name: "Trailblazer",
     element: "Imaginary",
     path: "Harmony",
     rarity: 5,
@@ -871,7 +871,7 @@ export const CHARACTERS: Character[] = [
   },
   {
     id: 8006,
-    name: "{NICKNAME}",
+    name: "Trailblazer",
     element: "Imaginary",
     path: "Harmony",
     rarity: 5,
@@ -881,7 +881,7 @@ export const CHARACTERS: Character[] = [
   },
   {
     id: 8007,
-    name: "{NICKNAME}",
+    name: "Trailblazer",
     element: "Ice",
     path: "Remembrance",
     rarity: 5,
@@ -891,7 +891,7 @@ export const CHARACTERS: Character[] = [
   },
   {
     id: 8008,
-    name: "{NICKNAME}",
+    name: "Trailblazer",
     element: "Ice",
     path: "Remembrance",
     rarity: 5,
@@ -901,7 +901,7 @@ export const CHARACTERS: Character[] = [
   },
   {
     id: 8009,
-    name: "{NICKNAME}",
+    name: "Trailblazer",
     element: "Lightning",
     path: "Elation",
     rarity: 5,
@@ -911,7 +911,7 @@ export const CHARACTERS: Character[] = [
   },
   {
     id: 8010,
-    name: "{NICKNAME}",
+    name: "Trailblazer",
     element: "Lightning",
     path: "Elation",
     rarity: 5,

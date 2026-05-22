@@ -17,17 +17,12 @@ interface Props {
   onToggleBlacklist?: (id: number) => void;
 }
 
-const GRADIENT: string = "from-black/70 via-black/30 to-transparent";
+const GRADIENT: string = "from-black/75 via-black/5 to-transparent";
 
 const RARITY_BADGE: Record<number, string> = {
   5: "text-amber-400",
   4: "text-purple-400",
 };
-
-/** Trailblazer entries come in as "{NICKNAME}" from the data source. */
-function displayName(name: string): string {
-  return name === "{NICKNAME}" ? "Trailblazer" : name;
-}
 
 function CharacterCardImpl({
   character,
@@ -75,10 +70,10 @@ function CharacterCardImpl({
     >
       {/* Portrait */}
       <div className="relative aspect-[3/4] w-full overflow-hidden bg-gray-800">
-        <img src={src} alt={displayName(character.name)} loading="lazy" className={imgClass} />
+        <img src={src} alt={character.name} loading="lazy" className={imgClass} />
 
         {/* Bottom gradient overlay for text legibility */}
-        <div className={`absolute inset-0 bg-gradient-to-tr ${GRADIENT}`} />
+        <div className={`absolute inset-0 bg-gradient-to-t ${GRADIENT}`} />
 
         {/* Rarity stars — bottom left over the image */}
         <span
@@ -89,7 +84,7 @@ function CharacterCardImpl({
         </span>
 
         {/* Blacklist toggle — top-right (icon-only, unobtrusive) */}
-        <button
+        {onToggleBlacklist ? (<button
           onClick={(e) => {
             e.stopPropagation();
             onToggleBlacklist?.(character.id);
@@ -109,14 +104,14 @@ function CharacterCardImpl({
               <path d="M5 12h14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           )}
-        </button>
+        </button>) : null}
       </div>
 
       {/* Info strip */}
       <div className="flex flex-col gap-1 px-3 py-2">
         {/* Name */}
         <p className="truncate text-sm font-semibold text-white leading-tight">
-          {displayName(character.name)}
+          {character.name}
         </p>
 
         {/* Element + Path */}

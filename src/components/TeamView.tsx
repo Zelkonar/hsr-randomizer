@@ -24,14 +24,13 @@ export function TeamView({
                         character={member}
                         selected
                         blacklisted={isBlacklisted(member.id)}
-                        onToggleBlacklist={toggleBlacklist}
                         imageSrc={member.portrait}
                         imageFit="cover"
                     />
                 ))}
             </div>
             <div>
-                HELLO
+
             </div>
         </section>
     );

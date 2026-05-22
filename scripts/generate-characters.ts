@@ -82,7 +82,11 @@ async function main() {
 
     lines.push(`  {`);
     lines.push(`    id: ${c.id},`);
-    lines.push(`    name: ${JSON.stringify(c.name)},`);
+    if (Number.parseInt(c.id) >= 8000) {
+      lines.push(`    name: "Trailblazer",`);
+    } else {
+      lines.push(`    name: ${JSON.stringify(c.name)},`);
+    }
     lines.push(`    element: "${element}",`);
     lines.push(`    path: "${path}",`);
     lines.push(`    rarity: ${c.rarity},`);
