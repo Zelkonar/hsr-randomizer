@@ -2,14 +2,18 @@ import { useState } from "react";
 import { CHARACTERS } from "./data/characters";
 import { CharacterGrid } from "./components/CharacterGrid";
 import { CharacterCard } from "./components/CharacterCard";
+import { useRoster } from "./hooks/useRoster";
 import { rollAndBuildTeam } from "./lib/randomize";
 import type { Team } from "./types/character";
 
 function App() {
   const [team, setTeam] = useState<Team | null>(null);
+  const roster = useRoster();
 
   function handleRandomize() {
-    const team = rollAndBuildTeam(CHARACTERS, 4, {});
+    const team = rollAndBuildTeam(CHARACTERS, 4, {
+      excludeIds: [...roster.blacklist],
+    });
     setTeam(team);
   }
 
@@ -22,7 +26,7 @@ function App() {
       {/* Header */}
       <header className="relative flex flex-col items-center justify-center border-b border-white/10 px-6 py-10 overflow-hidden">
         <span className="absolute top-3 left-4 text-[10px] font-mono tracking-widest text-purple-300/40 select-none">
-          v0.0.1-alpha
+          v0.0.2-alpha
         </span>
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div className="h-32 w-96 rounded-full bg-sky-500/10 blur-3xl" />
@@ -80,7 +84,13 @@ function App() {
             </p>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
               {team.members.map((member) => (
-                <CharacterCard key={member.id} character={member} selected />
+                <CharacterCard
+                  key={member.id}
+                  character={member}
+                  selected
+                  blacklisted={roster.isBlacklisted(member.id)}
+                  onToggleBlacklist={roster.toggleBlacklist}
+                />
               ))}
             </div>
           </section>
@@ -93,7 +103,12 @@ function App() {
             All Characters
             <span className="block h-px flex-1 bg-white/10" />
           </p>
-          <CharacterGrid characters={CHARACTERS} selectedIds={selectedIds} />
+          <CharacterGrid
+            characters={CHARACTERS}
+            selectedIds={selectedIds}
+            blacklist={roster.blacklist}
+            onToggleBlacklist={roster.toggleBlacklist}
+          />
         </section>
 
       </main>

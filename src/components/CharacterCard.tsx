@@ -6,6 +6,10 @@ interface Props {
   /** Highlight this card (e.g. it's part of the current random team) */
   selected?: boolean;
   onClick?: (character: Character) => void;
+  /** Whether the user has blacklisted this character */
+  blacklisted?: boolean;
+  /** Toggle blacklist state for this character by id */
+  onToggleBlacklist?: (id: number) => void;
 }
 
 const GRADIENT: string = "from-black/70 via-black/30 to-transparent";
@@ -20,14 +24,26 @@ function displayName(name: string): string {
   return name === "{NICKNAME}" ? "Trailblazer" : name;
 }
 
-export function CharacterCard({ character, selected = false, onClick }: Props) {
+export function CharacterCard({
+  character,
+  selected = false,
+  onClick,
+  blacklisted = false,
+  onToggleBlacklist,
+}: Props) {
   const el = getElementStyles(character.element);
   const rarityBadge = RARITY_BADGE[character.rarity] ?? RARITY_BADGE[4];
   const stars = "★".repeat(character.rarity);
 
   return (
     <article
-      onClick={() => onClick?.(character)}
+      onClick={() => {
+        if (onToggleBlacklist) {
+          onToggleBlacklist(character.id);
+        } else {
+          onClick?.(character);
+        }
+      }}
       className={[
         "group relative flex flex-col overflow-hidden rounded-xl cursor-pointer",
         "border transition-all duration-300",
@@ -37,6 +53,7 @@ export function CharacterCard({ character, selected = false, onClick }: Props) {
           : "border-white/10 hover:border-white/25",
         selected ? "scale-[1.03]" : "hover:scale-[1.02]",
         onClick ? "cursor-pointer" : "cursor-default",
+        blacklisted ? "opacity-60 grayscale" : "",
       ].join(" ")}
       style={
         selected
@@ -63,6 +80,29 @@ export function CharacterCard({ character, selected = false, onClick }: Props) {
         >
           {stars}
         </span>
+
+        {/* Blacklist toggle — top-right (icon-only, unobtrusive) */}
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            onToggleBlacklist?.(character.id);
+          }}
+          className="absolute top-2 right-2 z-10 p-1 text-sm text-white/70 hover:text-white"
+          aria-pressed={blacklisted}
+          title={blacklisted ? "Unblacklist" : "Blacklist"}
+        >
+          {blacklisted ? (
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M8 8l8 8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          ) : (
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+              <path d="M12 5v14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M5 12h14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          )}
+        </button>
 
         {/* Selected indicator */}
         {selected && (
