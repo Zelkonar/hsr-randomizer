@@ -21,6 +21,9 @@ function App() {
     <div className="min-h-screen bg-gray-950 text-white">
       {/* Header */}
       <header className="relative flex flex-col items-center justify-center border-b border-white/10 px-6 py-10 overflow-hidden">
+        <span className="absolute top-3 left-4 text-[10px] font-mono tracking-widest text-purple-300/40 select-none">
+          v0.0.1-alpha
+        </span>
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div className="h-32 w-96 rounded-full bg-sky-500/10 blur-3xl" />
         </div>
