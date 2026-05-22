@@ -14,9 +14,7 @@ function App() {
   const blacklistIds = roster.blacklistIds ?? [];
 
   const handleRandomize = useCallback(() => {
-    const team = rollAndBuildTeam(CHARACTERS, 4, {
-      excludeIds: blacklistIds,
-    });
+    const team = rollAndBuildTeam(CHARACTERS, 4, { excludeIds: blacklistIds });
     setTeam(team);
   }, [blacklistIds]);
 
@@ -58,6 +56,8 @@ function App() {
           selectedIds={selectedIds}
           blacklistIds={blacklistIds}
           onToggleBlacklist={roster.toggleBlacklist}
+          onEnableAll={roster.enableAll}
+          onDisableAll={roster.disableAll}
         />
       </main>
     </div>

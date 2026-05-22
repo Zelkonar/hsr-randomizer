@@ -4,11 +4,9 @@ import { CharacterCard } from "./CharacterCard";
 export function TeamView({
     team,
     isBlacklisted,
-    toggleBlacklist,
 }: {
     team: Team;
     isBlacklisted: (id: number) => boolean;
-    toggleBlacklist: (id: number) => void;
 }) {
     return (
         <section>

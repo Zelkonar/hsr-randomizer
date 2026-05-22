@@ -32,6 +32,8 @@ interface RosterModalProps {
     open: boolean;
     blacklistIds: number[];
     onToggleBlacklist: (id: number) => void;
+    onEnableAll: (ids: number[]) => void;
+    onDisableAll: (ids: number[]) => void;
     onClose: () => void;
 }
 
@@ -94,7 +96,7 @@ function CharacterCard({
     );
 }
 
-export function RosterModal({ open, blacklistIds, onToggleBlacklist, onClose }: RosterModalProps) {
+export function RosterModal({ open, blacklistIds, onToggleBlacklist, onEnableAll, onDisableAll, onClose }: RosterModalProps) {
     const [filters, setFilters] = useState<Filters>({
         search: "", elements: new Set(), paths: new Set(), rarities: new Set(),
     });
@@ -130,6 +132,11 @@ export function RosterModal({ open, blacklistIds, onToggleBlacklist, onClose }: 
 
     const hasActiveFilters = filters.search || filters.elements.size || filters.paths.size || filters.rarities.size;
     const activeCount = CHARACTERS.length - blacklistIds.length;
+
+    // For the bulk button: are ALL filtered characters currently enabled?
+    const filteredIds = filtered.map((c) => c.id);
+    const allFilteredEnabled = filteredIds.every((id) => !blacklistIds.includes(id));
+    const allFilteredDisabled = filteredIds.every((id) => blacklistIds.includes(id));
 
     if (!open) return null;
 
@@ -208,10 +215,43 @@ export function RosterModal({ open, blacklistIds, onToggleBlacklist, onClose }: 
                     ) : null}
                 </div>
 
-                <div className="px-5 py-2 shrink-0">
+                <div className="px-5 py-2 shrink-0 flex items-center justify-between gap-3">
                     <p className="text-[10px] text-white/30 uppercase tracking-widest">
                         {filtered.length} character{filtered.length !== 1 ? "s" : ""}{hasActiveFilters ? " matching" : " total"}
                     </p>
+                    {filtered.length > 0 && (
+                        allFilteredEnabled ? (
+                            <button
+                                onClick={() => onDisableAll(filteredIds)}
+                                className="text-[11px] font-medium text-rose-400/70 hover:text-rose-400 transition-colors"
+                            >
+                                Disable all
+                            </button>
+                        ) : allFilteredDisabled ? (
+                            <button
+                                onClick={() => onEnableAll(filteredIds)}
+                                className="text-[11px] font-medium text-sky-400/70 hover:text-sky-400 transition-colors"
+                            >
+                                Enable all
+                            </button>
+                        ) : (
+                            <div className="flex items-center gap-3">
+                                <button
+                                    onClick={() => onEnableAll(filteredIds)}
+                                    className="text-[11px] font-medium text-sky-400/70 hover:text-sky-400 transition-colors"
+                                >
+                                    Enable all
+                                </button>
+                                <span className="text-white/20">·</span>
+                                <button
+                                    onClick={() => onDisableAll(filteredIds)}
+                                    className="text-[11px] font-medium text-rose-400/70 hover:text-rose-400 transition-colors"
+                                >
+                                    Disable all
+                                </button>
+                            </div>
+                        )
+                    )}
                 </div>
 
                 {/* Grid */}

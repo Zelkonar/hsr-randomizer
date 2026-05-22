@@ -1,98 +1,53 @@
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback } from "react";
 
-const STORAGE_KEY = "hsr_blacklist";
+const BLACKLIST_KEY = "hsr-randomizer:blacklist";
 
-function loadBlacklist(): Set<number> {
+function loadIds(key: string): number[] {
     try {
-        const raw = localStorage.getItem(STORAGE_KEY);
-        if (!raw) return new Set();
-        return new Set(JSON.parse(raw) as number[]);
+        const raw = localStorage.getItem(key);
+        return raw ? (JSON.parse(raw) as number[]) : [];
     } catch {
-        return new Set();
+        return [];
     }
 }
 
-function saveBlacklist(ids: Set<number>): void {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify([...ids]));
+function saveIds(key: string, ids: number[]) {
+    localStorage.setItem(key, JSON.stringify(ids));
 }
 
-export interface UseRosterReturn {
-    /** IDs of characters the user has blacklisted. */
-    blacklist: Set<number>;
-    /** Array form of the blacklist for stable prop usage. */
-    blacklistIds: number[];
-    /** Whether a character is blacklisted. */
-    isBlacklisted: (id: number) => boolean;
-    /** Add a character to the blacklist. */
-    blacklistCharacter: (id: number) => void;
-    /** Remove a character from the blacklist. */
-    unblacklistCharacter: (id: number) => void;
-    /** Toggle a character's blacklist status. Returns the new state. */
-    toggleBlacklist: (id: number) => boolean;
-    /** Clear the entire blacklist. */
-    clearBlacklist: () => void;
-}
-
-export function useRoster(): UseRosterReturn {
-    const [blacklist, setBlacklist] = useState<Set<number>>(() => loadBlacklist());
-
-    const blacklistIds = useMemo(() => [...blacklist], [blacklist]);
-
-    const update = useCallback((next: Set<number>) => {
-        setBlacklist(next);
-        saveBlacklist(next);
-    }, []);
+export function useRoster() {
+    const [blacklistIds, setBlacklistIds] = useState<number[]>(() => loadIds(BLACKLIST_KEY));
 
     const isBlacklisted = useCallback(
-        (id: number) => blacklist.has(id),
-        [blacklist]
+        (id: number) => blacklistIds.includes(id),
+        [blacklistIds]
     );
 
-    const blacklistCharacter = useCallback(
-        (id: number) => {
-            if (blacklist.has(id)) return;
-            update(new Set([...blacklist, id]));
-        },
-        [blacklist, update]
-    );
+    const toggleBlacklist = useCallback((id: number) => {
+        setBlacklistIds((prev) => {
+            const next = prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id];
+            saveIds(BLACKLIST_KEY, next);
+            return next;
+        });
+    }, []);
 
-    const unblacklistCharacter = useCallback(
-        (id: number) => {
-            if (!blacklist.has(id)) return;
-            const next = new Set(blacklist);
-            next.delete(id);
-            update(next);
-        },
-        [blacklist, update]
-    );
+    // Add all given ids to the blacklist (disable them)
+    const disableAll = useCallback((ids: number[]) => {
+        setBlacklistIds((prev) => {
+            const next = Array.from(new Set([...prev, ...ids]));
+            saveIds(BLACKLIST_KEY, next);
+            return next;
+        });
+    }, []);
 
-    const toggleBlacklist = useCallback(
-        (id: number): boolean => {
-            const next = new Set(blacklist);
-            if (next.has(id)) {
-                next.delete(id);
-                update(next);
-                return false;
-            } else {
-                next.add(id);
-                update(next);
-                return true;
-            }
-        },
-        [blacklist, update]
-    );
+    // Remove all given ids from the blacklist (enable them)
+    const enableAll = useCallback((ids: number[]) => {
+        setBlacklistIds((prev) => {
+            const next = prev.filter((id) => !ids.includes(id));
+            saveIds(BLACKLIST_KEY, next);
+            return next;
+        });
+    }, []);
 
-    const clearBlacklist = useCallback(() => {
-        update(new Set());
-    }, [update]);
-
-    return {
-        blacklist,
-        blacklistIds,
-        isBlacklisted,
-        blacklistCharacter,
-        unblacklistCharacter,
-        toggleBlacklist,
-        clearBlacklist,
-    };
+    return { blacklistIds, isBlacklisted, toggleBlacklist, enableAll, disableAll };
 }

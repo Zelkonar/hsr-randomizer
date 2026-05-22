@@ -7,12 +7,16 @@ interface RosterSectionProps {
   selectedIds: number[];
   blacklistIds: number[];
   onToggleBlacklist: (id: number) => void;
+  onEnableAll: (ids: number[]) => void;
+  onDisableAll: (ids: number[]) => void;
 }
 
 export function RosterSection({
   selectedIds,
   blacklistIds,
   onToggleBlacklist,
+  onEnableAll,
+  onDisableAll,
 }: RosterSectionProps) {
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -57,6 +61,8 @@ export function RosterSection({
         open={modalOpen}
         blacklistIds={blacklistIds}
         onToggleBlacklist={onToggleBlacklist}
+        onEnableAll={onEnableAll}
+        onDisableAll={onDisableAll}
         onClose={() => setModalOpen(false)}
       />
     </>
