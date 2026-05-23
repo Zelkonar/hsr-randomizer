@@ -1,7 +1,14 @@
-import type { Character, CharacterFilter, Team } from "../types/character";
+import type { Character, CharacterFilter, Path, Team } from "../types/character";
 
 function randomPick<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
+}
+
+const SUSTAIN_PATHS = new Set<Path>(["Preservation", "Abundance"]);
+const SUSTAIN_IDS = new Set([1409]); // Hyacine
+
+export function isSustain(c: Character): boolean {
+  return SUSTAIN_PATHS.has(c.path) || SUSTAIN_IDS.has(c.id);
 }
 
 export function applyFilter(
@@ -27,6 +34,10 @@ export class NotEnoughCharactersError extends Error {
   }
 }
 
+function removeFromPool(pool: Character[], pick: Character): Character[] {
+  return pool.filter((c) => c.id !== pick.id && c.name !== pick.name);
+}
+
 export function rollTeam(
   pool: Character[],
   size: TeamSize = 4,
@@ -40,12 +51,22 @@ export function rollTeam(
 
   const team: Character[] = [];
 
-  for (let i = 0; i < size; i++) {
-    const pick = randomPick(remaining);
-    team.push(pick);
-
-    // remove picked character as well as any variants
-    remaining = remaining.filter((c) => c.id !== pick.id && c.name !== pick.name);
+  if (filter.requireSustain) {
+    for (let i = 0; i < size - 1; i++) {
+      const pick = randomPick(remaining);
+      team.push(pick);
+      remaining = removeFromPool(remaining, pick);
+    }
+    const lastPool = !team.some(isSustain) && remaining.some(isSustain)
+      ? remaining.filter(isSustain)
+      : remaining;
+    team.push(randomPick(lastPool));
+  } else {
+    while (team.length < size) {
+      const pick = randomPick(remaining);
+      team.push(pick);
+      remaining = removeFromPool(remaining, pick);
+    }
   }
 
   return team;

@@ -34,4 +34,5 @@ export interface CharacterFilter {
   paths?: Path[];
   rarities?: Rarity[];
   includeIds?: number[];
+  requireSustain?: boolean;
 }

@@ -5,7 +5,8 @@ import { OptionsRow } from "./components/OptionsRow";
 import { RandomizeButton } from "./components/RandomizeButton";
 import { TeamView } from "./components/TeamView";
 import { useRoster } from "./hooks/useRoster";
-import { rollAndBuildTeam, applyFilter } from "./lib/randomize";
+import { useOptions } from "./hooks/useOptions";
+import { rollAndBuildTeam, applyFilter, isSustain } from "./lib/randomize";
 import type { Team } from "./types/character";
 
 const styles = {
@@ -18,11 +19,15 @@ function App() {
   const [team, setTeam] = useState<Team | null>(null);
   const roster = useRoster();
   const rosterIds = roster.rosterIds;
+  const options = useOptions();
 
   const handleRandomize = useCallback(() => {
-    const team = rollAndBuildTeam(CHARACTERS, 4, { includeIds: rosterIds });
+    const team = rollAndBuildTeam(CHARACTERS, 4, {
+      includeIds: rosterIds,
+      requireSustain: options.requireSustain,
+    });
     setTeam(team);
-  }, [rosterIds]);
+  }, [rosterIds, options.requireSustain]);
 
   const availableCharacters = useMemo(
     () => applyFilter(CHARACTERS, { includeIds: rosterIds }),
@@ -34,7 +39,16 @@ function App() {
     [availableCharacters]
   );
 
-  const canRandomize = availableCount >= 4;
+  const sustainAvailable = useMemo(
+    () => !options.requireSustain || availableCharacters.some(isSustain),
+    [options.requireSustain, availableCharacters]
+  );
+
+  const disabledReason = availableCount < 4
+    ? "Not enough characters selected"
+    : !sustainAvailable
+      ? "No sustain available"
+      : undefined;
 
   return (
     <div className={styles.page}>
@@ -42,13 +56,15 @@ function App() {
 
       <main className={styles.main}>
         <div className={styles.hero}>
-          <RandomizeButton onRandomize={handleRandomize} disabled={!canRandomize} />
+          <RandomizeButton onRandomize={handleRandomize} disabledReason={disabledReason} />
 
           <OptionsRow
             rosterIds={rosterIds}
             onToggleRoster={roster.toggleRoster}
             onEnableAll={roster.enableAll}
             onDisableAll={roster.disableAll}
+            requireSustain={options.requireSustain}
+            onRequireSustainChange={options.setRequireSustain}
           />
         </div>
 
