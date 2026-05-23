@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { CHARACTERS } from "../data/characters";
-import { CharacterGrid } from "./CharacterGrid";
+import { CHARACTERS } from "../../data/characters";
+import { CharacterGrid } from "../CharacterGrid";
 import { RosterModal } from "./RosterModal";
 
 interface RosterSectionProps {
@@ -20,7 +20,6 @@ export function RosterSection({
 }: RosterSectionProps) {
   const [modalOpen, setModalOpen] = useState(false);
 
-  // Roster = everyone who isn't blacklisted
   const rosterCharacters = CHARACTERS.filter((c) => !blacklistIds.includes(c.id));
 
   return (
@@ -39,7 +38,8 @@ export function RosterSection({
               flex items-center gap-2 rounded-lg border border-white/15
               bg-white/5 px-4 py-2 text-[11px] font-semibold uppercase
               tracking-widest text-white/60 transition-all duration-150
-              hover:border-sky-500/50 hover:bg-sky-500/10 hover:text-sky-300
+              cursor-pointer hover:border-sky-500/50 hover:bg-sky-500/10 hover:text-sky-300
+              active:border-sky-500/50 active:bg-sky-500/10 active:text-sky-300
             "
           >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="h-3.5 w-3.5">

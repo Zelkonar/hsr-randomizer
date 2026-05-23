@@ -1,11 +1,11 @@
 import { useState, useMemo, useCallback } from "react";
 import { CHARACTERS } from "./data/characters";
 import { AppHeader } from "./components/AppHeader";
-import { RosterSection } from "./components/RosterSection";
+import { RosterSection } from "./components/Roster";
 import { RandomizeButton } from "./components/RandomizeButton";
 import { TeamView } from "./components/TeamView";
 import { useRoster } from "./hooks/useRoster";
-import { rollAndBuildTeam, applyFilter, familyKey } from "./lib/randomize";
+import { rollAndBuildTeam, applyFilter } from "./lib/randomize";
 import type { Team } from "./types/character";
 
 function App() {
@@ -24,7 +24,7 @@ function App() {
   );
 
   const availableCount = useMemo(
-    () => new Set(remainingAfterBlacklist.map((c) => familyKey(c))).size,
+    () => new Set(remainingAfterBlacklist.map((c) => c.name)).size,
     [remainingAfterBlacklist]
   );
 

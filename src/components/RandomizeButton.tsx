@@ -14,7 +14,7 @@ export function RandomizeButton({
                     "group relative inline-flex items-center gap-2 overflow-hidden rounded-full px-10 py-3 font-bold uppercase tracking-widest text-sm transition-all duration-300 bg-white/5 border border-white/20",
                     disabled
                         ? "opacity-50 cursor-not-allowed"
-                        : "hover:border-sky-400/60 hover:bg-sky-500/10 hover:text-sky-300 hover:shadow-lg hover:shadow-sky-500/20 active:scale-95",
+                        : "hover:border-sky-400/60 hover:bg-sky-500/10 hover:text-sky-300 hover:shadow-lg hover:shadow-sky-500/20 active:border-sky-400/60 active:bg-sky-500/10 active:text-sky-300 active:shadow-lg active:shadow-sky-500/20 active:scale-95",
                 ].join(" ")}
             >
                 <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/5 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
