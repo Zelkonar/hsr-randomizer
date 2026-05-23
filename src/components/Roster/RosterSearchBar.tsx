@@ -10,7 +10,7 @@ const styles = {
 };
 
 interface RosterSearchBarProps {
-    searchRef: RefObject<HTMLInputElement>;
+    searchRef: RefObject<HTMLInputElement | null>;
     search: string;
     onSearchChange: (value: string) => void;
     filtersOpen: boolean;
