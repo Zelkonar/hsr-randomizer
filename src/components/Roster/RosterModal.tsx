@@ -10,7 +10,7 @@ import type { RosterFiltersState } from "./RosterFilters";
 const styles = {
     backdrop: "fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4",
     overlay: "absolute inset-0 bg-black/70 backdrop-blur-sm",
-    panel: "relative z-10 flex flex-col w-full max-w-5xl max-h-[92dvh] sm:max-h-[90dvh] rounded-t-2xl sm:rounded-2xl bg-gray-900 border border-white/10 shadow-2xl overflow-hidden",
+    panel: "relative z-10 flex flex-col w-full max-w-5xl h-[92dvh] sm:h-[90dvh] rounded-t-2xl sm:rounded-2xl bg-gray-900 border border-white/10 shadow-2xl overflow-hidden",
     filtersSection: "shrink-0 border-b border-white/10",
     gridContainer: "overflow-y-auto px-5 pb-5",
 };
