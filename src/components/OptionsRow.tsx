@@ -17,7 +17,7 @@ const styles = {
         }`,
 };
 
-const SUSTAIN_TOOLTIP = "Guarantees at least one sustain in the team — any Preservation or Abundance character, or Hyacine.";
+const SUSTAIN_TOOLTIP = "Guarantees at least one sustain in the team: any Preservation or Abundance character, or Hyacine.";
 
 interface OptionsRowProps {
     rosterIds: number[];
