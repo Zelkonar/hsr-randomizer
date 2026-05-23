@@ -8,6 +8,12 @@ import { useRoster } from "./hooks/useRoster";
 import { rollAndBuildTeam, applyFilter } from "./lib/randomize";
 import type { Team } from "./types/character";
 
+const styles = {
+  page: "min-h-screen bg-gray-950 text-white",
+  main: "mx-auto max-w-screen-xl px-4 py-8 sm:px-6 space-y-5",
+  hero: "flex flex-col items-center gap-4",
+};
+
 function App() {
   const [team, setTeam] = useState<Team | null>(null);
   const roster = useRoster();
@@ -31,11 +37,11 @@ function App() {
   const canRandomize = availableCount >= 4;
 
   return (
-    <div className="min-h-screen bg-gray-950 text-white">
+    <div className={styles.page}>
       <AppHeader />
 
-      <main className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 space-y-5">
-        <div className="flex flex-col items-center gap-4">
+      <main className={styles.main}>
+        <div className={styles.hero}>
           <RandomizeButton onRandomize={handleRandomize} disabled={!canRandomize} />
 
           <OptionsRow

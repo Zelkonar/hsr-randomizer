@@ -4,124 +4,84 @@ import { getElementStyles } from "../utils/element";
 
 interface Props {
   character: Character;
-  /** Highlight this card (e.g. it's part of the current random team) */
   selected?: boolean;
-  onClick?: (character: Character) => void;
-  /** Whether the user has blacklisted this character */
   blacklisted?: boolean;
-  /** Optional override URL for the image shown on the card (defaults to `character.icon`) */
   imageSrc?: string;
-  /** How the image should be fit inside the card */
   imageFit?: "contain" | "cover";
-  /** Toggle blacklist state for this character by id */
-  onToggleBlacklist?: (id: number) => void;
 }
 
-const GRADIENT: string = "from-black/75 via-black/5 to-transparent";
+const styles = {
+  card: "group relative flex flex-col overflow-hidden rounded-xl border transition-all duration-300 bg-gray-900",
+  cardDefaultBorder: "border-white/10 hover:border-white/25",
+  cardSelectedScale: "scale-[1.03]",
+  cardDefaultScale: "hover:scale-[1.02]",
+  cardBlacklisted: "opacity-60 grayscale",
+  portrait: "relative aspect-[3/4] w-full overflow-hidden bg-gray-800",
+  portraitGradient: "absolute inset-0 bg-gradient-to-t",
+  rarityStars: "absolute bottom-2 left-2 text-xs font-bold tracking-widest drop-shadow",
+  infoStrip: "flex flex-col gap-1 px-3 py-2",
+  name: "truncate text-sm font-semibold text-white leading-tight",
+  tagsRow: "flex items-center gap-1.5 flex-wrap",
+  pathTag: "text-[10px] text-gray-500",
+};
 
-const RARITY_BADGE: Record<number, string> = {
+const imgStyles: Record<"contain" | "cover", string> = {
+  contain: "h-full w-full object-contain object-center transition-transform duration-500 group-hover:scale-105 p-1",
+  cover: "h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105",
+};
+
+const rarityColors: Record<number, string> = {
   5: "text-amber-400",
   4: "text-purple-400",
 };
 
+const GRADIENT = "from-black/75 via-black/5 to-transparent";
+
 function CharacterCardImpl({
   character,
   selected = false,
-  onClick,
   blacklisted = false,
-  onToggleBlacklist,
   imageSrc,
   imageFit = "contain",
 }: Props) {
   const el = getElementStyles(character.element);
-  const rarityBadge = RARITY_BADGE[character.rarity] ?? RARITY_BADGE[4];
-  const stars = "★".repeat(character.rarity);
+  const rarityColor = rarityColors[character.rarity] ?? rarityColors[4];
   const src = imageSrc ?? character.preview;
-  const imgClass =
-    imageFit === "cover"
-      ? "h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-      : "h-full w-full object-contain object-center transition-transform duration-500 group-hover:scale-105 p-1";
+
+  const cardClass = [
+    styles.card,
+    selected ? `${el.border} shadow-lg ${el.glow}` : styles.cardDefaultBorder,
+    selected ? styles.cardSelectedScale : styles.cardDefaultScale,
+    blacklisted ? styles.cardBlacklisted : "",
+  ].join(" ");
+
+  const elementBadgeClass = `inline-flex items-center rounded px-1.5 py-0.5 text-[10px] font-medium ${el.bg} ${el.text}`;
 
   return (
     <article
-      onClick={() => {
-        if (onToggleBlacklist) {
-          onToggleBlacklist(character.id);
-        } else {
-          onClick?.(character);
-        }
-      }}
-      className={[
-        "group relative flex flex-col overflow-hidden rounded-xl cursor-pointer",
-        "border transition-all duration-300",
-        "bg-gray-900",
-        selected
-          ? `${el.border} shadow-lg ${el.glow}`
-          : "border-white/10 hover:border-white/25",
-        selected ? "scale-[1.03]" : "hover:scale-[1.02]",
-        onClick ? "cursor-pointer" : "cursor-default",
-        blacklisted ? "opacity-60 grayscale" : "",
-      ].join(" ")}
+      className={cardClass}
       style={
         selected
           ? { boxShadow: `0 0 30px 5px ${el.hex}55, 0 4px 24px rgba(0,0,0,0.5)` }
           : undefined
       }
     >
-      {/* Portrait */}
-      <div className="relative aspect-[3/4] w-full overflow-hidden bg-gray-800">
-        <img src={src} alt={character.name} loading="lazy" className={imgClass} />
+      <div className={styles.portrait}>
+        <img src={src} alt={character.name} loading="lazy" className={imgStyles[imageFit]} />
 
-        {/* Bottom gradient overlay for text legibility */}
-        <div className={`absolute inset-0 bg-gradient-to-t ${GRADIENT}`} />
+        <div className={`${styles.portraitGradient} ${GRADIENT}`} />
 
-        {/* Rarity stars — bottom left over the image */}
-        <span
-          className={`absolute bottom-2 left-2 text-xs font-bold tracking-widest ${rarityBadge} drop-shadow`}
-          aria-label={`${character.rarity} star`}
-        >
-          {stars}
+        <span className={`${styles.rarityStars} ${rarityColor}`} aria-label={`${character.rarity} star`}>
+          {"★".repeat(character.rarity)}
         </span>
 
-        {/* Blacklist toggle — top-right (icon-only, unobtrusive) */}
-        {onToggleBlacklist ? (<button
-          onClick={(e) => {
-            e.stopPropagation();
-            onToggleBlacklist?.(character.id);
-          }}
-          className="absolute top-2 right-2 z-10 p-1 text-sm text-white/70 hover:text-white"
-          aria-pressed={blacklisted}
-          title={blacklisted ? "Unblacklist" : "Blacklist"}
-        >
-          {blacklisted ? (
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              <path d="M8 8l8 8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          ) : (
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-              <path d="M12 5v14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-              <path d="M5 12h14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          )}
-        </button>) : null}
       </div>
 
-      {/* Info strip */}
-      <div className="flex flex-col gap-1 px-3 py-2">
-        {/* Name */}
-        <p className="truncate text-sm font-semibold text-white leading-tight">
-          {character.name}
-        </p>
-
-        {/* Element + Path */}
-        <div className="flex items-center gap-1.5 flex-wrap">
-          <span
-            className={`inline-flex items-center rounded px-1.5 py-0.5 text-[10px] font-medium ${el.bg} ${el.text}`}
-          >
-            {character.element}
-          </span>
-          <span className="text-[10px] text-gray-500">{character.path}</span>
+      <div className={styles.infoStrip}>
+        <p className={styles.name}>{character.name}</p>
+        <div className={styles.tagsRow}>
+          <span className={elementBadgeClass}>{character.element}</span>
+          <span className={styles.pathTag}>{character.path}</span>
         </div>
       </div>
     </article>

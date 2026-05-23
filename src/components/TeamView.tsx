@@ -1,6 +1,12 @@
 import type { Team } from "../types/character";
 import { CharacterCard } from "./CharacterCard";
 
+const styles = {
+  label: "mb-4 flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] text-white/30",
+  dividerLine: "block h-px flex-1 bg-white/10",
+  grid: "grid grid-cols-2 gap-6 sm:grid-cols-4",
+};
+
 export function TeamView({
     team,
     isBlacklisted,
@@ -10,12 +16,12 @@ export function TeamView({
 }) {
     return (
         <section>
-            <p className="mb-4 flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] text-white/30">
-                <span className="block h-px flex-1 bg-white/10" />
+            <p className={styles.label}>
+                <span className={styles.dividerLine} />
                 Your Team
-                <span className="block h-px flex-1 bg-white/10" />
+                <span className={styles.dividerLine} />
             </p>
-            <div className="grid grid-cols-2 gap-6 sm:grid-cols-4">
+            <div className={styles.grid}>
                 {team.members.map((member) => (
                     <CharacterCard
                         key={member.id}
@@ -26,9 +32,6 @@ export function TeamView({
                         imageFit="cover"
                     />
                 ))}
-            </div>
-            <div>
-
             </div>
         </section>
     );

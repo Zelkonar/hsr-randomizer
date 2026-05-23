@@ -9,6 +9,17 @@ export const PATHS: Path[] = [
     "Nihility", "Preservation", "Abundance", "Remembrance", "Elation",
 ];
 
+const styles = {
+    container: "px-5 py-3 space-y-3",
+    filterRow: "flex flex-wrap items-center gap-2",
+    filterLabel: "text-[10px] uppercase tracking-widest text-white/30 w-12 shrink-0",
+    chip: "rounded-full border px-3 py-1 text-[11px] font-medium tracking-wide transition-all duration-150 cursor-pointer select-none",
+    pathChip: "bg-white/5 text-white/60 border-white/10 data-[active=true]:bg-white/15 data-[active=true]:border-white/40 data-[active=true]:text-white",
+    rarity5Chip: "bg-amber-500/20 text-amber-300 border-amber-500/30 data-[active=true]:bg-amber-500/40 data-[active=true]:border-amber-400",
+    rarity4Chip: "bg-purple-500/20 text-purple-300 border-purple-500/30 data-[active=true]:bg-purple-500/40 data-[active=true]:border-purple-400",
+    clearButton: "text-[11px] text-sky-400/70 hover:text-sky-400 transition-colors",
+};
+
 const ELEMENT_COLORS: Record<Element, string> = {
     Fire: "bg-orange-500/20 text-orange-300 border-orange-500/30 data-[active=true]:bg-orange-500/40 data-[active=true]:border-orange-400",
     Ice: "bg-cyan-500/20 text-cyan-300 border-cyan-500/30 data-[active=true]:bg-cyan-500/40 data-[active=true]:border-cyan-400",
@@ -45,10 +56,7 @@ function FilterChip({ label, active, className, onClick }: FilterChipProps) {
         <button
             onClick={onClick}
             data-active={active}
-            className={`
-        rounded-full border px-3 py-1 text-[11px] font-medium tracking-wide
-        transition-all duration-150 cursor-pointer select-none ${className}
-      `}
+            className={`${styles.chip} ${className}`}
         >
             {label}
         </button>
@@ -70,33 +78,22 @@ export function RosterFilters({ filters, onChange }: RosterFiltersProps) {
     const hasActive = filters.search || filters.elements.size || filters.paths.size || filters.rarities.size;
 
     return (
-        <div className="px-5 py-3 space-y-3">
-            <input
-                type="text"
-                placeholder="Search by name…"
-                value={filters.search}
-                onChange={(e) => onChange({ ...filters, search: e.target.value })}
-                className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-white placeholder-white/30 outline-none focus:border-sky-500/60 transition-colors"
-            />
-
-            <div className="flex flex-wrap items-center gap-2">
-                <span className="text-[10px] uppercase tracking-widest text-white/30 w-12 shrink-0">Rarity</span>
+        <div className={styles.container}>
+            <div className={styles.filterRow}>
+                <span className={styles.filterLabel}>Rarity</span>
                 {([5, 4] as Rarity[]).map((r) => (
                     <FilterChip
                         key={r}
                         label={`★${r}`}
                         active={filters.rarities.has(r)}
                         onClick={() => toggleSet("rarities", r)}
-                        className={r === 5
-                            ? "bg-amber-500/20 text-amber-300 border-amber-500/30 data-[active=true]:bg-amber-500/40 data-[active=true]:border-amber-400"
-                            : "bg-purple-500/20 text-purple-300 border-purple-500/30 data-[active=true]:bg-purple-500/40 data-[active=true]:border-purple-400"
-                        }
+                        className={r === 5 ? styles.rarity5Chip : styles.rarity4Chip}
                     />
                 ))}
             </div>
 
-            <div className="flex flex-wrap items-center gap-2">
-                <span className="text-[10px] uppercase tracking-widest text-white/30 w-12 shrink-0">Element</span>
+            <div className={styles.filterRow}>
+                <span className={styles.filterLabel}>Element</span>
                 {ELEMENTS.map((el) => (
                     <FilterChip
                         key={el}
@@ -108,27 +105,24 @@ export function RosterFilters({ filters, onChange }: RosterFiltersProps) {
                 ))}
             </div>
 
-            <div className="flex flex-wrap items-center gap-2">
-                <span className="text-[10px] uppercase tracking-widest text-white/30 w-12 shrink-0">Path</span>
+            <div className={styles.filterRow}>
+                <span className={styles.filterLabel}>Path</span>
                 {PATHS.map((p) => (
                     <FilterChip
                         key={p}
                         label={p}
                         active={filters.paths.has(p)}
                         onClick={() => toggleSet("paths", p)}
-                        className="bg-white/5 text-white/60 border-white/10 data-[active=true]:bg-white/15 data-[active=true]:border-white/40 data-[active=true]:text-white"
+                        className={styles.pathChip}
                     />
                 ))}
             </div>
 
-            {hasActive ? (
-                <button
-                    onClick={() => onChange(EMPTY_FILTERS)}
-                    className="text-[11px] text-sky-400/70 hover:text-sky-400 transition-colors"
-                >
+            {hasActive && (
+                <button onClick={() => onChange(EMPTY_FILTERS)} className={styles.clearButton}>
                     Clear all filters
                 </button>
-            ) : null}
+            )}
         </div>
     );
 }

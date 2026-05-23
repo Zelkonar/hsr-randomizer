@@ -7,6 +7,14 @@ import { RosterSearchBar } from "./RosterSearchBar";
 import { RosterResultsBar } from "./RosterResultsBar";
 import type { RosterFiltersState } from "./RosterFilters";
 
+const styles = {
+    backdrop: "fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4",
+    overlay: "absolute inset-0 bg-black/70 backdrop-blur-sm",
+    panel: "relative z-10 flex flex-col w-full max-w-3xl max-h-[92dvh] sm:max-h-[85dvh] rounded-t-2xl sm:rounded-2xl bg-gray-900 border border-white/10 shadow-2xl overflow-hidden",
+    filtersSection: "shrink-0 border-b border-white/10",
+    gridContainer: "overflow-y-auto px-5 pb-5",
+};
+
 interface RosterModalProps {
     open: boolean;
     blacklistIds: number[];
@@ -58,10 +66,10 @@ export function RosterModal({
     if (!open) return null;
 
     return (
-        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4">
-            <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={onClose} />
+        <div className={styles.backdrop}>
+            <div className={styles.overlay} onClick={onClose} />
 
-            <div className="relative z-10 flex flex-col w-full max-w-3xl max-h-[92dvh] sm:max-h-[85dvh] rounded-t-2xl sm:rounded-2xl bg-gray-900 border border-white/10 shadow-2xl overflow-hidden">
+            <div className={styles.panel}>
                 <RosterModalHeader blacklistIds={blacklistIds} onClose={onClose} />
 
                 <RosterSearchBar
@@ -74,7 +82,7 @@ export function RosterModal({
                 />
 
                 {filtersOpen && (
-                    <div className="shrink-0 border-b border-white/10">
+                    <div className={styles.filtersSection}>
                         <RosterFilters filters={filters} onChange={setFilters} />
                     </div>
                 )}
@@ -88,7 +96,7 @@ export function RosterModal({
                     onDisableAll={() => onDisableAll(filteredIds)}
                 />
 
-                <div className="overflow-y-auto px-5 pb-5">
+                <div className={styles.gridContainer}>
                     <RosterCharacterGrid
                         characters={filtered}
                         blacklistIds={blacklistIds}
