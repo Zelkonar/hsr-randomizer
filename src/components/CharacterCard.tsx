@@ -1,6 +1,7 @@
 import type { Character } from "../types/character";
 import { memo } from "react";
 import { getElementStyles } from "../utils/element";
+import { getPathIcon, getPathIconLarge } from "../utils/path";
 
 interface Props {
   character: Character;
@@ -19,15 +20,13 @@ const styles = {
   portrait: "relative aspect-[3/4] w-full overflow-hidden bg-gray-800",
   portraitGradient: "absolute inset-0 bg-gradient-to-t",
   rarityStars: "absolute bottom-2 left-2 text-xs font-bold tracking-widest drop-shadow",
-  infoStrip: "flex flex-col gap-1 px-3 py-2",
+  infoStrip: "flex items-center justify-between gap-2 px-3 py-2",
   name: "truncate text-sm font-semibold text-white leading-tight",
-  tagsRow: "flex items-center gap-1.5 flex-wrap",
-  pathTag: "text-[10px] text-gray-500",
 };
 
 const imgStyles: Record<"contain" | "cover", string> = {
-  contain: "h-full w-full object-contain object-center transition-transform duration-500 group-hover:scale-105 p-1",
-  cover: "h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105",
+  contain: "absolute inset-0 w-full h-full object-contain object-center transition-transform duration-500 group-hover:scale-105 p-1",
+  cover: "absolute inset-0 w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105",
 };
 
 const rarityColors: Record<number, string> = {
@@ -55,7 +54,6 @@ function CharacterCardImpl({
     blacklisted ? styles.cardBlacklisted : "",
   ].join(" ");
 
-  const elementBadgeClass = `inline-flex items-center rounded px-1.5 py-0.5 text-[10px] font-medium ${el.bg} ${el.text}`;
 
   return (
     <article
@@ -67,6 +65,7 @@ function CharacterCardImpl({
       }
     >
       <div className={styles.portrait}>
+        <img src={getPathIconLarge(character.path)} alt="" aria-hidden className="absolute inset-0 w-full h-full object-contain mix-blend-screen opacity-40" />
         <img src={src} alt={character.name} loading="lazy" className={imgStyles[imageFit]} />
 
         <div className={`${styles.portraitGradient} ${GRADIENT}`} />
@@ -79,9 +78,9 @@ function CharacterCardImpl({
 
       <div className={styles.infoStrip}>
         <p className={styles.name}>{character.name}</p>
-        <div className={styles.tagsRow}>
-          <span className={elementBadgeClass}>{character.element}</span>
-          <span className={styles.pathTag}>{character.path}</span>
+        <div className="flex items-center gap-1 shrink-0">
+          <img src={el.icon} alt={character.element} className="w-4 h-4" />
+          <img src={getPathIcon(character.path)} alt={character.path} className="w-4 h-4" />
         </div>
       </div>
     </article>
