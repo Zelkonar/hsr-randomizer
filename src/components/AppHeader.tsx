@@ -3,7 +3,7 @@ import VERSION from "../data/version";
 export function AppHeader() {
   return (
     <header className="relative flex flex-col items-center justify-center border-b border-white/10 px-6 py-10 overflow-hidden">
-      <span className="absolute top-3 left-4 text-[10px] font-mono tracking-widest text-purple-300/40 select-none">
+      <span className="absolute top-3 left-4 text-[10px] font-mono tracking-widest text-purple-300/40">
         {VERSION}
       </span>
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
