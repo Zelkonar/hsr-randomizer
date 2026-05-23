@@ -7,15 +7,15 @@ const styles = {
 };
 
 interface OptionsRowProps {
-    blacklistIds: number[];
-    onToggleBlacklist: (id: number) => void;
+    rosterIds: number[];
+    onToggleRoster: (id: number) => void;
     onEnableAll: (ids: number[]) => void;
     onDisableAll: (ids: number[]) => void;
 }
 
 export function OptionsRow({
-    blacklistIds,
-    onToggleBlacklist,
+    rosterIds,
+    onToggleRoster,
     onEnableAll,
     onDisableAll,
 }: OptionsRowProps) {
@@ -35,8 +35,8 @@ export function OptionsRow({
 
             <RosterModal
                 open={rosterOpen}
-                blacklistIds={blacklistIds}
-                onToggleBlacklist={onToggleBlacklist}
+                rosterIds={rosterIds}
+                onToggleRoster={onToggleRoster}
                 onEnableAll={onEnableAll}
                 onDisableAll={onDisableAll}
                 onClose={() => setRosterOpen(false)}

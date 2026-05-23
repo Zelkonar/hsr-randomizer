@@ -8,11 +8,11 @@ const styles = {
 
 interface RosterCharacterGridProps {
     characters: Character[];
-    blacklistIds: number[];
+    rosterIds: number[];
     onToggle: (id: number) => void;
 }
 
-export function RosterCharacterGrid({ characters, blacklistIds, onToggle }: RosterCharacterGridProps) {
+export function RosterCharacterGrid({ characters, rosterIds, onToggle }: RosterCharacterGridProps) {
     if (characters.length === 0) {
         return (
             <div className={styles.empty}>
@@ -28,7 +28,7 @@ export function RosterCharacterGrid({ characters, blacklistIds, onToggle }: Rost
                 <RosterCard
                     key={c.id}
                     character={c}
-                    blacklisted={blacklistIds.includes(c.id)}
+                    excluded={!rosterIds.includes(c.id)}
                     onToggle={() => onToggle(c.id)}
                 />
             ))}

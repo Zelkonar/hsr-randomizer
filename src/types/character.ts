@@ -33,5 +33,5 @@ export interface CharacterFilter {
   elements?: Element[];
   paths?: Path[];
   rarities?: Rarity[];
-  excludeIds?: number[];
+  includeIds?: number[];
 }

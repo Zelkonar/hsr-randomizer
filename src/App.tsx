@@ -17,21 +17,21 @@ const styles = {
 function App() {
   const [team, setTeam] = useState<Team | null>(null);
   const roster = useRoster();
-  const blacklistIds = roster.blacklistIds ?? [];
+  const rosterIds = roster.rosterIds;
 
   const handleRandomize = useCallback(() => {
-    const team = rollAndBuildTeam(CHARACTERS, 4, { excludeIds: blacklistIds });
+    const team = rollAndBuildTeam(CHARACTERS, 4, { includeIds: rosterIds });
     setTeam(team);
-  }, [blacklistIds]);
+  }, [rosterIds]);
 
-  const remainingAfterBlacklist = useMemo(
-    () => applyFilter(CHARACTERS, { excludeIds: blacklistIds }),
-    [blacklistIds]
+  const availableCharacters = useMemo(
+    () => applyFilter(CHARACTERS, { includeIds: rosterIds }),
+    [rosterIds]
   );
 
   const availableCount = useMemo(
-    () => new Set(remainingAfterBlacklist.map((c) => c.name)).size,
-    [remainingAfterBlacklist]
+    () => new Set(availableCharacters.map((c) => c.name)).size,
+    [availableCharacters]
   );
 
   const canRandomize = availableCount >= 4;
@@ -45,8 +45,8 @@ function App() {
           <RandomizeButton onRandomize={handleRandomize} disabled={!canRandomize} />
 
           <OptionsRow
-            blacklistIds={blacklistIds}
-            onToggleBlacklist={roster.toggleBlacklist}
+            rosterIds={rosterIds}
+            onToggleRoster={roster.toggleRoster}
             onEnableAll={roster.enableAll}
             onDisableAll={roster.disableAll}
           />
@@ -55,7 +55,7 @@ function App() {
         {team && (
           <TeamView
             team={team}
-            isBlacklisted={roster.isBlacklisted}
+            isInRoster={roster.isInRoster}
           />
         )}
       </main>

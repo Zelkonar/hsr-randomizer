@@ -17,8 +17,8 @@ const styles = {
 
 interface RosterModalProps {
     open: boolean;
-    blacklistIds: number[];
-    onToggleBlacklist: (id: number) => void;
+    rosterIds: number[];
+    onToggleRoster: (id: number) => void;
     onEnableAll: (ids: number[]) => void;
     onDisableAll: (ids: number[]) => void;
     onClose: () => void;
@@ -26,8 +26,8 @@ interface RosterModalProps {
 
 export function RosterModal({
     open,
-    blacklistIds,
-    onToggleBlacklist,
+    rosterIds,
+    onToggleRoster,
     onEnableAll,
     onDisableAll,
     onClose,
@@ -70,7 +70,7 @@ export function RosterModal({
             <div className={styles.overlay} onClick={onClose} />
 
             <div className={styles.panel}>
-                <RosterModalHeader blacklistIds={blacklistIds} onClose={onClose} />
+                <RosterModalHeader rosterIds={rosterIds} onClose={onClose} />
 
                 <RosterSearchBar
                     searchRef={searchRef}
@@ -90,8 +90,8 @@ export function RosterModal({
                 <RosterResultsBar
                     filteredCount={filtered.length}
                     hasActiveFilters={hasActiveFilters}
-                    allEnabled={filteredIds.every((id) => !blacklistIds.includes(id))}
-                    allDisabled={filteredIds.every((id) => blacklistIds.includes(id))}
+                    allEnabled={filteredIds.every((id) => rosterIds.includes(id))}
+                    allDisabled={filteredIds.every((id) => !rosterIds.includes(id))}
                     onEnableAll={() => onEnableAll(filteredIds)}
                     onDisableAll={() => onDisableAll(filteredIds)}
                 />
@@ -99,8 +99,8 @@ export function RosterModal({
                 <div className={styles.gridContainer}>
                     <RosterCharacterGrid
                         characters={filtered}
-                        blacklistIds={blacklistIds}
-                        onToggle={onToggleBlacklist}
+                        rosterIds={rosterIds}
+                        onToggle={onToggleRoster}
                     />
                 </div>
             </div>

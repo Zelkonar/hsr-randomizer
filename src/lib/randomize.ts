@@ -12,7 +12,7 @@ export function applyFilter(
     if (filter.elements?.length && !filter.elements.includes(c.element)) return false;
     if (filter.paths?.length && !filter.paths.includes(c.path)) return false;
     if (filter.rarities?.length && !filter.rarities.includes(c.rarity)) return false;
-    if (filter.excludeIds?.includes(c.id)) return false;
+    if (filter.includeIds && !filter.includeIds.includes(c.id)) return false;
     return true;
   });
 }

@@ -1,53 +1,57 @@
 import { useState, useCallback } from "react";
+import { CHARACTERS } from "../data/characters";
 
-const BLACKLIST_KEY = "hsr-randomizer:blacklist";
+const ROSTER_KEY = "hsr-randomizer:roster";
 
-function loadIds(key: string): number[] {
+const ALL_IDS = CHARACTERS.map((c) => c.id);
+
+function loadRoster(): number[] {
     try {
-        const raw = localStorage.getItem(key);
-        return raw ? (JSON.parse(raw) as number[]) : [];
+        const raw = localStorage.getItem(ROSTER_KEY);
+        if (raw !== null) return JSON.parse(raw) as number[];
     } catch {
-        return [];
+        // fall through
     }
+    // Fresh install: all current characters included
+    localStorage.setItem(ROSTER_KEY, JSON.stringify(ALL_IDS));
+    return [...ALL_IDS];
 }
 
-function saveIds(key: string, ids: number[]) {
-    localStorage.setItem(key, JSON.stringify(ids));
+function saveIds(ids: number[]) {
+    localStorage.setItem(ROSTER_KEY, JSON.stringify(ids));
 }
 
 export function useRoster() {
-    const [blacklistIds, setBlacklistIds] = useState<number[]>(() => loadIds(BLACKLIST_KEY));
+    const [rosterIds, setRosterIds] = useState<number[]>(() => loadRoster());
 
-    const isBlacklisted = useCallback(
-        (id: number) => blacklistIds.includes(id),
-        [blacklistIds]
+    const isInRoster = useCallback(
+        (id: number) => rosterIds.includes(id),
+        [rosterIds]
     );
 
-    const toggleBlacklist = useCallback((id: number) => {
-        setBlacklistIds((prev) => {
+    const toggleRoster = useCallback((id: number) => {
+        setRosterIds((prev) => {
             const next = prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id];
-            saveIds(BLACKLIST_KEY, next);
+            saveIds(next);
             return next;
         });
     }, []);
 
-    // Add all given ids to the blacklist (disable them)
-    const disableAll = useCallback((ids: number[]) => {
-        setBlacklistIds((prev) => {
-            const next = Array.from(new Set([...prev, ...ids]));
-            saveIds(BLACKLIST_KEY, next);
-            return next;
-        });
-    }, []);
-
-    // Remove all given ids from the blacklist (enable them)
     const enableAll = useCallback((ids: number[]) => {
-        setBlacklistIds((prev) => {
-            const next = prev.filter((id) => !ids.includes(id));
-            saveIds(BLACKLIST_KEY, next);
+        setRosterIds((prev) => {
+            const next = Array.from(new Set([...prev, ...ids]));
+            saveIds(next);
             return next;
         });
     }, []);
 
-    return { blacklistIds, isBlacklisted, toggleBlacklist, enableAll, disableAll };
+    const disableAll = useCallback((ids: number[]) => {
+        setRosterIds((prev) => {
+            const next = prev.filter((id) => !ids.includes(id));
+            saveIds(next);
+            return next;
+        });
+    }, []);
+
+    return { rosterIds, isInRoster, toggleRoster, enableAll, disableAll };
 }

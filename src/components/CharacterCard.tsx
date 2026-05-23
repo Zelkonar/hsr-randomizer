@@ -6,7 +6,7 @@ import { getPathIcon, getPathIconLarge } from "../utils/path";
 interface Props {
   character: Character;
   selected?: boolean;
-  blacklisted?: boolean;
+  excluded?: boolean;
   imageSrc?: string;
   imageFit?: "contain" | "cover";
 }
@@ -39,7 +39,7 @@ const GRADIENT = "from-black/75 via-black/5 to-transparent";
 function CharacterCardImpl({
   character,
   selected = false,
-  blacklisted = false,
+  excluded = false,
   imageSrc,
   imageFit = "contain",
 }: Props) {
@@ -51,7 +51,7 @@ function CharacterCardImpl({
     styles.card,
     selected ? `${el.border} shadow-lg ${el.glow}` : styles.cardDefaultBorder,
     selected ? styles.cardSelectedScale : styles.cardDefaultScale,
-    blacklisted ? styles.cardBlacklisted : "",
+    excluded ? styles.cardBlacklisted : "",
   ].join(" ");
 
 

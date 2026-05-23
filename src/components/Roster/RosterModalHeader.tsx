@@ -8,19 +8,17 @@ const styles = {
 };
 
 interface RosterModalHeaderProps {
-    blacklistIds: number[];
+    rosterIds: number[];
     onClose: () => void;
 }
 
-export function RosterModalHeader({ blacklistIds, onClose }: RosterModalHeaderProps) {
-    const activeCount = CHARACTERS.length - blacklistIds.length;
-
+export function RosterModalHeader({ rosterIds, onClose }: RosterModalHeaderProps) {
     return (
         <div className={styles.row}>
             <div>
                 <h2 className={styles.title}>Manage Roster</h2>
                 <p className={styles.subtitle}>
-                    {activeCount} of {CHARACTERS.length} characters active
+                    {rosterIds.length} of {CHARACTERS.length} characters active
                 </p>
             </div>
             <button onClick={onClose} className={styles.closeButton}>✕</button>

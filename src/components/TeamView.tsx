@@ -9,10 +9,10 @@ const styles = {
 
 export function TeamView({
     team,
-    isBlacklisted,
+    isInRoster,
 }: {
     team: Team;
-    isBlacklisted: (id: number) => boolean;
+    isInRoster: (id: number) => boolean;
 }) {
     return (
         <section>
@@ -27,7 +27,7 @@ export function TeamView({
                         key={member.id}
                         character={member}
                         selected
-                        blacklisted={isBlacklisted(member.id)}
+                        excluded={!isInRoster(member.id)}
                         imageSrc={member.portrait}
                         imageFit="cover"
                     />
