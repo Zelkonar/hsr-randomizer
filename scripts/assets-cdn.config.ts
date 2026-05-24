@@ -6,7 +6,7 @@
  * 3. Run `npm run generate:characters`.
  */
 export const ASSETS_CDN_BASE =
-  "https://cdn.jsdelivr.net/gh/Zelkonar/hsr-randomizer-assets@v1";
+  "https://cdn.jsdelivr.net/gh/Zelkonar/hsr-randomizer-assets@v2";
 
 /** File extension under each variant folder ({id}.{ext}) */
 export const ASSETS_EXT = "webp";

@@ -90,9 +90,9 @@ async function main() {
     lines.push(`    element: "${element}",`);
     lines.push(`    path: "${path}",`);
     lines.push(`    rarity: ${c.rarity},`);
-    lines.push(`    icon: \`\${ASSETS}/icon/${c.id}.${ASSETS_EXT}\`,`);
-    lines.push(`    preview: \`\${ASSETS}/preview/${c.id}.${ASSETS_EXT}\`,`);
-    lines.push(`    portrait: \`\${ASSETS}/portrait/${c.id}.${ASSETS_EXT}\`,`);
+    lines.push(`    icon: \`\${ASSETS}/characters/icon/${c.id}.${ASSETS_EXT}\`,`);
+    lines.push(`    preview: \`\${ASSETS}/characters/preview/${c.id}.${ASSETS_EXT}\`,`);
+    lines.push(`    portrait: \`\${ASSETS}/characters/portrait/${c.id}.${ASSETS_EXT}\`,`);
     lines.push(`  },`);
   }
 
