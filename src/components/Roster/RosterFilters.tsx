@@ -1,6 +1,6 @@
 import type { Element, Path, Rarity } from "../../types/character";
 import { getElementStyles } from "../../utils/element";
-import { getPathIcon } from "../../utils/path";
+import { getPathIcon, getPathIconLocal } from "../../utils/path";
 
 export const ELEMENTS: Element[] = [
     "Fire", "Ice", "Lightning", "Wind", "Quantum", "Imaginary", "Physical",
@@ -91,7 +91,7 @@ export function RosterFilters({ filters, onChange }: RosterFiltersProps) {
                             title={el}
                             className={`${styles.iconBtn} ${ELEMENT_ACTIVE_BG[el]}`}
                         >
-                            <img src={getElementStyles(el).icon} alt={el} className="w-5 h-5" />
+                            <img src={getElementStyles(el).icon} alt={el} className="w-5 h-5" onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = getElementStyles(el).iconLocal; }} />
                         </button>
                     ))}
                 </div>
@@ -108,7 +108,7 @@ export function RosterFilters({ filters, onChange }: RosterFiltersProps) {
                             title={p}
                             className={`${styles.iconBtn} ${styles.pathActive}`}
                         >
-                            <img src={getPathIcon(p)} alt={p} className="w-5 h-5" />
+                            <img src={getPathIcon(p)} alt={p} className="w-5 h-5" onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = getPathIconLocal(p); }} />
                         </button>
                     ))}
                 </div>
