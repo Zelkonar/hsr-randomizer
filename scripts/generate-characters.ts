@@ -67,11 +67,12 @@ async function main() {
     `// Re-run \`npm run generate:characters\` after a new patch to update.`,
     `//`,
     `// Metadata source: https://github.com/Mar-7th/StarRailRes`,
-    `// Images: ${ASSETS_CDN_BASE} (see scripts/assets-cdn.config.ts)`,
+    `// Images: ${ASSETS_CDN_BASE} (see src/config/assets.ts)`,
     ``,
     `import type { Character } from "../types/character";`,
+    `import { ASSETS_CDN } from "../config/assets";`,
     ``,
-    `const ASSETS = "${ASSETS_CDN_BASE}";`,
+    `const ASSETS = ASSETS_CDN;`,
     ``,
     `export const CHARACTERS: Character[] = [`,
   ];
@@ -90,9 +91,9 @@ async function main() {
     lines.push(`    element: "${element}",`);
     lines.push(`    path: "${path}",`);
     lines.push(`    rarity: ${c.rarity},`);
-    lines.push(`    icon: \`\${ASSETS}/icon/${c.id}.${ASSETS_EXT}\`,`);
-    lines.push(`    preview: \`\${ASSETS}/preview/${c.id}.${ASSETS_EXT}\`,`);
-    lines.push(`    portrait: \`\${ASSETS}/portrait/${c.id}.${ASSETS_EXT}\`,`);
+    lines.push(`    icon: \`\${ASSETS}/characters/icon/${c.id}.${ASSETS_EXT}\`,`);
+    lines.push(`    preview: \`\${ASSETS}/characters/preview/${c.id}.${ASSETS_EXT}\`,`);
+    lines.push(`    portrait: \`\${ASSETS}/characters/portrait/${c.id}.${ASSETS_EXT}\`,`);
     lines.push(`  },`);
   }
 

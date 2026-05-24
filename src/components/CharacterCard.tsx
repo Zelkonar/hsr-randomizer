@@ -1,7 +1,7 @@
 import type { Character } from "../types/character";
 import { memo } from "react";
 import { getElementStyles } from "../utils/element";
-import { getPathIcon, getPathIconLarge } from "../utils/path";
+import { getPathIcon, getPathIconLarge, getPathIconLocal, getPathIconLargeLocal } from "../utils/path";
 
 interface Props {
   character: Character;
@@ -65,7 +65,7 @@ function CharacterCardImpl({
       }
     >
       <div className={styles.portrait}>
-        <img src={getPathIconLarge(character.path)} alt="" aria-hidden className="absolute inset-0 w-full h-full object-contain mix-blend-screen opacity-40" />
+        <img src={getPathIconLarge(character.path)} alt="" aria-hidden className="absolute inset-0 w-full h-full object-contain mix-blend-screen opacity-40" onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = getPathIconLargeLocal(character.path); }} />
         <img src={src} alt={character.name} loading="lazy" className={imgStyles[imageFit]} />
 
         <div className={`${styles.portraitGradient} ${GRADIENT}`} />
@@ -79,8 +79,8 @@ function CharacterCardImpl({
       <div className={styles.infoStrip}>
         <p className={styles.name}>{character.name}</p>
         <div className="flex items-center gap-1 shrink-0">
-          <img src={el.icon} alt={character.element} className="w-4 h-4" />
-          <img src={getPathIcon(character.path)} alt={character.path} className="w-4 h-4" />
+          <img src={el.icon} alt={character.element} className="w-4 h-4" onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = el.iconLocal; }} />
+          <img src={getPathIcon(character.path)} alt={character.path} className="w-4 h-4" onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = getPathIconLocal(character.path); }} />
         </div>
       </div>
     </article>
