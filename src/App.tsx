@@ -1,5 +1,6 @@
 import { useState, useMemo, useCallback } from "react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
+import { Analytics } from "@vercel/analytics/react";
 import { CHARACTERS } from "./data/characters";
 import { AppHeader } from "./components/AppHeader";
 import { OptionsRow } from "./components/OptionsRow";
@@ -54,6 +55,7 @@ function App() {
   return (
     <div className={styles.page}>
       <SpeedInsights />
+      <Analytics />
       <AppHeader />
 
       <main className={styles.main}>
