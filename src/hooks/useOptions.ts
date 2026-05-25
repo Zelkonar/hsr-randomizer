@@ -1,8 +1,7 @@
 import { useState, useCallback } from "react";
+import type { GameMode } from "../types/gameMode";
 
 const OPTIONS_KEY = "hsr-randomizer:options";
-
-export type GameMode = "team" | "moc" | "pf" | "as" | "aa";
 
 interface Options {
     requireSustain: boolean;

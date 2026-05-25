@@ -1,4 +1,4 @@
-import type { GameMode } from "../hooks/useOptions";
+import type { GameMode } from "../types/gameMode";
 
 const MODES: { id: GameMode; label: string }[] = [
     { id: "team", label: "Random Team" },

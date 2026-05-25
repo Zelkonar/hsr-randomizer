@@ -21,7 +21,6 @@ const styles = {
   portrait: "relative aspect-[3/4] w-full overflow-hidden bg-gray-800",
   portraitShort: "relative aspect-square w-full overflow-hidden bg-gray-800",
   portraitGradient: "absolute inset-0 bg-gradient-to-t",
-  rarityStars: "absolute bottom-2 left-2 text-xs font-bold tracking-widest drop-shadow",
   infoStrip: "flex items-center justify-between gap-2 px-3 py-2",
   name: "truncate text-sm font-semibold text-white leading-tight",
 };

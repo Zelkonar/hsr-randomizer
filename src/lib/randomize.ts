@@ -84,16 +84,6 @@ export function buildTeam(members: Character[]): Team {
   };
 }
 
-// Convenience: roll and build in one call.
-export function rollAndBuildTeam(
-  pool: Character[],
-  size: TeamSize = 4,
-  filter: CharacterFilter = {}
-): Team {
-  const members = rollTeam(pool, size, filter);
-  return buildTeam(members);
-}
-
 // Roll N teams from a shared pool — each team excludes characters already picked.
 // Static filters (includeIds, elements, paths, rarities) are applied once up front;
 // requireSustain is enforced per team.
