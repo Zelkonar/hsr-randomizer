@@ -146,3 +146,4 @@ vite.config.ts.timestamp-*
 .vscode/
 src/data/version.ts
 public/images/
+.claude/
