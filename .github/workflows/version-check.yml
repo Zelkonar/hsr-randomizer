@@ -1,0 +1,62 @@
+name: Version Check
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  version-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout PR branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check version is greater than main
+        run: |
+          pr_version=$(cat VERSION | tr -d '[:space:]')
+          main_version=$(git show origin/main:VERSION 2>/dev/null | tr -d '[:space:]' || echo "")
+
+          if [ -z "$main_version" ]; then
+            echo "No VERSION on main yet, skipping comparison"
+            exit 0
+          fi
+
+          strip_v() { echo "${1#v}"; }
+
+          pr_ver=$(strip_v "$pr_version")
+          main_ver=$(strip_v "$main_version")
+
+          IFS='.' read -r pr_major pr_minor pr_patch <<EOF
+          $pr_ver
+          EOF
+          IFS='.' read -r main_major main_minor main_patch <<EOF
+          $main_ver
+          EOF
+
+          pr_major=$(echo $pr_major | tr -d ' ')
+          pr_minor=$(echo $pr_minor | tr -d ' ')
+          pr_patch=$(echo $pr_patch | tr -d ' ')
+          main_major=$(echo $main_major | tr -d ' ')
+          main_minor=$(echo $main_minor | tr -d ' ')
+          main_patch=$(echo $main_patch | tr -d ' ')
+
+          is_greater=false
+          if [ "$pr_major" -gt "$main_major" ]; then
+            is_greater=true
+          elif [ "$pr_major" -eq "$main_major" ] && [ "$pr_minor" -gt "$main_minor" ]; then
+            is_greater=true
+          elif [ "$pr_major" -eq "$main_major" ] && [ "$pr_minor" -eq "$main_minor" ] && [ "$pr_patch" -gt "$main_patch" ]; then
+            is_greater=true
+          fi
+
+          echo "main: $main_version  →  PR: $pr_version"
+
+          if [ "$is_greater" = false ]; then
+            echo "ERROR: VERSION ($pr_version) must be greater than main ($main_version)"
+            exit 1
+          fi
+
+          echo "OK: version bump is valid"

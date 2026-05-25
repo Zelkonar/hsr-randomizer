@@ -1,26 +1,10 @@
 import fs from "fs";
-import { execSync } from "child_process";
 
-function tryExec(cmd: string): string | null {
-  try {
-    return execSync(cmd, {
-      stdio: ["ignore", "pipe", "ignore"],
-    }).toString().trim();
-  } catch {
-    return null;
-  }
-}
+const semver = fs.existsSync("VERSION")
+  ? fs.readFileSync("VERSION", "utf8").trim()
+  : "v0.0.0";
 
-const tag = tryExec("git tag --points-at HEAD --sort=-version:refname")
-  ?.split("\n")
-  .find((t) => /^v\d+\.\d+\.\d+/.test(t)) ?? null;
-
-const sha =
-  tryExec("git rev-parse --short HEAD") ??
-  process.env.VERCEL_GIT_COMMIT_SHA?.slice(0, 7) ??
-  "dev";
-
-const version = tag ?? sha;
+const version = semver;
 const buildDate = new Date().toISOString().slice(0, 10);
 
 const out = [

@@ -11,10 +11,10 @@
     "predev": "tsx scripts/write-version.ts",
     "build": "tsc -b && vite build",
     "prebuild": "tsx scripts/write-version.ts",
-    "postinstall": "node scripts/install-native-bindings.mjs",
-    "lint": "eslint .",
+"lint": "eslint .",
     "preview": "vite preview",
-    "generate:characters": "tsx scripts/generate-characters.ts"
+    "generate:characters": "tsx scripts/generate-characters.ts",
+    "prepare": "husky"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.0",
@@ -43,6 +43,7 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.6.0",
+    "husky": "^9.1.7",
     "tsx": "^4.22.3",
     "typescript": "~6.0.2",
     "typescript-eslint": "^8.59.2",
