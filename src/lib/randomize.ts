@@ -93,3 +93,26 @@ export function rollAndBuildTeam(
   const members = rollTeam(pool, size, filter);
   return buildTeam(members);
 }
+
+// Roll N teams from a shared pool — each team excludes characters already picked.
+// Static filters (includeIds, elements, paths, rarities) are applied once up front;
+// requireSustain is enforced per team.
+export function rollMultipleTeams(
+  pool: Character[],
+  count: number,
+  size: TeamSize = 4,
+  filter: CharacterFilter = {}
+): Team[] {
+  const { requireSustain, ...staticFilter } = filter;
+  let remaining = applyFilter(pool, staticFilter);
+  const teams: Team[] = [];
+
+  for (let i = 0; i < count; i++) {
+    const members = rollTeam(remaining, size, { requireSustain });
+    teams.push(buildTeam(members));
+    const pickedIds = new Set(members.map((c) => c.id));
+    remaining = remaining.filter((c) => !pickedIds.has(c.id));
+  }
+
+  return teams;
+}
