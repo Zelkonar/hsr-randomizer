@@ -55,7 +55,7 @@ async function main() {
   const res = await fetch(INDEX_URL);
   if (!res.ok) throw new Error(`Failed to fetch: ${res.status} ${res.statusText}`);
 
-  const raw: Record<string, RawCharacter> = await res.json();
+  const raw = await res.json() as Record<string, RawCharacter>;
   const entries = Object.values(raw);
 
   console.log(`  Found ${entries.length} characters.`);

@@ -18,7 +18,7 @@ export function AppHeader() {
     <header className={styles.header}>
       <span className={styles.version}>
         <span>{VERSION}</span>
-        {BUILD_DATE && <span>last deployed {BUILD_DATE}</span>}
+        {BUILD_DATE && <span>{BUILD_DATE}</span>}
       </span>
 
       <div className={styles.glowWrap}>
