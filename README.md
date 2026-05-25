@@ -1,32 +1,26 @@
-# hsr-randomizer-react
+# HSR Randomizer
 
-Random HSR Teams
+A randomizer for Honkai: Star Rail team building. Filter your roster by element, path, and rarity, then let the app generate a random team: useful for challenge runs or just mixing things up.
 
 Visit: https://hsr-randomizer.vercel.app/
 
+## Stack
+
+React, TypeScript, Tailwind CSS, Vite: deployed on Vercel.
+
 ## Local development
 
-Requires **Node.js 20.19+** (22 LTS recommended). Vite 8 and Tailwind 4 use platform-specific native binaries; install dependencies on each machine (do not copy `node_modules` from macOS to Windows).
+Requires **Node.js 20.19+** (22 LTS recommended).
 
 ```bash
 npm install
 npm run dev
 ```
 
-### Character images (separate repo + jsDelivr)
+## Assets
 
-Images and sync scripts live in **[hsr-randomizer-assets](https://github.com/Zelkonar/hsr-randomizer-assets)**. This app only references jsDelivr URLs — see **[docs/assets.md](docs/assets.md)**.
+Character images, element icons, and path icons are served from **[hsr-randomizer-assets](https://github.com/Zelkonar/hsr-randomizer-assets)** via jsDelivr. When the assets repo publishes a new tag, bump `VERSION` in `src/config/assets.ts` to match, then run `npm run generate:characters`.
 
-Quick flow: sync in assets repo → bump tag in `scripts/assets-cdn.config.ts` → `npm run generate:characters`.
+## Versioning
 
-### Deploying on Vercel
-
-Vercel runs `npm run build`, which automatically runs **`prebuild`** → `tsx scripts/write-version.ts` before `tsc` and `vite build`. You do not need to commit `src/data/version.ts` (it is gitignored and generated on every build).
-
-Default project settings are enough: **Framework Preset: Vite**, **Build Command: `npm run build`**, **Output Directory: `dist`**.
-
-### Windows notes
-
-- Use Node 20+ from [nodejs.org](https://nodejs.org/) or `nvm-windows`. The repo ships `.nvmrc` with `22`.
-- If `npm run build` fails with "Cannot find native binding", delete `node_modules` and run `npm install` again on Windows (not after copying `node_modules` from another OS).
-- `postinstall` installs the correct rolldown/Tailwind bindings for your platform when npm skips optional dependencies.
+Version is tracked in the `VERSION` file (`vX.Y.Z`). A pre-commit hook validates the format. When opening a PR to `main`, CI checks that the version is greater than what's on `main`.
