@@ -24,7 +24,6 @@ export function applyFilter(
   });
 }
 
-
 type TeamSize = 1 | 2 | 3 | 4;
 
 class NotEnoughCharactersError extends Error {
@@ -38,45 +37,10 @@ function removeFromPool(pool: Character[], pick: Character): Character[] {
   return pool.filter((c) => c.id !== pick.id && c.name !== pick.name);
 }
 
-function rollTeam(
-  pool: Character[],
-  size: TeamSize = 4,
-  filter: CharacterFilter = {}
-): Character[] {
-  let remaining = applyFilter(pool, filter);
-
-  if (remaining.length < size) {
-    throw new NotEnoughCharactersError(size, remaining.length);
-  }
-
-  const team: Character[] = [];
-
-  if (filter.requireSustain) {
-    for (let i = 0; i < size - 1; i++) {
-      const pick = randomPick(remaining);
-      team.push(pick);
-      remaining = removeFromPool(remaining, pick);
-    }
-    const lastPool = !team.some(isSustain) && remaining.some(isSustain)
-      ? remaining.filter(isSustain)
-      : remaining;
-    team.push(randomPick(lastPool));
-  } else {
-    while (team.length < size) {
-      const pick = randomPick(remaining);
-      team.push(pick);
-      remaining = removeFromPool(remaining, pick);
-    }
-  }
-
-  return team;
-}
-
 function buildTeam(members: Character[]): Team {
   if (members.length < 1 || members.length > 4) {
     throw new Error("A team must have between 1 and 4 members.");
   }
-
   return {
     id: crypto.randomUUID(),
     members: members as Team["members"],
@@ -84,6 +48,10 @@ function buildTeam(members: Character[]): Team {
   };
 }
 
+// Pre-select one sustain per team upfront and remove them from the general pool.
+// Each team rolls size-1 members freely. If the free picks include any sustain,
+// the reserved one returns to the pool and the last slot is rolled freely too.
+// If no sustain was rolled freely, the reserved sustain fills the last slot.
 export function rollMultipleTeams(
   pool: Character[],
   count: number,
@@ -92,13 +60,50 @@ export function rollMultipleTeams(
 ): Team[] {
   const { requireSustain, ...staticFilter } = filter;
   let remaining = applyFilter(pool, staticFilter);
+
+  const reserved: (Character | null)[] = new Array(count).fill(null);
+  if (requireSustain) {
+    let sustainPool = remaining.filter(isSustain);
+    if (sustainPool.length < count) {
+      throw new NotEnoughCharactersError(count, sustainPool.length);
+    }
+    for (let i = 0; i < count; i++) {
+      const pick = randomPick(sustainPool);
+      reserved[i] = pick;
+      sustainPool = removeFromPool(sustainPool, pick);
+      remaining = removeFromPool(remaining, pick);
+    }
+  }
+
   const teams: Team[] = [];
 
   for (let i = 0; i < count; i++) {
-    const members = rollTeam(remaining, size, { requireSustain });
+    const members: Character[] = [];
+
+    for (let j = 0; j < size - 1; j++) {
+      const pick = randomPick(remaining);
+      members.push(pick);
+      remaining = removeFromPool(remaining, pick);
+    }
+
+    const sustain = reserved[i];
+    if (sustain !== null) {
+      if (members.some(isSustain)) {
+        // Free picks already include a sustain — return reserved to pool and roll last slot freely
+        remaining = [sustain, ...remaining];
+        const pick = randomPick(remaining);
+        members.push(pick);
+        remaining = removeFromPool(remaining, pick);
+      } else {
+        members.push(sustain);
+      }
+    } else {
+      const pick = randomPick(remaining);
+      members.push(pick);
+      remaining = removeFromPool(remaining, pick);
+    }
+
     teams.push(buildTeam(members));
-    const pickedIds = new Set(members.map((c) => c.id));
-    remaining = remaining.filter((c) => !pickedIds.has(c.id));
   }
 
   return teams;

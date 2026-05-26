@@ -9,14 +9,12 @@ export type Result =
     | { mode: TwoTeamMode; teams: [Team, Team] }
     | { mode: "aa"; knights: [Team, Team, Team]; king: Team };
 
-const TWO_TEAM_MODES = new Set<GameMode>(["moc", "pf", "as"]);
+const TEAM_COUNT: Record<GameMode, number> = {
+    team: 1,
+    moc: 2, pf: 2, as: 2,
+    aa: 3, // really 4, but actually 3 as far as validations are concerened
+};
 
-// TODO: we have an issue where if we're doing multiple team type deal,
-// if we have constraints like "must have sustain" and we roll a team with
-// sustain, then the next team might not have sustain but it won't re-roll 
-// because the first team already satisfies the requirement. We should probably
-// re-roll all teams if any of them don't satisfy the requirement, but that
-// might be a bit more complex to implement
 export function useRandomizer(
     rosterIds: number[],
     mode: GameMode,
@@ -34,12 +32,14 @@ export function useRandomizer(
         [availableCharacters]
     );
 
-    const sustainAvailable = useMemo(
-        () => !requireSustain || availableCharacters.some(isSustain),
-        [requireSustain, availableCharacters]
+    const sustainCount = useMemo(
+        () => availableCharacters.filter(isSustain).length,
+        [availableCharacters]
     );
 
-    const neededCount = mode === "aa" ? 12 : TWO_TEAM_MODES.has(mode) ? 8 : 4;
+    const teamCount = TEAM_COUNT[mode];
+    const neededCount = teamCount * 4;
+    const sustainAvailable = !requireSustain || sustainCount >= teamCount;
 
     const disabledReason = availableCount < neededCount
         ? "Not enough characters selected"
@@ -53,7 +53,7 @@ export function useRandomizer(
             const [k1, k2, k3] = rollMultipleTeams(CHARACTERS, 3, 4, filter);
             const [king] = rollMultipleTeams(CHARACTERS, 1, 4, filter);
             setResult({ mode: "aa", knights: [k1, k2, k3], king });
-        } else if (TWO_TEAM_MODES.has(mode)) {
+        } else if (TEAM_COUNT[mode] === 2) {
             const [side1, side2] = rollMultipleTeams(CHARACTERS, 2, 4, filter);
             setResult({ mode: mode as TwoTeamMode, teams: [side1, side2] });
         } else {
