@@ -15,6 +15,10 @@ const PATH_ICON_NAMES: Record<Path, string> = {
   Elation:      "Joy",
 };
 
+export function getPathIconSmall(path: Path) {
+  return `${CDN}/${PATH_ICON_NAMES[path]}Small.webp`;
+}
+
 export function getPathIcon(path: Path) {
   return `${CDN}/${PATH_ICON_NAMES[path]}Middle.webp`;
 }

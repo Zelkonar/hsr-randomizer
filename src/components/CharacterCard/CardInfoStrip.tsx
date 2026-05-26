@@ -19,16 +19,16 @@ export function CardInfoStrip({
 
     if (short) {
         return (
-            <div className="flex flex-col gap-1 px-2 py-1.5">
-                <div className="flex h-[2.5em] items-center">
-                    <p className="line-clamp-2 text-sm font-semibold text-white leading-tight">
+            <div className="flex flex-col gap-0.5 px-1.5 py-1 md:gap-1 md:px-2 md:py-1.5">
+                <div className="flex h-[2em] items-center md:h-[2.5em]">
+                    <p className="line-clamp-2 text-[10px] font-medium text-white leading-tight md:text-sm md:font-semibold">
                         {character.name}
                     </p>
                 </div>
-                <div className="flex items-center gap-1">
-                    <span className={`${rarityColor} text-xs`} aria-label={`${character.rarity} star`}>★</span>
-                    <img src={el.icon} alt={character.element} className="w-4 h-4" onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = el.iconLocal; }} />
-                    <img src={getPathIcon(character.path)} alt={character.path} className="w-4 h-4" onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = getPathIconLocal(character.path); }} />
+                <div className="flex items-center gap-0.5 md:gap-1">
+                    <span className={`${rarityColor} text-[9px] md:text-xs`} aria-label={`${character.rarity} star`}>★</span>
+                    <img src={el.icon} alt={character.element} className="w-3 h-3 md:w-4 md:h-4" onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = el.iconLocal; }} />
+                    <img src={getPathIcon(character.path)} alt={character.path} className="w-3 h-3 md:w-4 md:h-4" onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = getPathIconLocal(character.path); }} />
                 </div>
             </div>
         );
