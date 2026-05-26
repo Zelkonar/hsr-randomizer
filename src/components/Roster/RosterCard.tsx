@@ -1,4 +1,6 @@
 import type { Character } from "../../types/character";
+import { getElementStyles } from "../../utils/element";
+import { getPathIconSmall } from "../../utils/path";
 
 const styles = {
     buttonBase: "group relative flex flex-col items-center gap-1.5 rounded-xl border p-2 w-full transition-all duration-150 cursor-pointer",
@@ -8,7 +10,7 @@ const styles = {
     excludedBadge: "absolute top-1.5 left-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-white/20 text-[9px] text-white/60 font-bold",
     icon: "h-14 w-14 rounded-lg object-cover",
     name: "truncate text-[10px] font-semibold text-white/90 leading-tight",
-    subtitle: "truncate text-[9px] text-white/40",
+    icons: "flex items-center justify-center gap-1 mt-0.5",
     info: "w-full text-center",
 };
 
@@ -50,7 +52,10 @@ export function RosterCard({ character, excluded, onToggle }: RosterCardProps) {
 
             <div className={styles.info}>
                 <p className={styles.name}>{character.name}</p>
-                <p className={styles.subtitle}>{character.element} · {character.path}</p>
+                <div className={styles.icons}>
+                    <img src={getElementStyles(character.element).icon} alt={character.element} className="w-3 h-3 opacity-70" />
+                    <img src={getPathIconSmall(character.path)} alt={character.path} className="w-3 h-3 opacity-70" />
+                </div>
             </div>
         </button>
     );
