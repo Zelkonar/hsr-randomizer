@@ -1,19 +1,21 @@
 import { useState, useCallback } from "react";
+import type { GameMode } from "../types/gameMode";
 
 const OPTIONS_KEY = "hsr-randomizer:options";
 
 interface Options {
     requireSustain: boolean;
+    mode: GameMode;
 }
 
 function loadOptions(): Options {
     try {
         const raw = localStorage.getItem(OPTIONS_KEY);
-        if (raw) return { requireSustain: false, ...JSON.parse(raw) };
+        if (raw) return { requireSustain: false, mode: "team", ...JSON.parse(raw) };
     } catch {
         // fall through
     }
-    return { requireSustain: false };
+    return { requireSustain: false, mode: "team" };
 }
 
 function saveOptions(opts: Options) {
@@ -31,5 +33,13 @@ export function useOptions() {
         });
     }, []);
 
-    return { ...options, setRequireSustain };
+    const setMode = useCallback((value: GameMode) => {
+        setOptions((prev) => {
+            const next = { ...prev, mode: value };
+            saveOptions(next);
+            return next;
+        });
+    }, []);
+
+    return { ...options, setRequireSustain, setMode };
 }

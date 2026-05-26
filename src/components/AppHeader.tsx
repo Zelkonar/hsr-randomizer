@@ -2,7 +2,7 @@ import VERSION, { BUILD_DATE } from "../data/version";
 
 const styles = {
   header: "relative flex flex-col items-center justify-center border-b border-white/10 px-6 py-10 overflow-hidden",
-  version: "absolute top-3 left-4 flex flex-col text-[10px] font-mono tracking-widest text-purple-300/40 select-all",
+  version: "absolute top-3 left-4 flex flex-col text-[10px] font-mono tracking-widest text-purple-300/40",
   glowWrap: "absolute inset-0 flex items-center justify-center pointer-events-none",
   glow: "h-32 w-96 rounded-full bg-sky-500/10 blur-3xl",
   eyebrow: "relative mb-3 flex items-center gap-3 text-[10px] uppercase tracking-[0.4em] text-sky-400/70 font-medium",
@@ -17,8 +17,8 @@ export function AppHeader() {
   return (
     <header className={styles.header}>
       <span className={styles.version}>
-        <span>{VERSION}</span>
-        {BUILD_DATE && <span>{BUILD_DATE}</span>}
+        <span className="select-all">{VERSION}</span>
+        {BUILD_DATE && <span className="select-all">{BUILD_DATE}</span>}
       </span>
 
       <div className={styles.glowWrap}>
