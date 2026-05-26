@@ -1,6 +1,6 @@
 import { useState, useMemo, useCallback } from "react";
 import { CHARACTERS } from "../data/characters";
-import { rollMultipleTeams, applyFilter, isSustain } from "../lib/randomize";
+import { rollMultipleTeams, applyFilter, isSustain } from "../utils/randomize";
 import type { Team } from "../types/character";
 import type { GameMode, TwoTeamMode } from "../types/gameMode";
 
@@ -11,6 +11,12 @@ export type Result =
 
 const TWO_TEAM_MODES = new Set<GameMode>(["moc", "pf", "as"]);
 
+// TODO: we have an issue where if we're doing multiple team type deal,
+// if we have constraints like "must have sustain" and we roll a team with
+// sustain, then the next team might not have sustain but it won't re-roll 
+// because the first team already satisfies the requirement. We should probably
+// re-roll all teams if any of them don't satisfy the requirement, but that
+// might be a bit more complex to implement
 export function useRandomizer(
     rosterIds: number[],
     mode: GameMode,

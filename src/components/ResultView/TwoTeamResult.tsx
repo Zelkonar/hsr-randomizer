@@ -1,4 +1,4 @@
-import { TeamView } from "../TeamView";
+import { TeamView } from "./TeamView";
 import { ModeHeader } from "./ModeHeader";
 import type { TwoTeamMode } from "../../types/gameMode";
 import type { Team } from "../../types/character";

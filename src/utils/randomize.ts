@@ -25,9 +25,9 @@ export function applyFilter(
 }
 
 
-export type TeamSize = 1 | 2 | 3 | 4;
+type TeamSize = 1 | 2 | 3 | 4;
 
-export class NotEnoughCharactersError extends Error {
+class NotEnoughCharactersError extends Error {
   constructor(needed: number, available: number) {
     super(`Need ${needed} characters but only ${available} are available after filtering.`);
     this.name = "NotEnoughCharactersError";
@@ -38,7 +38,7 @@ function removeFromPool(pool: Character[], pick: Character): Character[] {
   return pool.filter((c) => c.id !== pick.id && c.name !== pick.name);
 }
 
-export function rollTeam(
+function rollTeam(
   pool: Character[],
   size: TeamSize = 4,
   filter: CharacterFilter = {}
@@ -72,7 +72,7 @@ export function rollTeam(
   return team;
 }
 
-export function buildTeam(members: Character[]): Team {
+function buildTeam(members: Character[]): Team {
   if (members.length < 1 || members.length > 4) {
     throw new Error("A team must have between 1 and 4 members.");
   }
@@ -84,9 +84,6 @@ export function buildTeam(members: Character[]): Team {
   };
 }
 
-// Roll N teams from a shared pool — each team excludes characters already picked.
-// Static filters (includeIds, elements, paths, rarities) are applied once up front;
-// requireSustain is enforced per team.
 export function rollMultipleTeams(
   pool: Character[],
   count: number,

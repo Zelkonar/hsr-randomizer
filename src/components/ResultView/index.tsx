@@ -1,4 +1,4 @@
-import { TeamView } from "../TeamView";
+import { TeamView } from "./TeamView";
 import { TwoTeamResult } from "./TwoTeamResult";
 import { AnomalyArbitrationResult } from "./AnomalyArbitrationResult";
 import type { Result } from "../../hooks/useRandomizer";

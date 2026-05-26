@@ -1,5 +1,5 @@
-import type { Team } from "../types/character";
-import { CharacterCard } from "./CharacterCard";
+import type { Team } from "../../types/character";
+import { CharacterCard } from "../CharacterCard";
 
 const styles = {
   section: "flex flex-col gap-3",
