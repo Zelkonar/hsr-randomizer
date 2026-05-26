@@ -57,7 +57,7 @@ export function RosterModal({
         if (filters.paths.size && !filters.paths.has(c.path)) return false;
         if (filters.rarities.size && !filters.rarities.has(c.rarity)) return false;
         return true;
-    }), [filters]);
+    }).sort((a, b) => a.name.localeCompare(b.name)), [filters]);
 
     const filteredIds = filtered.map((c) => c.id);
     const nonSearchFilterCount = filters.elements.size + filters.paths.size + filters.rarities.size;
