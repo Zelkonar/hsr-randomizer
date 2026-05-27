@@ -23,6 +23,7 @@ interface OptionsRowProps {
     onToggleRoster: (id: number) => void;
     onEnableAll: (ids: number[]) => void;
     onDisableAll: (ids: number[]) => void;
+    onImport: (ids: number[]) => void;
     requireSustain: boolean;
     onRequireSustainChange: (value: boolean) => void;
 }
@@ -32,6 +33,7 @@ export function OptionsRow({
     onToggleRoster,
     onEnableAll,
     onDisableAll,
+    onImport,
     requireSustain,
     onRequireSustainChange,
 }: OptionsRowProps) {
@@ -77,6 +79,7 @@ export function OptionsRow({
                 onToggleRoster={onToggleRoster}
                 onEnableAll={onEnableAll}
                 onDisableAll={onDisableAll}
+                onImport={onImport}
                 onClose={() => setRosterOpen(false)}
             />
         </>

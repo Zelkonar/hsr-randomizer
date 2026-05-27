@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { getElementStyles } from "../../utils/element";
+import { getElementStyles } from "../../lib/element";
 import { CardPortrait } from "./CardPortrait";
 import { CardInfoStrip } from "./CardInfoStrip";
 import type { Character } from "../../types/character";

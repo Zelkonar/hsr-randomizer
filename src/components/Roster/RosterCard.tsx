@@ -1,6 +1,6 @@
 import type { Character } from "../../types/character";
-import { getElementStyles } from "../../utils/element";
-import { getPathIconSmall } from "../../utils/path";
+import { getElementStyles } from "../../lib/element";
+import { getPathIconSmall } from "../../lib/path";
 
 const styles = {
     buttonBase: "group relative flex flex-col items-center gap-1.5 rounded-xl border p-2 w-full transition-all duration-150 cursor-pointer",
