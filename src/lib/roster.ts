@@ -7,11 +7,11 @@ export function parseRosterImport(text: string, validIds: Set<number>): ImportRe
     try {
         data = JSON.parse(text);
     } catch {
-        return { ok: false, error: "Invalid JSON — expected an array of IDs" };
+        return { ok: false, error: "Invalid JSON: expected an array of IDs" };
     }
 
     if (!Array.isArray(data)) {
-        return { ok: false, error: "Invalid JSON — expected an array of IDs" };
+        return { ok: false, error: "Invalid JSON: expected an array of IDs" };
     }
 
     const valid = data.filter((id): id is number => typeof id === "number" && validIds.has(id));

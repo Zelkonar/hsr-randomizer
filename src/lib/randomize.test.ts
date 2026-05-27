@@ -184,7 +184,7 @@ describe("rollMultipleTeams", () => {
         });
 
         it("works when a free pick happens to be a sustain (reserved sustain returned to pool)", () => {
-            // Pool with only 2 sustains and 6 others — forces the edge case where the reserved
+            // Pool with only 2 sustains and 6 others: forces the edge case where the reserved
             // sustain may need to return to the pool because a free pick covered it.
             const tightPool = [GEPARD, BAILU, SEELE, JINGLIU, ACHERON, FEIXIAO, KAFKA, ARGENTI];
             repeat(200, () => {
@@ -213,7 +213,7 @@ describe("rollMultipleTeams", () => {
         });
 
         it("throws when there are fewer sustains than teams", () => {
-            // 1 sustain, 2 teams — can't guarantee one sustain per team
+            // 1 sustain, 2 teams: can't guarantee one sustain per team
             const oneSustain = [GEPARD, SEELE, JINGLIU, ACHERON, FEIXIAO, KAFKA, ARGENTI, BRONYA];
             expect(() => rollMultipleTeams(oneSustain, 2, 4, { requireSustain: true })).toThrow();
         });
