@@ -14,7 +14,7 @@ A team randomizer for Honkai: Star Rail. Configure your owned roster, pick a mod
 
 ## Stack
 
-React 19, TypeScript, Tailwind CSS v4, Vite — deployed on Vercel.
+React 19, TypeScript, Tailwind CSS v4, Vite, deployed on Vercel.
 
 ## Local development
 
