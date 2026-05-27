@@ -1,11 +1,6 @@
 import { RosterCard } from "./RosterCard";
 import type { Character } from "../../types/character";
 
-const styles = {
-    empty: "flex flex-col items-center justify-center py-16 text-white/30",
-    grid: "grid grid-cols-[repeat(auto-fill,minmax(72px,1fr))] gap-2",
-};
-
 interface RosterCharacterGridProps {
     characters: Character[];
     rosterIds: number[];
@@ -15,7 +10,7 @@ interface RosterCharacterGridProps {
 export function RosterCharacterGrid({ characters, rosterIds, onToggle }: RosterCharacterGridProps) {
     if (characters.length === 0) {
         return (
-            <div className={styles.empty}>
+            <div className="flex flex-col items-center justify-center py-16 text-white/30">
                 <span className="text-3xl mb-2">∅</span>
                 <p className="text-sm">No characters match your filters</p>
             </div>
@@ -23,7 +18,7 @@ export function RosterCharacterGrid({ characters, rosterIds, onToggle }: RosterC
     }
 
     return (
-        <div className={styles.grid}>
+        <div className="grid grid-cols-[repeat(auto-fill,minmax(72px,1fr))] gap-2">
             {characters.map((c) => (
                 <RosterCard
                     key={c.id}

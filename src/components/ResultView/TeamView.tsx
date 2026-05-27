@@ -1,16 +1,26 @@
+import { cva } from "class-variance-authority";
 import type { Team } from "../../types/character";
 import { CharacterCard } from "../CharacterCard";
 
-const styles = {
-  section: "flex flex-col gap-3",
-  sectionPanel: "flex flex-col gap-3 rounded-xl border border-white/8 bg-white/[0.025] p-4",
-  labelFull: "flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] text-white/30",
-  labelPanel: "text-center text-xs font-semibold uppercase tracking-widest text-white/70",
-  dividerLine: "block h-px flex-1 bg-white/10",
-  gridFull: "grid grid-cols-2 gap-6 sm:grid-cols-4",
-  gridHalf: "grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-5",
-  gridKnight: "grid grid-cols-4 gap-2 md:grid-cols-2 md:gap-4",
-};
+const section = cva("flex flex-col gap-3", {
+    variants: {
+        layout: {
+            full: "",
+            half: "rounded-xl border border-white/8 bg-white/[0.025] p-4",
+            knight: "rounded-xl border border-white/8 bg-white/[0.025] p-4",
+        },
+    },
+});
+
+const grid = cva("grid", {
+    variants: {
+        layout: {
+            full: "grid-cols-2 gap-6 sm:grid-cols-4",
+            half: "grid-cols-2 gap-4 md:grid-cols-4 md:gap-5",
+            knight: "grid-cols-4 gap-2 md:grid-cols-2 md:gap-4",
+        },
+    },
+});
 
 export function TeamView({
     team,
@@ -24,21 +34,19 @@ export function TeamView({
     layout?: "full" | "half" | "knight";
 }) {
     const isKnight = layout === "knight";
-    const grid = layout === "full" ? styles.gridFull : isKnight ? styles.gridKnight : styles.gridHalf;
-    const sectionClass = layout !== "full" ? styles.sectionPanel : styles.section;
 
     return (
-        <section className={sectionClass}>
+        <section className={section({ layout })}>
             {layout === "full" ? (
-                <p className={styles.labelFull}>
-                    <span className={styles.dividerLine} />
+                <p className="flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] text-white/30">
+                    <span className="block h-px flex-1 bg-white/10" />
                     {label}
-                    <span className={styles.dividerLine} />
+                    <span className="block h-px flex-1 bg-white/10" />
                 </p>
             ) : (
-                <p className={styles.labelPanel}>{label}</p>
+                <p className="text-center text-xs font-semibold uppercase tracking-widest text-white/70">{label}</p>
             )}
-            <div className={grid}>
+            <div className={grid({ layout })}>
                 {team.members.map((member) => (
                     <CharacterCard
                         key={member.id}
