@@ -39,18 +39,9 @@ export function RosterModal({
     const searchRef = useRef<HTMLInputElement>(null);
     const { savedRosters, saveRoster, deleteSavedRoster } = useSavedRosters();
 
-    // Reset internal state each time the modal opens. An external `key` would
-    // also work but would require the parent to track open count.
-    /* eslint-disable react-hooks/set-state-in-effect */
     useEffect(() => {
-        if (open) {
-            setFilters(EMPTY_FILTERS);
-            setFiltersOpen(false);
-            setDataModal(null);
-            setTimeout(() => searchRef.current?.focus(), 0);
-        }
+        if (open) setTimeout(() => searchRef.current?.focus(), 0);
     }, [open]);
-    /* eslint-enable react-hooks/set-state-in-effect */
 
     useEffect(() => {
         if (!open) return;

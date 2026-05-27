@@ -26,13 +26,17 @@ export function OptionsRow({
     onRequireSustainChange,
 }: OptionsRowProps) {
     const [rosterOpen, setRosterOpen] = useState(false);
+    const [rosterKey, setRosterKey] = useState(0);
 
     return (
         <>
             <div className="flex flex-col items-center gap-2 mt-1">
                 <div>
                     <button
-                        onClick={() => setRosterOpen(true)}
+                        onClick={() => {
+                            setRosterKey((k) => k + 1);
+                            setRosterOpen(true);
+                        }}
                         className="flex items-center gap-1.5 rounded-md border border-white/10 bg-white/[0.03] px-3 py-1.5 text-[11px] font-semibold uppercase tracking-widest text-white/40 transition-all duration-150 hover:border-sky-500/40 hover:bg-sky-500/8 hover:text-sky-400/80 active:scale-95"
                     >
                         <svg
@@ -87,6 +91,7 @@ export function OptionsRow({
             </div>
 
             <RosterModal
+                key={rosterKey}
                 open={rosterOpen}
                 rosterIds={rosterIds}
                 onToggleRoster={onToggleRoster}
