@@ -53,5 +53,12 @@ export function useRoster() {
         });
     }, []);
 
-    return { rosterIds, isInRoster, toggleRoster, enableAll, disableAll };
+    const importRoster = useCallback((ids: number[]) => {
+        setRosterIds(() => {
+            saveIds(ids);
+            return ids;
+        });
+    }, []);
+
+    return { rosterIds, isInRoster, toggleRoster, enableAll, disableAll, importRoster };
 }
