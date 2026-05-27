@@ -67,8 +67,13 @@ export function SavedRosters({ savedRosters, rosterIds, onLoad, onSave, onDelete
                     <div className="flex flex-col gap-0.5 max-h-36 overflow-y-auto">
                         {entries.map(([rosterName, ids]) =>
                             pendingDelete === rosterName ? (
-                                <div key={rosterName} className="flex items-center gap-2 rounded-lg px-2 py-1.5 bg-red-500/5 border border-red-500/20">
-                                    <span className="flex-1 min-w-0 text-[12px] text-red-400/80 truncate font-medium">Delete "{rosterName}"?</span>
+                                <div
+                                    key={rosterName}
+                                    className="flex items-center gap-2 rounded-lg px-2 py-1.5 bg-red-500/5 border border-red-500/20"
+                                >
+                                    <span className="flex-1 min-w-0 text-[12px] text-red-400/80 truncate font-medium">
+                                        Delete "{rosterName}"?
+                                    </span>
                                     <div className="flex items-center gap-2 shrink-0">
                                         <label className="flex items-center gap-1.5 text-[10px] text-white/30 cursor-pointer select-none hover:text-white/50 transition-colors">
                                             <input
@@ -94,9 +99,16 @@ export function SavedRosters({ savedRosters, rosterIds, onLoad, onSave, onDelete
                                     </div>
                                 </div>
                             ) : (
-                                <div key={rosterName} className="flex items-center gap-2 rounded-lg px-2 py-1.5 hover:bg-white/5 transition-colors">
-                                    <span className="flex-1 min-w-0 text-[12px] text-white/70 truncate font-medium">{rosterName}</span>
-                                    <span className="text-[11px] text-white/30 shrink-0 tabular-nums">{ids.length}/{TOTAL}</span>
+                                <div
+                                    key={rosterName}
+                                    className="flex items-center gap-2 rounded-lg px-2 py-1.5 hover:bg-white/5 transition-colors"
+                                >
+                                    <span className="flex-1 min-w-0 text-[12px] text-white/70 truncate font-medium">
+                                        {rosterName}
+                                    </span>
+                                    <span className="text-[11px] text-white/30 shrink-0 tabular-nums">
+                                        {ids.length}/{TOTAL}
+                                    </span>
                                     <button
                                         className="shrink-0 h-6 px-2.5 rounded border border-white/10 text-white/40 text-[10px] font-semibold uppercase tracking-widest hover:text-white hover:border-white/30 transition-colors"
                                         onClick={() => onLoad(ids)}

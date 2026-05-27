@@ -1,62 +1,57 @@
 name: Version Check
 
 on:
-  pull_request:
-    branches:
-      - release
+    pull_request:
+        branches:
+            - release
 
 jobs:
-  version-check:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout PR branch
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+    version-check:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout PR branch
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
 
-      - name: Check version is greater than release
-        run: |
-          pr_version=$(cat VERSION | tr -d '[:space:]')
-          release_version=$(git show origin/release:VERSION 2>/dev/null | tr -d '[:space:]' || echo "")
+            - name: Check version is greater than release
+              run: |
+                  pr_version=$(cat VERSION | tr -d '[:space:]')
+                  release_version=$(git show origin/release:VERSION 2>/dev/null | tr -d '[:space:]' || echo "")
 
-          if [ -z "$release_version" ]; then
-            echo "No VERSION on release yet, skipping comparison"
-            exit 0
-          fi
+                  if [ -z "$release_version" ]; then
+                    exit 0
+                  fi
 
-          strip_v() { echo "${1#v}"; }
+                  strip_v() { echo "${1#v}"; }
 
-          pr_ver=$(strip_v "$pr_version")
-          release_ver=$(strip_v "$release_version")
+                  pr_ver=$(strip_v "$pr_version")
+                  release_ver=$(strip_v "$release_version")
 
-          IFS='.' read -r pr_major pr_minor pr_patch <<EOF
-          $pr_ver
-          EOF
-          IFS='.' read -r release_major release_minor release_patch <<EOF
-          $release_ver
-          EOF
+                  IFS='.' read -r pr_major pr_minor pr_patch <<EOF
+                  $pr_ver
+                  EOF
+                  IFS='.' read -r release_major release_minor release_patch <<EOF
+                  $release_ver
+                  EOF
 
-          pr_major=$(echo $pr_major | tr -d ' ')
-          pr_minor=$(echo $pr_minor | tr -d ' ')
-          pr_patch=$(echo $pr_patch | tr -d ' ')
-          release_major=$(echo $release_major | tr -d ' ')
-          release_minor=$(echo $release_minor | tr -d ' ')
-          release_patch=$(echo $release_patch | tr -d ' ')
+                  pr_major=$(echo $pr_major | tr -d ' ')
+                  pr_minor=$(echo $pr_minor | tr -d ' ')
+                  pr_patch=$(echo $pr_patch | tr -d ' ')
+                  release_major=$(echo $release_major | tr -d ' ')
+                  release_minor=$(echo $release_minor | tr -d ' ')
+                  release_patch=$(echo $release_patch | tr -d ' ')
 
-          is_greater=false
-          if [ "$pr_major" -gt "$release_major" ]; then
-            is_greater=true
-          elif [ "$pr_major" -eq "$release_major" ] && [ "$pr_minor" -gt "$release_minor" ]; then
-            is_greater=true
-          elif [ "$pr_major" -eq "$release_major" ] && [ "$pr_minor" -eq "$release_minor" ] && [ "$pr_patch" -gt "$release_patch" ]; then
-            is_greater=true
-          fi
+                  is_greater=false
+                  if [ "$pr_major" -gt "$release_major" ]; then
+                    is_greater=true
+                  elif [ "$pr_major" -eq "$release_major" ] && [ "$pr_minor" -gt "$release_minor" ]; then
+                    is_greater=true
+                  elif [ "$pr_major" -eq "$release_major" ] && [ "$pr_minor" -eq "$release_minor" ] && [ "$pr_patch" -gt "$release_patch" ]; then
+                    is_greater=true
+                  fi
 
-          echo "release: $release_version  →  PR: $pr_version"
-
-          if [ "$is_greater" = false ]; then
-            echo "ERROR: VERSION ($pr_version) must be greater than release ($release_version)"
-            exit 1
-          fi
-
-          echo "OK: version bump is valid"
+                  if [ "$is_greater" = false ]; then
+                    echo "ERROR: VERSION ($pr_version) must be greater than release ($release_version)"
+                    exit 1
+                  fi

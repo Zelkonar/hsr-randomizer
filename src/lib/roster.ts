@@ -1,6 +1,4 @@
-type ImportResult =
-    | { ok: true; ids: number[]; skipped: number }
-    | { ok: false; error: string };
+type ImportResult = { ok: true; ids: number[]; skipped: number } | { ok: false; error: string };
 
 export function parseRosterImport(text: string, validIds: Set<number>): ImportResult {
     let data: unknown;

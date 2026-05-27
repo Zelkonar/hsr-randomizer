@@ -34,8 +34,22 @@ const TOPAZ = char(14, "Topaz", "The Hunt", "Fire");
 const IMBIBITOR = char(15, "Imbibitor", "Destruction", "Imaginary");
 
 const ALL = [
-    GEPARD, BAILU, FU_XUAN, HYACINE,
-    SEELE, JINGLIU, ACHERON, FEIXIAO, KAFKA, ARGENTI, BRONYA, RUAN_MEI, FIREFLY, BLADE, TOPAZ, IMBIBITOR,
+    GEPARD,
+    BAILU,
+    FU_XUAN,
+    HYACINE,
+    SEELE,
+    JINGLIU,
+    ACHERON,
+    FEIXIAO,
+    KAFKA,
+    ARGENTI,
+    BRONYA,
+    RUAN_MEI,
+    FIREFLY,
+    BLADE,
+    TOPAZ,
+    IMBIBITOR,
 ];
 
 describe("removeFromPool", () => {
@@ -82,11 +96,11 @@ describe("isSustain", () => {
     });
 
     it("returns false for non-sustain paths", () => {
-        expect(isSustain(SEELE)).toBe(false);     // The Hunt
-        expect(isSustain(JINGLIU)).toBe(false);   // Destruction
-        expect(isSustain(ACHERON)).toBe(false);   // Nihility
-        expect(isSustain(BRONYA)).toBe(false);    // Harmony
-        expect(isSustain(ARGENTI)).toBe(false);   // Erudition
+        expect(isSustain(SEELE)).toBe(false); // The Hunt
+        expect(isSustain(JINGLIU)).toBe(false); // Destruction
+        expect(isSustain(ACHERON)).toBe(false); // Nihility
+        expect(isSustain(BRONYA)).toBe(false); // Harmony
+        expect(isSustain(ARGENTI)).toBe(false); // Erudition
     });
 });
 
@@ -251,9 +265,7 @@ describe("rollMultipleTeams", () => {
 
         it("throws when element filter leaves no sustains", () => {
             // No Fire sustains in ALL
-            expect(() =>
-                rollMultipleTeams(ALL, 1, 4, { requireSustain: true, elements: ["Fire"] })
-            ).toThrow();
+            expect(() => rollMultipleTeams(ALL, 1, 4, { requireSustain: true, elements: ["Fire"] })).toThrow();
         });
     });
 });

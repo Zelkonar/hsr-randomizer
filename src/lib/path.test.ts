@@ -3,8 +3,15 @@ import { getPathIcon, getPathIconSmall, getPathIconLarge, getPathIconLocal, getP
 import type { Path } from "../types/path";
 
 const PATHS: Path[] = [
-    "The Hunt", "Destruction", "Erudition", "Harmony",
-    "Nihility", "Preservation", "Abundance", "Remembrance", "Elation",
+    "The Hunt",
+    "Destruction",
+    "Erudition",
+    "Harmony",
+    "Nihility",
+    "Preservation",
+    "Abundance",
+    "Remembrance",
+    "Elation",
 ];
 
 describe("getPathIcon", () => {

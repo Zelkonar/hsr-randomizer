@@ -2,13 +2,14 @@ import { useState, useMemo, useEffect, useRef } from "react";
 import { CHARACTERS } from "../../data/characters";
 import { RosterCharacterGrid } from "./RosterCharacterGrid";
 import { RosterDataModal } from "./RosterDataModal";
-import { RosterFilters, EMPTY_FILTERS } from "./RosterFilters";
+import { RosterFilters } from "./RosterFilters";
+import { EMPTY_FILTERS } from "./rosterFiltersConfig";
 import { RosterModalHeader } from "./RosterModalHeader";
 import { RosterSearchBar } from "./RosterSearchBar";
 import { RosterResultsBar } from "./RosterResultsBar";
 import { SavedRosters } from "./SavedRosters";
 import { useSavedRosters } from "../../hooks/useSavedRosters";
-import type { RosterFiltersState } from "./RosterFilters";
+import type { RosterFiltersState } from "./rosterFiltersConfig";
 
 type DataModal = "import" | "export" | null;
 
@@ -38,6 +39,9 @@ export function RosterModal({
     const searchRef = useRef<HTMLInputElement>(null);
     const { savedRosters, saveRoster, deleteSavedRoster } = useSavedRosters();
 
+    // Reset internal state each time the modal opens. An external `key` would
+    // also work but would require the parent to track open count.
+    /* eslint-disable react-hooks/set-state-in-effect */
     useEffect(() => {
         if (open) {
             setFilters(EMPTY_FILTERS);
@@ -46,6 +50,7 @@ export function RosterModal({
             setTimeout(() => searchRef.current?.focus(), 0);
         }
     }, [open]);
+    /* eslint-enable react-hooks/set-state-in-effect */
 
     useEffect(() => {
         if (!open) return;
@@ -125,11 +130,7 @@ export function RosterModal({
                     />
 
                     <div className="overflow-y-auto px-5 pb-5">
-                        <RosterCharacterGrid
-                            characters={filtered}
-                            rosterIds={rosterIds}
-                            onToggle={onToggleRoster}
-                        />
+                        <RosterCharacterGrid characters={filtered} rosterIds={rosterIds} onToggle={onToggleRoster} />
                     </div>
                 </div>
             </div>

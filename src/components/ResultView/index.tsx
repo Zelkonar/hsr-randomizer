@@ -3,13 +3,7 @@ import { TwoTeamResult } from "./TwoTeamResult";
 import { AnomalyArbitrationResult } from "./AnomalyArbitrationResult";
 import type { Result } from "../../hooks/useRandomizer";
 
-export function ResultView({
-    result,
-    isInRoster,
-}: {
-    result: Result;
-    isInRoster: (id: number) => boolean;
-}) {
+export function ResultView({ result, isInRoster }: { result: Result; isInRoster: (id: number) => boolean }) {
     if (result.mode === "team") {
         return <TeamView team={result.team} label="Your Team" isInRoster={isInRoster} />;
     }

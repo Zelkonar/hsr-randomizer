@@ -12,31 +12,19 @@ const randomizeButton = cva(
     }
 );
 
-export function RandomizeButton({
-    onRandomize,
-    disabledReason,
-}: {
-    onRandomize: () => void;
-    disabledReason?: string;
-}) {
+export function RandomizeButton({ onRandomize, disabledReason }: { onRandomize: () => void; disabledReason?: string }) {
     const disabled = !!disabledReason;
 
     return (
         <div className="flex flex-col items-center">
-            <button
-                onClick={onRandomize}
-                disabled={disabled}
-                className={randomizeButton({ active: !disabled })}
-            >
+            <button onClick={onRandomize} disabled={disabled} className={randomizeButton({ active: !disabled })}>
                 <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/5 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
                 <span>✦</span>
                 <span>Randomize</span>
                 <span>✦</span>
             </button>
 
-            {disabledReason && (
-                <p className="mt-2 text-center text-sm text-rose-400">{disabledReason}</p>
-            )}
+            {disabledReason && <p className="mt-2 text-center text-sm text-rose-400">{disabledReason}</p>}
         </div>
     );
 }

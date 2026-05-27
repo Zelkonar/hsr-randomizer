@@ -1,39 +1,17 @@
 import { cn } from "../../lib/cn";
-import type { Element, Path, Rarity } from "../../types/character";
 import { getElementStyles } from "../../lib/element";
 import { getPathIcon, getPathIconLocal } from "../../lib/path";
+import { ELEMENTS, PATHS, EMPTY_FILTERS } from "./rosterFiltersConfig";
+import type { RosterFiltersState } from "./rosterFiltersConfig";
 
-export const ELEMENTS: Element[] = [
-    "Fire", "Ice", "Lightning", "Wind", "Quantum", "Imaginary", "Physical",
-];
-
-export const PATHS: Path[] = [
-    "The Hunt", "Destruction", "Erudition", "Harmony",
-    "Nihility", "Preservation", "Abundance", "Remembrance", "Elation",
-];
-
-const ELEMENT_ACTIVE_BG: Record<Element, string> = {
-    Fire:      "data-[active=true]:bg-red-500/25",
-    Ice:       "data-[active=true]:bg-sky-400/25",
+const ELEMENT_ACTIVE_BG: Record<string, string> = {
+    Fire: "data-[active=true]:bg-red-500/25",
+    Ice: "data-[active=true]:bg-sky-400/25",
     Lightning: "data-[active=true]:bg-violet-500/25",
-    Wind:      "data-[active=true]:bg-emerald-500/25",
-    Quantum:   "data-[active=true]:bg-indigo-500/25",
+    Wind: "data-[active=true]:bg-emerald-500/25",
+    Quantum: "data-[active=true]:bg-indigo-500/25",
     Imaginary: "data-[active=true]:bg-yellow-400/25",
-    Physical:  "data-[active=true]:bg-stone-400/25",
-};
-
-export interface RosterFiltersState {
-    search: string;
-    elements: Set<Element>;
-    paths: Set<Path>;
-    rarities: Set<Rarity>;
-}
-
-export const EMPTY_FILTERS: RosterFiltersState = {
-    search: "",
-    elements: new Set(),
-    paths: new Set(),
-    rarities: new Set(),
+    Physical: "data-[active=true]:bg-stone-400/25",
 };
 
 interface RosterFiltersProps {
@@ -44,7 +22,11 @@ interface RosterFiltersProps {
 export function RosterFilters({ filters, onChange }: RosterFiltersProps) {
     function toggleSet<T>(key: keyof Pick<RosterFiltersState, "elements" | "paths" | "rarities">, value: T) {
         const next = new Set(filters[key] as Set<T>);
-        next.has(value) ? next.delete(value) : next.add(value);
+        if (next.has(value)) {
+            next.delete(value);
+        } else {
+            next.add(value);
+        }
         onChange({ ...filters, [key]: next });
     }
 
@@ -55,7 +37,7 @@ export function RosterFilters({ filters, onChange }: RosterFiltersProps) {
             <div className="flex items-center gap-2">
                 <span className="text-[10px] uppercase tracking-widest text-white/30 shrink-0">Rarity</span>
                 <div className="flex rounded-lg border border-white/10 overflow-hidden divide-x divide-white/10">
-                    {([5, 4] as Rarity[]).map((r) => (
+                    {([5, 4] as (4 | 5)[]).map((r) => (
                         <button
                             key={r}
                             onClick={() => toggleSet("rarities", r)}
@@ -82,9 +64,20 @@ export function RosterFilters({ filters, onChange }: RosterFiltersProps) {
                             onClick={() => toggleSet("elements", el)}
                             data-active={filters.elements.has(el)}
                             title={el}
-                            className={cn("p-1.5 bg-transparent hover:bg-white/[0.06] transition-colors duration-150 cursor-pointer", ELEMENT_ACTIVE_BG[el])}
+                            className={cn(
+                                "p-1.5 bg-transparent hover:bg-white/[0.06] transition-colors duration-150 cursor-pointer",
+                                ELEMENT_ACTIVE_BG[el]
+                            )}
                         >
-                            <img src={getElementStyles(el).icon} alt={el} className="w-5 h-5" onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = getElementStyles(el).iconLocal; }} />
+                            <img
+                                src={getElementStyles(el).icon}
+                                alt={el}
+                                className="w-5 h-5"
+                                onError={(e) => {
+                                    e.currentTarget.onerror = null;
+                                    e.currentTarget.src = getElementStyles(el).iconLocal;
+                                }}
+                            />
                         </button>
                     ))}
                 </div>
@@ -101,7 +94,15 @@ export function RosterFilters({ filters, onChange }: RosterFiltersProps) {
                             title={p}
                             className="p-1.5 bg-transparent hover:bg-white/[0.06] transition-colors duration-150 cursor-pointer data-[active=true]:bg-white/15"
                         >
-                            <img src={getPathIcon(p)} alt={p} className="w-5 h-5" onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = getPathIconLocal(p); }} />
+                            <img
+                                src={getPathIcon(p)}
+                                alt={p}
+                                className="w-5 h-5"
+                                onError={(e) => {
+                                    e.currentTarget.onerror = null;
+                                    e.currentTarget.src = getPathIconLocal(p);
+                                }}
+                            />
                         </button>
                     ))}
                 </div>

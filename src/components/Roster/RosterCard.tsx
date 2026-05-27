@@ -34,10 +34,17 @@ export function RosterCard({ character, excluded, onToggle }: RosterCardProps) {
             title={excluded ? `Add ${character.name} to roster` : `Remove ${character.name} from roster`}
             className={cardButton({ excluded })}
         >
-            <span className={cn("absolute top-1.5 right-1.5 h-1.5 w-1.5 rounded-full", rarityDotColor[character.rarity] ?? rarityDotColor[4])} />
+            <span
+                className={cn(
+                    "absolute top-1.5 right-1.5 h-1.5 w-1.5 rounded-full",
+                    rarityDotColor[character.rarity] ?? rarityDotColor[4]
+                )}
+            />
 
             {excluded && (
-                <span className="absolute top-1.5 left-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-white/20 text-[9px] text-white/60 font-bold">✕</span>
+                <span className="absolute top-1.5 left-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-white/20 text-[9px] text-white/60 font-bold">
+                    ✕
+                </span>
             )}
 
             <img
@@ -50,7 +57,11 @@ export function RosterCard({ character, excluded, onToggle }: RosterCardProps) {
             <div className="w-full text-center">
                 <p className="truncate text-[10px] font-semibold text-white/90 leading-tight">{character.name}</p>
                 <div className="flex items-center justify-center gap-1 mt-0.5">
-                    <img src={getElementStyles(character.element).icon} alt={character.element} className="w-3 h-3 opacity-70" />
+                    <img
+                        src={getElementStyles(character.element).icon}
+                        alt={character.element}
+                        className="w-3 h-3 opacity-70"
+                    />
                     <img src={getPathIconSmall(character.path)} alt={character.path} className="w-3 h-3 opacity-70" />
                 </div>
             </div>

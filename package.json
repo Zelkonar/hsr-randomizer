@@ -1,59 +1,70 @@
 {
-  "name": "hsr-randomizer",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "engines": {
-    "node": ">=20.19.0"
-  },
-  "scripts": {
-    "dev": "vite",
-    "predev": "tsx scripts/write-version.ts",
-    "build": "tsc -b && vite build",
-    "prebuild": "tsx scripts/write-version.ts",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "lint": "eslint .",
-    "preview": "vite preview",
-    "generate:characters": "tsx scripts/generate-characters.ts",
-    "prepare": "husky"
-  },
-  "dependencies": {
-    "@tailwindcss/vite": "^4.3.0",
-    "@vercel/analytics": "^2.0.1",
-    "@vercel/speed-insights": "^2.0.0",
-    "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
-    "react": "^19.2.6",
-    "react-dom": "^19.2.6",
-    "tailwind-merge": "^3.6.0",
-    "tailwindcss": "^4.3.0"
-  },
-  "optionalDependencies": {
-    "@rolldown/binding-darwin-arm64": "1.0.2",
-    "@rolldown/binding-darwin-x64": "1.0.2",
-    "@rolldown/binding-win32-arm64-msvc": "1.0.2",
-    "@rolldown/binding-win32-x64-msvc": "1.0.2",
-    "@tailwindcss/oxide-darwin-arm64": "4.3.0",
-    "@tailwindcss/oxide-darwin-x64": "4.3.0",
-    "@tailwindcss/oxide-win32-arm64-msvc": "4.3.0",
-    "@tailwindcss/oxide-win32-x64-msvc": "4.3.0"
-  },
-  "devDependencies": {
-    "@eslint/js": "^10.0.1",
-    "@types/node": "^24.12.3",
-    "@types/react": "^19.2.14",
-    "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^6.0.1",
-    "eslint": "^10.3.0",
-    "eslint-plugin-react-hooks": "^7.1.1",
-    "eslint-plugin-react-refresh": "^0.5.2",
-    "globals": "^17.6.0",
-    "husky": "^9.1.7",
-    "tsx": "^4.22.3",
-    "typescript": "~6.0.2",
-    "typescript-eslint": "^8.59.2",
-    "vite": "^8.0.12",
-    "vitest": "^4.1.7"
-  }
+    "name": "hsr-randomizer",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "engines": {
+        "node": ">=20.19.0"
+    },
+    "scripts": {
+        "dev": "vite",
+        "predev": "tsx scripts/write-version.ts",
+        "build": "tsc -b && vite build",
+        "prebuild": "tsx scripts/write-version.ts",
+        "test": "vitest run",
+        "test:watch": "vitest",
+        "lint": "eslint .",
+        "preview": "vite preview",
+        "generate:characters": "tsx scripts/generate-characters.ts",
+        "format": "prettier --write .",
+        "format:check": "prettier --check .",
+        "prepare": "husky"
+    },
+    "lint-staged": {
+        "*.{ts,tsx}": [
+            "prettier --write",
+            "eslint"
+        ],
+        "*.{js,json,css,md}": "prettier --write"
+    },
+    "dependencies": {
+        "@tailwindcss/vite": "^4.3.0",
+        "@vercel/analytics": "^2.0.1",
+        "@vercel/speed-insights": "^2.0.0",
+        "class-variance-authority": "^0.7.1",
+        "clsx": "^2.1.1",
+        "react": "^19.2.6",
+        "react-dom": "^19.2.6",
+        "tailwind-merge": "^3.6.0",
+        "tailwindcss": "^4.3.0"
+    },
+    "optionalDependencies": {
+        "@rolldown/binding-darwin-arm64": "1.0.2",
+        "@rolldown/binding-darwin-x64": "1.0.2",
+        "@rolldown/binding-win32-arm64-msvc": "1.0.2",
+        "@rolldown/binding-win32-x64-msvc": "1.0.2",
+        "@tailwindcss/oxide-darwin-arm64": "4.3.0",
+        "@tailwindcss/oxide-darwin-x64": "4.3.0",
+        "@tailwindcss/oxide-win32-arm64-msvc": "4.3.0",
+        "@tailwindcss/oxide-win32-x64-msvc": "4.3.0"
+    },
+    "devDependencies": {
+        "@eslint/js": "^10.0.1",
+        "@types/node": "^24.12.3",
+        "@types/react": "^19.2.14",
+        "@types/react-dom": "^19.2.3",
+        "@vitejs/plugin-react": "^6.0.1",
+        "eslint": "^10.3.0",
+        "eslint-plugin-react-hooks": "^7.1.1",
+        "eslint-plugin-react-refresh": "^0.5.2",
+        "globals": "^17.6.0",
+        "husky": "^9.1.7",
+        "lint-staged": "^17.0.5",
+        "prettier": "^3.8.3",
+        "tsx": "^4.22.3",
+        "typescript": "~6.0.2",
+        "typescript-eslint": "^8.59.2",
+        "vite": "^8.0.12",
+        "vitest": "^4.1.7"
+    }
 }
