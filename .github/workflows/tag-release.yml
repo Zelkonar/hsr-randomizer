@@ -1,0 +1,42 @@
+name: Tag Release
+
+on:
+  push:
+    branches:
+      - release
+
+jobs:
+  tag:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Read VERSION
+        id: version
+        run: echo "tag=$(cat VERSION | tr -d '[:space:]')" >> $GITHUB_OUTPUT
+
+      - name: Validate VERSION format
+        run: |
+          tag="${{ steps.version.outputs.tag }}"
+          if ! echo "$tag" | grep -qE '^v[0-9]+\.[0-9]+\.[0-9]+$'; then
+            echo "ERROR: VERSION '$tag' does not match required format vX.Y.Z"
+            exit 1
+          fi
+          echo "OK: format is valid"
+
+      - name: Ensure tag does not exist
+        run: |
+          tag="${{ steps.version.outputs.tag }}"
+          if git ls-remote --tags origin "refs/tags/$tag" | grep -q "$tag"; then
+            echo "ERROR: tag '$tag' already exists on remote"
+            exit 1
+          fi
+          echo "OK: tag does not exist yet"
+
+      - name: Create GitHub Release
+        run: gh release create ${{ steps.version.outputs.tag }} --title "${{ steps.version.outputs.tag }}" --generate-notes
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
