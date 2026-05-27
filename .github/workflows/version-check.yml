@@ -3,7 +3,7 @@ name: Version Check
 on:
   pull_request:
     branches:
-      - main
+      - release
 
 jobs:
   version-check:
@@ -14,10 +14,10 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Check version is greater than main
+      - name: Check version is greater than release
         run: |
           pr_version=$(cat VERSION | tr -d '[:space:]')
-          main_version=$(git show origin/main:VERSION 2>/dev/null | tr -d '[:space:]' || echo "")
+          main_version=$(git show origin/release:VERSION 2>/dev/null | tr -d '[:space:]' || echo "")
 
           if [ -z "$main_version" ]; then
             echo "No VERSION on main yet, skipping comparison"
@@ -52,10 +52,10 @@ jobs:
             is_greater=true
           fi
 
-          echo "main: $main_version  →  PR: $pr_version"
+          echo "release: $main_version  →  PR: $pr_version"
 
           if [ "$is_greater" = false ]; then
-            echo "ERROR: VERSION ($pr_version) must be greater than main ($main_version)"
+            echo "ERROR: VERSION ($pr_version) must be greater than release ($main_version)"
             exit 1
           fi
 
