@@ -1,6 +1,7 @@
 import { useState, useMemo, useEffect, useRef } from "react";
 import { CHARACTERS } from "../../data/characters";
 import { RosterCharacterGrid } from "./RosterCharacterGrid";
+import { RosterDataModal } from "./RosterDataModal";
 import { RosterFilters, EMPTY_FILTERS } from "./RosterFilters";
 import { RosterModalHeader } from "./RosterModalHeader";
 import { RosterSearchBar } from "./RosterSearchBar";
@@ -15,12 +16,15 @@ const styles = {
     gridContainer: "overflow-y-auto px-5 pb-5",
 };
 
+type DataModal = "import" | "export" | null;
+
 interface RosterModalProps {
     open: boolean;
     rosterIds: number[];
     onToggleRoster: (id: number) => void;
     onEnableAll: (ids: number[]) => void;
     onDisableAll: (ids: number[]) => void;
+    onImport: (ids: number[]) => void;
     onClose: () => void;
 }
 
@@ -30,80 +34,105 @@ export function RosterModal({
     onToggleRoster,
     onEnableAll,
     onDisableAll,
+    onImport,
     onClose,
 }: RosterModalProps) {
     const [filters, setFilters] = useState<RosterFiltersState>(EMPTY_FILTERS);
     const [filtersOpen, setFiltersOpen] = useState(false);
+    const [dataModal, setDataModal] = useState<DataModal>(null);
     const searchRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
         if (open) {
             setFilters(EMPTY_FILTERS);
             setFiltersOpen(false);
+            setDataModal(null);
             setTimeout(() => searchRef.current?.focus(), 0);
         }
     }, [open]);
 
     useEffect(() => {
         if (!open) return;
-        const handler = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+        const handler = (e: KeyboardEvent) => {
+            if (e.key === "Escape" && !dataModal) onClose();
+        };
         window.addEventListener("keydown", handler);
         return () => window.removeEventListener("keydown", handler);
-    }, [open, onClose]);
+    }, [open, onClose, dataModal]);
 
-    const filtered = useMemo(() => CHARACTERS.filter((c) => {
-        if (filters.search && !c.name.toLowerCase().includes(filters.search.toLowerCase())) return false;
-        if (filters.elements.size && !filters.elements.has(c.element)) return false;
-        if (filters.paths.size && !filters.paths.has(c.path)) return false;
-        if (filters.rarities.size && !filters.rarities.has(c.rarity)) return false;
-        return true;
-    }).sort((a, b) => a.name.localeCompare(b.name)), [filters]);
+    const { filtered, filteredIds } = useMemo(() => {
+        const f = CHARACTERS.filter((c) => {
+            if (filters.search && !c.name.toLowerCase().includes(filters.search.toLowerCase())) return false;
+            if (filters.elements.size && !filters.elements.has(c.element)) return false;
+            if (filters.paths.size && !filters.paths.has(c.path)) return false;
+            if (filters.rarities.size && !filters.rarities.has(c.rarity)) return false;
+            return true;
+        }).sort((a, b) => a.name.localeCompare(b.name));
+        return { filtered: f, filteredIds: f.map((c) => c.id) };
+    }, [filters]);
 
-    const filteredIds = filtered.map((c) => c.id);
+    const rosterSet = useMemo(() => new Set(rosterIds), [rosterIds]);
+
     const nonSearchFilterCount = filters.elements.size + filters.paths.size + filters.rarities.size;
     const hasActiveFilters = nonSearchFilterCount > 0 || !!filters.search;
 
     if (!open) return null;
 
     return (
-        <div className={styles.backdrop}>
-            <div className={styles.overlay} onClick={onClose} />
+        <>
+            <div className={styles.backdrop}>
+                <div className={styles.overlay} onClick={onClose} />
 
-            <div className={styles.panel}>
-                <RosterModalHeader rosterIds={rosterIds} onClose={onClose} />
-
-                <RosterSearchBar
-                    searchRef={searchRef}
-                    search={filters.search}
-                    onSearchChange={(value) => setFilters((p) => ({ ...p, search: value }))}
-                    filtersOpen={filtersOpen}
-                    onToggleFilters={() => setFiltersOpen((p) => !p)}
-                    nonSearchFilterCount={nonSearchFilterCount}
-                />
-
-                {filtersOpen && (
-                    <div className={styles.filtersSection}>
-                        <RosterFilters filters={filters} onChange={setFilters} />
-                    </div>
-                )}
-
-                <RosterResultsBar
-                    filteredCount={filtered.length}
-                    hasActiveFilters={hasActiveFilters}
-                    allEnabled={filteredIds.every((id) => rosterIds.includes(id))}
-                    allDisabled={filteredIds.every((id) => !rosterIds.includes(id))}
-                    onEnableAll={() => onEnableAll(filteredIds)}
-                    onDisableAll={() => onDisableAll(filteredIds)}
-                />
-
-                <div className={styles.gridContainer}>
-                    <RosterCharacterGrid
-                        characters={filtered}
+                <div className={styles.panel}>
+                    <RosterModalHeader
                         rosterIds={rosterIds}
-                        onToggle={onToggleRoster}
+                        onExport={() => setDataModal("export")}
+                        onImport={() => setDataModal("import")}
+                        onClose={onClose}
                     />
+
+                    <RosterSearchBar
+                        searchRef={searchRef}
+                        search={filters.search}
+                        onSearchChange={(value) => setFilters((p) => ({ ...p, search: value }))}
+                        filtersOpen={filtersOpen}
+                        onToggleFilters={() => setFiltersOpen((p) => !p)}
+                        nonSearchFilterCount={nonSearchFilterCount}
+                    />
+
+                    {filtersOpen && (
+                        <div className={styles.filtersSection}>
+                            <RosterFilters filters={filters} onChange={setFilters} />
+                        </div>
+                    )}
+
+                    <RosterResultsBar
+                        filteredCount={filtered.length}
+                        hasActiveFilters={hasActiveFilters}
+                        allEnabled={filteredIds.every((id) => rosterSet.has(id))}
+                        allDisabled={filteredIds.every((id) => !rosterSet.has(id))}
+                        onEnableAll={() => onEnableAll(filteredIds)}
+                        onDisableAll={() => onDisableAll(filteredIds)}
+                    />
+
+                    <div className={styles.gridContainer}>
+                        <RosterCharacterGrid
+                            characters={filtered}
+                            rosterIds={rosterIds}
+                            onToggle={onToggleRoster}
+                        />
+                    </div>
                 </div>
             </div>
-        </div>
+
+            {dataModal && (
+                <RosterDataModal
+                    mode={dataModal}
+                    rosterIds={rosterIds}
+                    onImport={onImport}
+                    onClose={() => setDataModal(null)}
+                />
+            )}
+        </>
     );
 }

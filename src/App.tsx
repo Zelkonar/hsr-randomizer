@@ -45,6 +45,7 @@ function App() {
             onToggleRoster={roster.toggleRoster}
             onEnableAll={roster.enableAll}
             onDisableAll={roster.disableAll}
+            onImport={roster.importRoster}
             requireSustain={options.requireSustain}
             onRequireSustainChange={options.setRequireSustain}
           />
