@@ -8,12 +8,6 @@ const MODE_ICONS: Record<TwoTeamMode | "aa", { cdn: string; local: string }> = {
     aa:  { cdn: `${ASSETS_CDN}/sign/AbyssThemeTabIcon.png`, local: "/sign/AbyssThemeTabIcon.png" },
 };
 
-const styles = {
-    modeHeader: "flex items-center gap-3 text-xs font-semibold uppercase tracking-widest text-white/70",
-    dividerLine: "block h-px flex-1 bg-white/10",
-    modeIcon: "h-5 w-5 object-contain",
-};
-
 function ModeIcon({ mode }: { mode: TwoTeamMode | "aa" }) {
     const icon = MODE_ICONS[mode];
     return (
@@ -21,7 +15,7 @@ function ModeIcon({ mode }: { mode: TwoTeamMode | "aa" }) {
             src={icon.cdn}
             alt=""
             aria-hidden
-            className={styles.modeIcon}
+            className="h-5 w-5 object-contain"
             onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = icon.local; }}
         />
     );
@@ -29,11 +23,11 @@ function ModeIcon({ mode }: { mode: TwoTeamMode | "aa" }) {
 
 export function ModeHeader({ mode, label }: { mode: TwoTeamMode | "aa"; label: string }) {
     return (
-        <p className={styles.modeHeader}>
-            <span className={styles.dividerLine} />
+        <p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-widest text-white/70">
+            <span className="block h-px flex-1 bg-white/10" />
             <ModeIcon mode={mode} />
             {label}
-            <span className={styles.dividerLine} />
+            <span className="block h-px flex-1 bg-white/10" />
         </p>
     );
 }

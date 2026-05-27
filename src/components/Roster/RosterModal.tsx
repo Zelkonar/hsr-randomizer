@@ -10,14 +10,6 @@ import { SavedRosters } from "./SavedRosters";
 import { useSavedRosters } from "../../hooks/useSavedRosters";
 import type { RosterFiltersState } from "./RosterFilters";
 
-const styles = {
-    backdrop: "fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4",
-    overlay: "absolute inset-0 bg-black/70 backdrop-blur-sm",
-    panel: "relative z-10 flex flex-col w-full max-w-5xl h-[92dvh] sm:h-[90dvh] rounded-t-2xl sm:rounded-2xl bg-gray-900 border border-white/10 shadow-2xl overflow-hidden",
-    filtersSection: "shrink-0 border-b border-white/10",
-    gridContainer: "overflow-y-auto px-5 pb-5",
-};
-
 type DataModal = "import" | "export" | null;
 
 interface RosterModalProps {
@@ -84,10 +76,10 @@ export function RosterModal({
 
     return (
         <>
-            <div className={styles.backdrop}>
-                <div className={styles.overlay} onClick={onClose} />
+            <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4">
+                <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={onClose} />
 
-                <div className={styles.panel}>
+                <div className="relative z-10 flex flex-col w-full max-w-5xl h-[92dvh] sm:h-[90dvh] rounded-t-2xl sm:rounded-2xl bg-gray-900 border border-white/10 shadow-2xl overflow-hidden">
                     <RosterModalHeader
                         rosterIds={rosterIds}
                         savedCount={Object.keys(savedRosters).length}
@@ -118,7 +110,7 @@ export function RosterModal({
                     />
 
                     {filtersOpen && (
-                        <div className={styles.filtersSection}>
+                        <div className="shrink-0 border-b border-white/10">
                             <RosterFilters filters={filters} onChange={setFilters} />
                         </div>
                     )}
@@ -132,7 +124,7 @@ export function RosterModal({
                         onDisableAll={() => onDisableAll(filteredIds)}
                     />
 
-                    <div className={styles.gridContainer}>
+                    <div className="overflow-y-auto px-5 pb-5">
                         <RosterCharacterGrid
                             characters={filtered}
                             rosterIds={rosterIds}

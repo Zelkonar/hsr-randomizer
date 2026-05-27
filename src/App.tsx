@@ -10,12 +10,6 @@ import { useRoster } from "./hooks/useRoster";
 import { useOptions } from "./hooks/useOptions";
 import { useRandomizer } from "./hooks/useRandomizer";
 
-const styles = {
-  page: "min-h-screen bg-gray-950 text-white",
-  main: "mx-auto max-w-screen-xl px-4 py-8 sm:px-6 space-y-8",
-  hero: "flex flex-col items-center gap-4",
-};
-
 function App() {
   const roster = useRoster();
   const options = useOptions();
@@ -30,13 +24,13 @@ function App() {
   }, [options]);
 
   return (
-    <div className={styles.page}>
+    <div className="min-h-screen bg-gray-950 text-white">
       <SpeedInsights />
       <Analytics />
       <AppHeader />
 
-      <main className={styles.main}>
-        <div className={styles.hero}>
+      <main className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 space-y-8">
+        <div className="flex flex-col items-center gap-4">
           <ModeSelector mode={options.mode} onModeChange={handleModeChange} />
           <RandomizeButton onRandomize={randomize} disabledReason={disabledReason} />
 
