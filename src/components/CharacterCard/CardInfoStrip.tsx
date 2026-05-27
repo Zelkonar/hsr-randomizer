@@ -1,5 +1,5 @@
-import { getPathIcon, getPathIconLocal } from "../../utils/path";
-import { getElementStyles } from "../../utils/element";
+import { getPathIcon, getPathIconLocal } from "../../lib/path";
+import { getElementStyles } from "../../lib/element";
 import type { Character } from "../../types/character";
 
 const rarityColors: Record<number, string> = {

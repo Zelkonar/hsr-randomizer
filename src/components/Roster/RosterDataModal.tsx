@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { CHARACTERS } from "../../data/characters";
+import { parseRosterImport } from "../../lib/roster";
 
 const VALID_IDS = new Set(CHARACTERS.map((c) => c.id));
 
@@ -53,25 +54,18 @@ export function RosterDataModal({ mode, rosterIds, onImport, onClose }: RosterDa
     }
 
     function handleImport() {
-        try {
-            const data = JSON.parse(text);
-            if (!Array.isArray(data)) throw new Error();
-            const valid = data.filter((id): id is number => typeof id === "number" && VALID_IDS.has(id));
-            const unknown = data.length - valid.length;
-            if (!valid.length) {
-                setStatus({ ok: false, text: "No valid character IDs found" });
-                return;
-            }
-            onImport(valid);
-            setStatus({
-                ok: unknown === 0,
-                text: unknown > 0
-                    ? `Imported ${valid.length} characters (${unknown} unknown IDs skipped)`
-                    : `Imported ${valid.length} characters`,
-            });
-        } catch {
-            setStatus({ ok: false, text: "Invalid JSON — expected an array of IDs" });
+        const result = parseRosterImport(text, VALID_IDS);
+        if (!result.ok) {
+            setStatus({ ok: false, text: result.error });
+            return;
         }
+        onImport(result.ids);
+        setStatus({
+            ok: result.skipped === 0,
+            text: result.skipped > 0
+                ? `Imported ${result.ids.length} characters (${result.skipped} unknown IDs skipped)`
+                : `Imported ${result.ids.length} characters`,
+        });
     }
 
     return (
