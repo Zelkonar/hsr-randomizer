@@ -6,6 +6,8 @@ import { RosterFilters, EMPTY_FILTERS } from "./RosterFilters";
 import { RosterModalHeader } from "./RosterModalHeader";
 import { RosterSearchBar } from "./RosterSearchBar";
 import { RosterResultsBar } from "./RosterResultsBar";
+import { SavedRosters } from "./SavedRosters";
+import { useSavedRosters } from "../../hooks/useSavedRosters";
 import type { RosterFiltersState } from "./RosterFilters";
 
 const styles = {
@@ -39,8 +41,10 @@ export function RosterModal({
 }: RosterModalProps) {
     const [filters, setFilters] = useState<RosterFiltersState>(EMPTY_FILTERS);
     const [filtersOpen, setFiltersOpen] = useState(false);
+    const [savedOpen, setSavedOpen] = useState(false);
     const [dataModal, setDataModal] = useState<DataModal>(null);
     const searchRef = useRef<HTMLInputElement>(null);
+    const { savedRosters, saveRoster, deleteSavedRoster } = useSavedRosters();
 
     useEffect(() => {
         if (open) {
@@ -86,10 +90,23 @@ export function RosterModal({
                 <div className={styles.panel}>
                     <RosterModalHeader
                         rosterIds={rosterIds}
+                        savedCount={Object.keys(savedRosters).length}
+                        savedOpen={savedOpen}
+                        onToggleSaved={() => setSavedOpen((p) => !p)}
                         onExport={() => setDataModal("export")}
                         onImport={() => setDataModal("import")}
                         onClose={onClose}
                     />
+
+                    {savedOpen && (
+                        <SavedRosters
+                            savedRosters={savedRosters}
+                            rosterIds={rosterIds}
+                            onLoad={onImport}
+                            onSave={saveRoster}
+                            onDelete={deleteSavedRoster}
+                        />
+                    )}
 
                     <RosterSearchBar
                         searchRef={searchRef}

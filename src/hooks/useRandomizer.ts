@@ -44,7 +44,7 @@ export function useRandomizer(
     const disabledReason = availableCount < neededCount
         ? "Not enough characters selected"
         : !sustainAvailable
-            ? "No sustain available"
+            ? `Need ${teamCount} sustains, ${sustainCount} available`
             : undefined;
 
     const randomize = useCallback(() => {
