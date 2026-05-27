@@ -2,13 +2,14 @@ import { useState, useMemo, useEffect, useRef } from "react";
 import { CHARACTERS } from "../../data/characters";
 import { RosterCharacterGrid } from "./RosterCharacterGrid";
 import { RosterDataModal } from "./RosterDataModal";
-import { RosterFilters, EMPTY_FILTERS } from "./RosterFilters";
+import { RosterFilters } from "./RosterFilters";
+import { EMPTY_FILTERS } from "./rosterFiltersConfig";
 import { RosterModalHeader } from "./RosterModalHeader";
 import { RosterSearchBar } from "./RosterSearchBar";
 import { RosterResultsBar } from "./RosterResultsBar";
 import { SavedRosters } from "./SavedRosters";
 import { useSavedRosters } from "../../hooks/useSavedRosters";
-import type { RosterFiltersState } from "./RosterFilters";
+import type { RosterFiltersState } from "./rosterFiltersConfig";
 
 type DataModal = "import" | "export" | null;
 
@@ -39,12 +40,7 @@ export function RosterModal({
     const { savedRosters, saveRoster, deleteSavedRoster } = useSavedRosters();
 
     useEffect(() => {
-        if (open) {
-            setFilters(EMPTY_FILTERS);
-            setFiltersOpen(false);
-            setDataModal(null);
-            setTimeout(() => searchRef.current?.focus(), 0);
-        }
+        if (open) setTimeout(() => searchRef.current?.focus(), 0);
     }, [open]);
 
     useEffect(() => {
@@ -125,11 +121,7 @@ export function RosterModal({
                     />
 
                     <div className="overflow-y-auto px-5 pb-5">
-                        <RosterCharacterGrid
-                            characters={filtered}
-                            rosterIds={rosterIds}
-                            onToggle={onToggleRoster}
-                        />
+                        <RosterCharacterGrid characters={filtered} rosterIds={rosterIds} onToggle={onToggleRoster} />
                     </div>
                 </div>
             </div>

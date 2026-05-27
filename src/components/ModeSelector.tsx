@@ -21,21 +21,11 @@ const modeButton = cva(
     }
 );
 
-export function ModeSelector({
-    mode,
-    onModeChange,
-}: {
-    mode: GameMode;
-    onModeChange: (m: GameMode) => void;
-}) {
+export function ModeSelector({ mode, onModeChange }: { mode: GameMode; onModeChange: (m: GameMode) => void }) {
     return (
         <div className="flex flex-wrap items-center justify-center gap-2">
             {MODES.map((m) => (
-                <button
-                    key={m.id}
-                    className={modeButton({ active: mode === m.id })}
-                    onClick={() => onModeChange(m.id)}
-                >
+                <button key={m.id} className={modeButton({ active: mode === m.id })} onClick={() => onModeChange(m.id)}>
                     {m.label}
                 </button>
             ))}

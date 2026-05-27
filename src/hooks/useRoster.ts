@@ -24,10 +24,7 @@ function saveIds(ids: number[]) {
 export function useRoster() {
     const [rosterIds, setRosterIds] = useState<number[]>(() => loadRoster());
 
-    const isInRoster = useCallback(
-        (id: number) => rosterIds.includes(id),
-        [rosterIds]
-    );
+    const isInRoster = useCallback((id: number) => rosterIds.includes(id), [rosterIds]);
 
     const toggleRoster = useCallback((id: number) => {
         setRosterIds((prev) => {

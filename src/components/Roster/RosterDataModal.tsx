@@ -14,7 +14,7 @@ interface RosterDataModalProps {
 }
 
 export function RosterDataModal({ mode, rosterIds, onImport, onClose }: RosterDataModalProps) {
-    const [text, setText] = useState(() => mode === "export" ? JSON.stringify(rosterIds) : "");
+    const [text, setText] = useState(() => (mode === "export" ? JSON.stringify(rosterIds) : ""));
     const [status, setStatus] = useState<Status | null>(null);
     const [copied, setCopied] = useState(false);
     const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -27,7 +27,12 @@ export function RosterDataModal({ mode, rosterIds, onImport, onClose }: RosterDa
         if (mode === "export") el.select();
     }, [mode]);
 
-    useEffect(() => () => { if (copyTimer.current) clearTimeout(copyTimer.current); }, []);
+    useEffect(
+        () => () => {
+            if (copyTimer.current) clearTimeout(copyTimer.current);
+        },
+        []
+    );
 
     function handleCopy() {
         navigator.clipboard.writeText(text).then(() => {
@@ -46,9 +51,10 @@ export function RosterDataModal({ mode, rosterIds, onImport, onClose }: RosterDa
         onImport(result.ids);
         setStatus({
             ok: result.skipped === 0,
-            text: result.skipped > 0
-                ? `Imported ${result.ids.length} characters (${result.skipped} unknown IDs skipped)`
-                : `Imported ${result.ids.length} characters`,
+            text:
+                result.skipped > 0
+                    ? `Imported ${result.ids.length} characters (${result.skipped} unknown IDs skipped)`
+                    : `Imported ${result.ids.length} characters`,
         });
     }
 
@@ -60,14 +66,22 @@ export function RosterDataModal({ mode, rosterIds, onImport, onClose }: RosterDa
                     <h2 className="text-sm font-bold tracking-widest uppercase text-white">
                         {mode === "export" ? "Export Roster" : "Import Roster"}
                     </h2>
-                    <button onClick={onClose} className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 text-white/50 hover:text-white hover:border-white/30 transition-colors">✕</button>
+                    <button
+                        onClick={onClose}
+                        className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 text-white/50 hover:text-white hover:border-white/30 transition-colors"
+                    >
+                        ✕
+                    </button>
                 </div>
                 <div className="p-5">
                     <textarea
                         ref={textareaRef}
                         className="w-full h-40 resize-none rounded-lg border border-white/10 bg-white/5 text-white/70 text-xs font-mono px-3 py-2.5 focus:outline-none focus:border-white/30"
                         value={text}
-                        onChange={(e) => { setText(e.target.value); setStatus(null); }}
+                        onChange={(e) => {
+                            setText(e.target.value);
+                            setStatus(null);
+                        }}
                         placeholder={mode === "import" ? "Paste a JSON array of character IDs…" : undefined}
                         readOnly={mode === "export"}
                         spellCheck={false}
@@ -75,9 +89,7 @@ export function RosterDataModal({ mode, rosterIds, onImport, onClose }: RosterDa
                 </div>
                 <div className="flex items-center justify-between px-5 pb-5 gap-3">
                     <div className="text-[11px] min-w-0">
-                        {status && (
-                            <p className={status.ok ? "text-green-400/70" : "text-red-400/70"}>{status.text}</p>
-                        )}
+                        {status && <p className={status.ok ? "text-green-400/70" : "text-red-400/70"}>{status.text}</p>}
                     </div>
                     <div className="flex gap-2 shrink-0">
                         {mode === "import" ? (

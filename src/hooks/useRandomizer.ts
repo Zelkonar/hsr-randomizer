@@ -11,41 +11,31 @@ export type Result =
 
 const TEAM_COUNT: Record<GameMode, number> = {
     team: 1,
-    moc: 2, pf: 2, as: 2,
+    moc: 2,
+    pf: 2,
+    as: 2,
     aa: 3, // really 4, but actually 3 as far as validations are concerened
 };
 
-export function useRandomizer(
-    rosterIds: number[],
-    mode: GameMode,
-    requireSustain: boolean,
-) {
+export function useRandomizer(rosterIds: number[], mode: GameMode, requireSustain: boolean) {
     const [result, setResult] = useState<Result | null>(null);
 
-    const availableCharacters = useMemo(
-        () => applyFilter(CHARACTERS, { includeIds: rosterIds }),
-        [rosterIds]
-    );
+    const availableCharacters = useMemo(() => applyFilter(CHARACTERS, { includeIds: rosterIds }), [rosterIds]);
 
-    const availableCount = useMemo(
-        () => new Set(availableCharacters.map((c) => c.name)).size,
-        [availableCharacters]
-    );
+    const availableCount = useMemo(() => new Set(availableCharacters.map((c) => c.name)).size, [availableCharacters]);
 
-    const sustainCount = useMemo(
-        () => availableCharacters.filter(isSustain).length,
-        [availableCharacters]
-    );
+    const sustainCount = useMemo(() => availableCharacters.filter(isSustain).length, [availableCharacters]);
 
     const teamCount = TEAM_COUNT[mode];
     const neededCount = teamCount * 4;
     const sustainAvailable = !requireSustain || sustainCount >= teamCount;
 
-    const disabledReason = availableCount < neededCount
-        ? "Not enough characters selected"
-        : !sustainAvailable
-            ? `Need ${teamCount} sustains, ${sustainCount} available`
-            : undefined;
+    const disabledReason =
+        availableCount < neededCount
+            ? "Not enough characters selected"
+            : !sustainAvailable
+              ? `Need ${teamCount} sustains, ${sustainCount} available`
+              : undefined;
 
     const randomize = useCallback(() => {
         const filter = { includeIds: rosterIds, requireSustain };

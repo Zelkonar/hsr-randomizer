@@ -2,7 +2,8 @@ import { getPathIconLarge, getPathIconLargeLocal } from "../../lib/path";
 import type { Character } from "../../types/character";
 
 const imgStyles: Record<"contain" | "cover", string> = {
-    contain: "absolute inset-0 w-full h-full object-contain object-center transition-transform duration-500 group-hover:scale-105 p-1",
+    contain:
+        "absolute inset-0 w-full h-full object-contain object-center transition-transform duration-500 group-hover:scale-105 p-1",
     cover: "absolute inset-0 w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105",
 };
 
@@ -31,14 +32,12 @@ export function CardPortrait({
                 alt=""
                 aria-hidden
                 className="absolute inset-0 w-full h-full object-contain mix-blend-screen opacity-40"
-                onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = getPathIconLargeLocal(character.path); }}
+                onError={(e) => {
+                    e.currentTarget.onerror = null;
+                    e.currentTarget.src = getPathIconLargeLocal(character.path);
+                }}
             />
-            <img
-                src={src}
-                alt={character.name}
-                loading="lazy"
-                className={imgStyles[imageFit]}
-            />
+            <img src={src} alt={character.name} loading="lazy" className={imgStyles[imageFit]} />
             <div className={`absolute inset-0 bg-gradient-to-t ${GRADIENT}`} />
         </div>
     );

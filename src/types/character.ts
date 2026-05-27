@@ -7,32 +7,32 @@ export type { Path } from "./path";
 export type { Rarity } from "./rarity";
 
 export interface Character {
-  id: number;
-  name: string;
-  element: Element;
-  path: Path;
-  rarity: Rarity;
-  icon: string;
-  preview: string;
-  portrait: string;
+    id: number;
+    name: string;
+    element: Element;
+    path: Path;
+    rarity: Rarity;
+    icon: string;
+    preview: string;
+    portrait: string;
 }
 
 export interface Team {
-  id: string;
-  // Allow teams of 1–4 members.
-  members:
-  | [Character]
-  | [Character, Character]
-  | [Character, Character, Character]
-  | [Character, Character, Character, Character];
-  createdAt: number; // unix ms
-  label?: string;
+    id: string;
+    // Allow teams of 1–4 members.
+    members:
+        | [Character]
+        | [Character, Character]
+        | [Character, Character, Character]
+        | [Character, Character, Character, Character];
+    createdAt: number; // unix ms
+    label?: string;
 }
 
 export interface CharacterFilter {
-  elements?: Element[];
-  paths?: Path[];
-  rarities?: Rarity[];
-  includeIds?: number[];
-  requireSustain?: boolean;
+    elements?: Element[];
+    paths?: Path[];
+    rarities?: Rarity[];
+    includeIds?: number[];
+    requireSustain?: boolean;
 }
