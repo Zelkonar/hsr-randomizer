@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { isSustain, applyFilter, rollMultipleTeams } from "./randomize";
+import { isSustain, applyFilter, rollMultipleTeams, removeFromPool } from "./randomize";
 import type { Character } from "../types/character";
 import type { Element } from "../types/element";
 import type { Path } from "../types/path";
@@ -37,6 +37,33 @@ const ALL = [
     GEPARD, BAILU, FU_XUAN, HYACINE,
     SEELE, JINGLIU, ACHERON, FEIXIAO, KAFKA, ARGENTI, BRONYA, RUAN_MEI, FIREFLY, BLADE, TOPAZ, IMBIBITOR,
 ];
+
+describe("removeFromPool", () => {
+    it("removes the character matching the given id", () => {
+        const result = removeFromPool([GEPARD, BAILU, SEELE], GEPARD);
+        expect(result).not.toContain(GEPARD);
+        expect(result).toHaveLength(2);
+    });
+
+    it("removes by name match as well as id match", () => {
+        // A character with a different id but the same name should also be removed
+        const imposter = char(999, "Gepard", "The Hunt");
+        const result = removeFromPool([GEPARD, imposter, SEELE], GEPARD);
+        expect(result).toHaveLength(1);
+        expect(result[0]).toBe(SEELE);
+    });
+
+    it("returns the pool unchanged when the character is not present", () => {
+        const result = removeFromPool([BAILU, SEELE], GEPARD);
+        expect(result).toHaveLength(2);
+    });
+
+    it("does not mutate the original array", () => {
+        const pool = [GEPARD, BAILU, SEELE];
+        removeFromPool(pool, GEPARD);
+        expect(pool).toHaveLength(3);
+    });
+});
 
 describe("isSustain", () => {
     it("returns true for Preservation path", () => {
@@ -199,6 +226,34 @@ describe("rollMultipleTeams", () => {
             for (const member of team.members) {
                 expect(allowed).toContain(member.id);
             }
+        });
+    });
+
+    describe("requireSustain edge cases", () => {
+        it("size-1 teams are always a sustain", () => {
+            repeat(200, () => {
+                const [team] = rollMultipleTeams(ALL, 1, 1, { requireSustain: true });
+                expect(isSustain(team.members[0])).toBe(true);
+            });
+        });
+
+        it("respects element filter alongside requireSustain", () => {
+            // FU_XUAN is the only Quantum sustain; SEELE is the only other Quantum character
+            repeat(50, () => {
+                const [team] = rollMultipleTeams(ALL, 1, 2, {
+                    requireSustain: true,
+                    elements: ["Quantum"],
+                });
+                expect(team.members.some(isSustain)).toBe(true);
+                expect(team.members.every((c) => c.element === "Quantum")).toBe(true);
+            });
+        });
+
+        it("throws when element filter leaves no sustains", () => {
+            // No Fire sustains in ALL
+            expect(() =>
+                rollMultipleTeams(ALL, 1, 4, { requireSustain: true, elements: ["Fire"] })
+            ).toThrow();
         });
     });
 });

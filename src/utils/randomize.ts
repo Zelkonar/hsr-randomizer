@@ -33,7 +33,7 @@ class NotEnoughCharactersError extends Error {
   }
 }
 
-function removeFromPool(pool: Character[], pick: Character): Character[] {
+export function removeFromPool(pool: Character[], pick: Character): Character[] {
   return pool.filter((c) => c.id !== pick.id && c.name !== pick.name);
 }
 
