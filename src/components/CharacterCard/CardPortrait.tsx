@@ -1,4 +1,4 @@
-import { getPathIconLarge, getPathIconLargeLocal } from "../../utils/path";
+import { getPathIconLarge, getPathIconLargeLocal } from "../../lib/path";
 import type { Character } from "../../types/character";
 
 const imgStyles: Record<"contain" | "cover", string> = {

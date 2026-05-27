@@ -1,6 +1,6 @@
 import { useState, useMemo, useCallback } from "react";
 import { CHARACTERS } from "../data/characters";
-import { rollMultipleTeams, applyFilter, isSustain } from "../utils/randomize";
+import { rollMultipleTeams, applyFilter, isSustain } from "../lib/randomize";
 import type { Team } from "../types/character";
 import type { GameMode, TwoTeamMode } from "../types/gameMode";
 

@@ -1,6 +1,6 @@
 import type { Element, Path, Rarity } from "../../types/character";
-import { getElementStyles } from "../../utils/element";
-import { getPathIcon, getPathIconLocal } from "../../utils/path";
+import { getElementStyles } from "../../lib/element";
+import { getPathIcon, getPathIconLocal } from "../../lib/path";
 
 export const ELEMENTS: Element[] = [
     "Fire", "Ice", "Lightning", "Wind", "Quantum", "Imaginary", "Physical",

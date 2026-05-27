@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { CHARACTERS } from "../../data/characters";
-import { parseRosterImport } from "../../utils/roster";
+import { parseRosterImport } from "../../lib/roster";
 
 const VALID_IDS = new Set(CHARACTERS.map((c) => c.id));
 
