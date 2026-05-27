@@ -48,10 +48,6 @@ function buildTeam(members: Character[]): Team {
   };
 }
 
-// Pre-select one sustain per team upfront and remove them from the general pool.
-// Each team rolls size-1 members freely. If the free picks include any sustain,
-// the reserved one returns to the pool and the last slot is rolled freely too.
-// If no sustain was rolled freely, the reserved sustain fills the last slot.
 export function rollMultipleTeams(
   pool: Character[],
   count: number,
@@ -78,24 +74,33 @@ export function rollMultipleTeams(
   const teams: Team[] = [];
 
   for (let i = 0; i < count; i++) {
+    const sustain = reserved[i];
+    // add reserved sustain back to the general pool at start rolling of 'their team'
+    if (sustain !== null) remaining = [sustain, ...remaining];
+
+    if (remaining.length < size) {
+      throw new NotEnoughCharactersError(size, remaining.length);
+    }
+
     const members: Character[] = [];
 
+    // TODO: more complex constraints will be more complicated to implement if 
+    // we do it this way, consider a more flexible approach if we add more 
+    // restraints in the future
     for (let j = 0; j < size - 1; j++) {
       const pick = randomPick(remaining);
       members.push(pick);
       remaining = removeFromPool(remaining, pick);
     }
 
-    const sustain = reserved[i];
     if (sustain !== null) {
       if (members.some(isSustain)) {
-        // Free picks already include a sustain — return reserved to pool and roll last slot freely
-        remaining = [sustain, ...remaining];
         const pick = randomPick(remaining);
         members.push(pick);
         remaining = removeFromPool(remaining, pick);
       } else {
         members.push(sustain);
+        remaining = removeFromPool(remaining, sustain);
       }
     } else {
       const pick = randomPick(remaining);

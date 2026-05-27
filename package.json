@@ -11,7 +11,9 @@
     "predev": "tsx scripts/write-version.ts",
     "build": "tsc -b && vite build",
     "prebuild": "tsx scripts/write-version.ts",
-"lint": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint .",
     "preview": "vite preview",
     "generate:characters": "tsx scripts/generate-characters.ts",
     "prepare": "husky"
@@ -48,6 +50,7 @@
     "tsx": "^4.22.3",
     "typescript": "~6.0.2",
     "typescript-eslint": "^8.59.2",
-    "vite": "^8.0.12"
+    "vite": "^8.0.12",
+    "vitest": "^3.2.4"
   }
 }
