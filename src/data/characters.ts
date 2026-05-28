@@ -2,7 +2,7 @@
 // Re-run `npm run generate:characters` after a new patch to update.
 //
 // Metadata source: https://github.com/Mar-7th/StarRailRes
-// Images: https://cdn.jsdelivr.net/gh/Zelkonar/hsr-randomizer-assets@v2 (see src/config/assets.ts)
+// Images: https://assets.hsr-randomizer.zelkonar.com (see src/config/assets.ts)
 
 import type { Character } from "../types/character";
 import { ASSETS_CDN } from "../config/assets";

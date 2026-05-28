@@ -1,7 +1,4 @@
 import type { Element } from "../types/element";
-import { ASSETS_CDN } from "../config/assets";
-
-const CDN = `${ASSETS_CDN}/icons/element`;
 
 export const ELEMENT_STYLES: Record<
     Element,
@@ -13,7 +10,7 @@ export const ELEMENT_STYLES: Record<
         border: "border-red-500/40",
         glow: "shadow-red-500/30",
         hex: "#f87171",
-        icon: `${CDN}/Fire.webp`,
+        icon: "/elements/Fire.png",
         iconLocal: "/elements/Fire.png",
     },
     Ice: {
@@ -22,7 +19,7 @@ export const ELEMENT_STYLES: Record<
         border: "border-sky-400/40",
         glow: "shadow-sky-400/30",
         hex: "#7dd3fc",
-        icon: `${CDN}/Ice.webp`,
+        icon: "/elements/Ice.png",
         iconLocal: "/elements/Ice.png",
     },
     Lightning: {
@@ -31,7 +28,7 @@ export const ELEMENT_STYLES: Record<
         border: "border-violet-500/40",
         glow: "shadow-violet-500/30",
         hex: "#a78bfa",
-        icon: `${CDN}/Thunder.webp`,
+        icon: "/elements/Thunder.png",
         iconLocal: "/elements/Thunder.png",
     },
     Wind: {
@@ -40,7 +37,7 @@ export const ELEMENT_STYLES: Record<
         border: "border-emerald-500/40",
         glow: "shadow-emerald-500/30",
         hex: "#34d399",
-        icon: `${CDN}/Wind.webp`,
+        icon: "/elements/Wind.png",
         iconLocal: "/elements/Wind.png",
     },
     Quantum: {
@@ -49,7 +46,7 @@ export const ELEMENT_STYLES: Record<
         border: "border-indigo-500/40",
         glow: "shadow-indigo-500/30",
         hex: "#818cf8",
-        icon: `${CDN}/Quantum.webp`,
+        icon: "/elements/Quantum.png",
         iconLocal: "/elements/Quantum.png",
     },
     Imaginary: {
@@ -58,7 +55,7 @@ export const ELEMENT_STYLES: Record<
         border: "border-yellow-400/40",
         glow: "shadow-yellow-400/30",
         hex: "#fde047",
-        icon: `${CDN}/Imaginary.webp`,
+        icon: "/elements/Imaginary.png",
         iconLocal: "/elements/Imaginary.png",
     },
     Physical: {
@@ -67,7 +64,7 @@ export const ELEMENT_STYLES: Record<
         border: "border-stone-400/40",
         glow: "shadow-stone-400/30",
         hex: "#d6d3d1",
-        icon: `${CDN}/Physical.webp`,
+        icon: "/elements/Physical.png",
         iconLocal: "/elements/Physical.png",
     },
 };
