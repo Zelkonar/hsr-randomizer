@@ -23,11 +23,3 @@ export function getPathIcon(path: Path) {
 export function getPathIconLarge(path: Path) {
     return `/paths/${PATH_ICON_NAMES[path]}.png`;
 }
-
-export function getPathIconLocal(path: Path) {
-    return `/paths/${PATH_ICON_NAMES[path]}Middle.png`;
-}
-
-export function getPathIconLargeLocal(path: Path) {
-    return `/paths/${PATH_ICON_NAMES[path]}.png`;
-}

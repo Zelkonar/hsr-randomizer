@@ -1,4 +1,4 @@
-import { getPathIconLarge, getPathIconLargeLocal } from "../../lib/path";
+import { getPathIconLarge } from "../../lib/path";
 import type { Character } from "../../types/character";
 
 const imgStyles: Record<"contain" | "cover", string> = {
@@ -32,10 +32,6 @@ export function CardPortrait({
                 alt=""
                 aria-hidden
                 className="absolute inset-0 w-full h-full object-contain mix-blend-screen opacity-40"
-                onError={(e) => {
-                    e.currentTarget.onerror = null;
-                    e.currentTarget.src = getPathIconLargeLocal(character.path);
-                }}
             />
             <img src={src} alt={character.name} loading="lazy" className={imgStyles[imageFit]} />
             <div className={`absolute inset-0 bg-gradient-to-t ${GRADIENT}`} />

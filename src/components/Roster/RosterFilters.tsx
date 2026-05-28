@@ -1,6 +1,6 @@
 import { cn } from "../../lib/cn";
 import { getElementStyles } from "../../lib/element";
-import { getPathIcon, getPathIconLocal } from "../../lib/path";
+import { getPathIcon } from "../../lib/path";
 import { ELEMENTS, PATHS, EMPTY_FILTERS } from "./rosterFiltersConfig";
 import type { RosterFiltersState } from "./rosterFiltersConfig";
 
@@ -69,15 +69,7 @@ export function RosterFilters({ filters, onChange }: RosterFiltersProps) {
                                 ELEMENT_ACTIVE_BG[el]
                             )}
                         >
-                            <img
-                                src={getElementStyles(el).icon}
-                                alt={el}
-                                className="w-5 h-5"
-                                onError={(e) => {
-                                    e.currentTarget.onerror = null;
-                                    e.currentTarget.src = getElementStyles(el).iconLocal;
-                                }}
-                            />
+                            <img src={getElementStyles(el).icon} alt={el} className="w-5 h-5" />
                         </button>
                     ))}
                 </div>
@@ -94,15 +86,7 @@ export function RosterFilters({ filters, onChange }: RosterFiltersProps) {
                             title={p}
                             className="p-1.5 bg-transparent hover:bg-white/[0.06] transition-colors duration-150 cursor-pointer data-[active=true]:bg-white/15"
                         >
-                            <img
-                                src={getPathIcon(p)}
-                                alt={p}
-                                className="w-5 h-5"
-                                onError={(e) => {
-                                    e.currentTarget.onerror = null;
-                                    e.currentTarget.src = getPathIconLocal(p);
-                                }}
-                            />
+                            <img src={getPathIcon(p)} alt={p} className="w-5 h-5" />
                         </button>
                     ))}
                 </div>

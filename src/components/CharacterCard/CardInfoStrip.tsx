@@ -1,4 +1,4 @@
-import { getPathIcon, getPathIconLocal } from "../../lib/path";
+import { getPathIcon } from "../../lib/path";
 import { getElementStyles } from "../../lib/element";
 import type { Character } from "../../types/character";
 
@@ -23,24 +23,8 @@ export function CardInfoStrip({ character, short = false }: { character: Charact
                     <span className={`${rarityColor} text-[9px] md:text-xs`} aria-label={`${character.rarity} star`}>
                         ★
                     </span>
-                    <img
-                        src={el.icon}
-                        alt={character.element}
-                        className="w-3 h-3 md:w-4 md:h-4"
-                        onError={(e) => {
-                            e.currentTarget.onerror = null;
-                            e.currentTarget.src = el.iconLocal;
-                        }}
-                    />
-                    <img
-                        src={getPathIcon(character.path)}
-                        alt={character.path}
-                        className="w-3 h-3 md:w-4 md:h-4"
-                        onError={(e) => {
-                            e.currentTarget.onerror = null;
-                            e.currentTarget.src = getPathIconLocal(character.path);
-                        }}
-                    />
+                    <img src={el.icon} alt={character.element} className="w-3 h-3 md:w-4 md:h-4" />
+                    <img src={getPathIcon(character.path)} alt={character.path} className="w-3 h-3 md:w-4 md:h-4" />
                 </div>
             </div>
         );
@@ -57,24 +41,8 @@ export function CardInfoStrip({ character, short = false }: { character: Charact
                 </p>
             </div>
             <div className="flex items-center gap-1 shrink-0">
-                <img
-                    src={el.icon}
-                    alt={character.element}
-                    className="w-4 h-4"
-                    onError={(e) => {
-                        e.currentTarget.onerror = null;
-                        e.currentTarget.src = el.iconLocal;
-                    }}
-                />
-                <img
-                    src={getPathIcon(character.path)}
-                    alt={character.path}
-                    className="w-4 h-4"
-                    onError={(e) => {
-                        e.currentTarget.onerror = null;
-                        e.currentTarget.src = getPathIconLocal(character.path);
-                    }}
-                />
+                <img src={el.icon} alt={character.element} className="w-4 h-4" />
+                <img src={getPathIcon(character.path)} alt={character.path} className="w-4 h-4" />
             </div>
         </div>
     );
