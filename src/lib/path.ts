@@ -1,7 +1,4 @@
 import type { Path } from "../types/path";
-import { ASSETS_CDN } from "../config/assets";
-
-const CDN = `${ASSETS_CDN}/icons/path`;
 
 const PATH_ICON_NAMES: Record<Path, string> = {
     "The Hunt": "Hunt",
@@ -16,15 +13,15 @@ const PATH_ICON_NAMES: Record<Path, string> = {
 };
 
 export function getPathIconSmall(path: Path) {
-    return `${CDN}/${PATH_ICON_NAMES[path]}Small.webp`;
+    return `/paths/${PATH_ICON_NAMES[path]}Small.png`;
 }
 
 export function getPathIcon(path: Path) {
-    return `${CDN}/${PATH_ICON_NAMES[path]}Middle.webp`;
+    return `/paths/${PATH_ICON_NAMES[path]}Middle.png`;
 }
 
 export function getPathIconLarge(path: Path) {
-    return `${CDN}/${PATH_ICON_NAMES[path]}.webp`;
+    return `/paths/${PATH_ICON_NAMES[path]}.png`;
 }
 
 export function getPathIconLocal(path: Path) {

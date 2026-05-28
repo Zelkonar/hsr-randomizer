@@ -16,48 +16,48 @@ const PATHS: Path[] = [
 
 describe("getPathIcon", () => {
     it("uses 'Hunt' for The Hunt", () => {
-        expect(getPathIcon("The Hunt")).toContain("HuntMiddle.webp");
+        expect(getPathIcon("The Hunt")).toContain("HuntMiddle.png");
     });
 
     it("uses 'Joy' for Elation", () => {
-        expect(getPathIcon("Elation")).toContain("JoyMiddle.webp");
+        expect(getPathIcon("Elation")).toContain("JoyMiddle.png");
     });
 
-    it("returns a .webp URL for every path", () => {
+    it("returns a local /paths/ URL for every path", () => {
         for (const path of PATHS) {
-            expect(getPathIcon(path)).toMatch(/\.webp$/);
+            expect(getPathIcon(path)).toMatch(/^\/paths\/.+\.png$/);
         }
     });
 });
 
 describe("getPathIconSmall", () => {
     it("uses 'Hunt' for The Hunt", () => {
-        expect(getPathIconSmall("The Hunt")).toContain("HuntSmall.webp");
+        expect(getPathIconSmall("The Hunt")).toContain("HuntSmall.png");
     });
 
     it("uses 'Joy' for Elation", () => {
-        expect(getPathIconSmall("Elation")).toContain("JoySmall.webp");
+        expect(getPathIconSmall("Elation")).toContain("JoySmall.png");
     });
 
-    it("returns a .webp URL for every path", () => {
+    it("returns a local /paths/ URL for every path", () => {
         for (const path of PATHS) {
-            expect(getPathIconSmall(path)).toMatch(/\.webp$/);
+            expect(getPathIconSmall(path)).toMatch(/^\/paths\/.+\.png$/);
         }
     });
 });
 
 describe("getPathIconLarge", () => {
     it("uses 'Hunt' for The Hunt (no size suffix)", () => {
-        expect(getPathIconLarge("The Hunt")).toMatch(/\/Hunt\.webp$/);
+        expect(getPathIconLarge("The Hunt")).toMatch(/\/Hunt\.png$/);
     });
 
     it("uses 'Joy' for Elation (no size suffix)", () => {
-        expect(getPathIconLarge("Elation")).toMatch(/\/Joy\.webp$/);
+        expect(getPathIconLarge("Elation")).toMatch(/\/Joy\.png$/);
     });
 
-    it("returns a .webp URL for every path", () => {
+    it("returns a local /paths/ URL for every path", () => {
         for (const path of PATHS) {
-            expect(getPathIconLarge(path)).toMatch(/\.webp$/);
+            expect(getPathIconLarge(path)).toMatch(/^\/paths\/.+\.png$/);
         }
     });
 });
