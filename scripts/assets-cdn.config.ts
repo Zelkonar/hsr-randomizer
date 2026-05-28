@@ -1,9 +1,7 @@
 /**
- * jsDelivr CDN base for hsr-randomizer-assets (no trailing slash).
+ * Cloudflare R2 CDN base for character images (no trailing slash).
  *
- * 1. In the assets repo: `npm run sync` → commit → push → tag.
- * 2. Update ASSETS_CDN in src/config/assets.ts to the new tag.
- * 3. Run `npm run generate:characters`.
+ * When new characters are added, run `npm run generate:characters`.
  */
 export { ASSETS_CDN as ASSETS_CDN_BASE } from "../src/config/assets";
 

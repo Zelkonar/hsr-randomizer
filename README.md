@@ -2,7 +2,7 @@
 
 A team randomizer for Honkai: Star Rail. Configure your owned roster, pick a mode, and generate random teams from your available characters: useful for challenge runs or mixing things up.
 
-**Live:** https://hsr-randomizer.vercel.app/
+**Live:** https://hsr-randomizer.zelkonar.com/
 
 ## Features
 
@@ -33,9 +33,9 @@ npm test
 
 ## Assets
 
-Character images live in a separate repo: **[hsr-randomizer-assets](https://github.com/Zelkonar/hsr-randomizer-assets)**, sourced from **[Mar-7th/StarRailRes](https://github.com/Mar-7th/StarRailRes)**. They are served via jsDelivr.
+Character images are sourced from **[Mar-7th/StarRailRes](https://github.com/Mar-7th/StarRailRes)** and served via Cloudflare R2.
 
-When the assets repo publishes a new tag, bump the version in `src/config/assets.ts` to match, then run `npm run generate:characters` to regenerate `src/data/characters.ts`.
+When new characters are added, run `npm run generate:characters` to regenerate `src/data/characters.ts`.
 
 ## Branching and deployment
 
