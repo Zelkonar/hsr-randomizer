@@ -23,8 +23,18 @@ export function CardInfoStrip({ character, short = false }: { character: Charact
                     <span className={`${rarityColor} text-[9px] md:text-xs`} aria-label={`${character.rarity} star`}>
                         ★
                     </span>
-                    <img src={el.icon} alt={character.element} className="w-3 h-3 md:w-4 md:h-4" />
-                    <img src={getPathIcon(character.path)} alt={character.path} className="w-3 h-3 md:w-4 md:h-4" />
+                    <img
+                        src={el.icon}
+                        alt={character.element}
+                        title={character.element}
+                        className="w-3 h-3 md:w-4 md:h-4"
+                    />
+                    <img
+                        src={getPathIcon(character.path)}
+                        alt={character.path}
+                        title={character.path}
+                        className="w-3 h-3 md:w-4 md:h-4"
+                    />
                 </div>
             </div>
         );
@@ -41,8 +51,13 @@ export function CardInfoStrip({ character, short = false }: { character: Charact
                 </p>
             </div>
             <div className="flex items-center gap-1 shrink-0">
-                <img src={el.icon} alt={character.element} className="w-4 h-4" />
-                <img src={getPathIcon(character.path)} alt={character.path} className="w-4 h-4" />
+                <img src={el.icon} alt={character.element} title={character.element} className="w-4 h-4" />
+                <img
+                    src={getPathIcon(character.path)}
+                    alt={character.path}
+                    title={character.path}
+                    className="w-4 h-4"
+                />
             </div>
         </div>
     );
