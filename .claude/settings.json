@@ -1,0 +1,12 @@
+{
+    "permissions": {
+        "allow": [
+            "Bash(mkdir -p /Users/sallywood/src/hsr-randomizer-infra)",
+            "Bash(git -C /Users/sallywood/src/hsr-randomizer-infra remote -v)",
+            "Bash(curl -s \"https://raw.githubusercontent.com/cloudflare/terraform-provider-cloudflare/main/docs/resources/r2_bucket_cors.md\")",
+            "Bash(npx --yes tsx scripts/generate-characters.ts)",
+            "Bash(python3 -c \"import json; d=json.load\\(open\\('assets/data/characters.b59d1ce356.json'\\)\\); print\\(json.dumps\\(d[0], indent=2\\)\\); print\\('count:', len\\(d\\)\\)\")"
+        ],
+        "additionalDirectories": ["/Users/sallywood/src"]
+    }
+}
