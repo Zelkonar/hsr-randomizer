@@ -15,7 +15,7 @@
         "test:watch": "vitest",
         "lint": "eslint .",
         "preview": "vite preview",
-        "generate:characters": "tsx scripts/generate-characters.ts",
+        "update:fallback": "tsx scripts/update-fallback.ts",
         "format": "prettier --write .",
         "format:check": "prettier --check .",
         "prepare": "husky"

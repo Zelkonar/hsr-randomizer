@@ -31,11 +31,13 @@ Run tests:
 npm test
 ```
 
-## Assets
+## Assets & character data
 
-Character images are sourced from **[Mar-7th/StarRailRes](https://github.com/Mar-7th/StarRailRes)** and served via Cloudflare R2.
+Character images and metadata are sourced from **[Mar-7th/StarRailRes](https://github.com/Mar-7th/StarRailRes)** and served via Cloudflare R2.
 
-When new characters are added, run `npm run generate:characters` to regenerate `src/data/characters.ts`.
+Character data is **generated and uploaded from [`hsr-randomizer-infra`](https://github.com/Zelkonar/hsr-randomizer-infra)** (`npm run deploy` there), not bundled into this app. The app fetches `data/version.json` from R2 at runtime and loads the content-hashed `characters.<hash>.json` it points to, so a data update lands without redeploying the front end.
+
+`src/data/characters.fallback.json` is a bundled snapshot used only when the live fetch fails (offline / R2 down). Refresh it from the current R2 data with `npm run update:fallback`.
 
 ## Branching and deployment
 
