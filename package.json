@@ -11,6 +11,8 @@
         "predev": "tsx scripts/write-version.ts",
         "build": "tsc -b && vite build",
         "prebuild": "tsx scripts/write-version.ts",
+        "pretypecheck": "tsx scripts/write-version.ts",
+        "typecheck": "tsc -b",
         "test": "vitest run",
         "test:watch": "vitest",
         "lint": "eslint .",
