@@ -147,3 +147,4 @@ vite.config.ts.timestamp-*
 src/data/version.ts
 public/images/
 .DS_Store
+.claude/settings.local.json
