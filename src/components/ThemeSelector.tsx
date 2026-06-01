@@ -74,7 +74,7 @@ export function ThemeSelector() {
             <div
                 role="group"
                 aria-label="Theme"
-                className="hidden sm:flex items-center overflow-hidden rounded-lg border border-gray-300 divide-x divide-gray-300 dark:border-white/10 dark:divide-white/10"
+                className="hidden sm:flex items-center overflow-hidden rounded-lg border border-gray-300 bg-white shadow-sm divide-x divide-gray-300 dark:border-white/10 dark:bg-gray-900 dark:divide-white/10"
             >
                 {OPTIONS.map(({ value, label, Icon }) => (
                     <button
@@ -99,7 +99,7 @@ export function ThemeSelector() {
                     aria-haspopup="true"
                     aria-expanded={open}
                     aria-label="Theme"
-                    className="flex h-8 w-8 items-center justify-center rounded-lg border border-gray-300 text-gray-500 transition-colors hover:border-gray-400 hover:text-gray-900 dark:border-white/10 dark:text-white/50 dark:hover:border-white/30 dark:hover:text-white"
+                    className="flex h-8 w-8 items-center justify-center rounded-lg border border-gray-300 bg-white text-gray-500 shadow-sm transition-colors hover:border-gray-400 hover:text-gray-900 dark:border-white/10 dark:bg-gray-900 dark:text-white/50 dark:hover:border-white/30 dark:hover:text-white"
                 >
                     <Current />
                 </button>
@@ -108,7 +108,7 @@ export function ThemeSelector() {
                     <div
                         role="group"
                         aria-label="Theme"
-                        className="absolute right-0 top-full mt-1.5 flex flex-col overflow-hidden rounded-lg border border-gray-300 bg-white shadow-lg divide-y divide-gray-300 dark:border-white/10 dark:bg-gray-900 dark:divide-white/10"
+                        className="absolute bottom-full left-0 mb-1.5 flex flex-col overflow-hidden rounded-lg border border-gray-300 bg-white shadow-lg divide-y divide-gray-300 dark:border-white/10 dark:bg-gray-900 dark:divide-white/10"
                     >
                         {OPTIONS.map(({ value, label, Icon }) => (
                             <button
