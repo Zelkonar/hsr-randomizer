@@ -35,18 +35,18 @@ export function RosterFilters({ filters, onChange }: RosterFiltersProps) {
     return (
         <div className="flex flex-wrap items-center gap-3 px-5 py-3">
             <div className="flex items-center gap-2">
-                <span className="text-[10px] uppercase tracking-widest text-white/30 shrink-0">Rarity</span>
-                <div className="flex rounded-lg border border-white/10 overflow-hidden divide-x divide-white/10">
+                <span className="text-[10px] uppercase tracking-widest text-muted-foreground shrink-0">Rarity</span>
+                <div className="flex rounded-lg border border-border overflow-hidden divide-x divide-border">
                     {([5, 4] as (4 | 5)[]).map((r) => (
                         <button
                             key={r}
                             onClick={() => toggleSet("rarities", r)}
                             data-active={filters.rarities.has(r)}
                             className={cn(
-                                "px-3 py-1 text-[11px] font-medium tracking-wide bg-transparent hover:bg-white/[0.06] transition-colors duration-150 cursor-pointer select-none",
+                                "px-3 py-1 text-[11px] font-medium tracking-wide bg-transparent hover:bg-muted transition-colors duration-150 cursor-pointer select-none",
                                 r === 5
-                                    ? "text-amber-300 data-[active=true]:bg-amber-500/30"
-                                    : "text-purple-300 data-[active=true]:bg-purple-500/30"
+                                    ? "text-amber-600 data-[active=true]:bg-amber-500/30 dark:text-amber-300"
+                                    : "text-purple-600 data-[active=true]:bg-purple-500/30 dark:text-purple-300"
                             )}
                         >
                             ★{r}
@@ -56,8 +56,8 @@ export function RosterFilters({ filters, onChange }: RosterFiltersProps) {
             </div>
 
             <div className="flex items-center gap-2">
-                <span className="text-[10px] uppercase tracking-widest text-white/30 shrink-0">Element</span>
-                <div className="flex rounded-lg border border-white/10 overflow-hidden divide-x divide-white/10">
+                <span className="text-[10px] uppercase tracking-widest text-muted-foreground shrink-0">Element</span>
+                <div className="flex rounded-lg border border-border overflow-hidden divide-x divide-border">
                     {ELEMENTS.map((el) => (
                         <button
                             key={el}
@@ -65,7 +65,7 @@ export function RosterFilters({ filters, onChange }: RosterFiltersProps) {
                             data-active={filters.elements.has(el)}
                             title={el}
                             className={cn(
-                                "p-1.5 bg-transparent hover:bg-white/[0.06] transition-colors duration-150 cursor-pointer",
+                                "p-1.5 bg-transparent hover:bg-muted transition-colors duration-150 cursor-pointer",
                                 ELEMENT_ACTIVE_BG[el]
                             )}
                         >
@@ -76,17 +76,17 @@ export function RosterFilters({ filters, onChange }: RosterFiltersProps) {
             </div>
 
             <div className="flex items-center gap-2">
-                <span className="text-[10px] uppercase tracking-widest text-white/30 shrink-0">Path</span>
-                <div className="flex rounded-lg border border-white/10 overflow-hidden divide-x divide-white/10">
+                <span className="text-[10px] uppercase tracking-widest text-muted-foreground shrink-0">Path</span>
+                <div className="flex rounded-lg border border-border overflow-hidden divide-x divide-border">
                     {PATHS.map((p) => (
                         <button
                             key={p}
                             onClick={() => toggleSet("paths", p)}
                             data-active={filters.paths.has(p)}
                             title={p}
-                            className="p-1.5 bg-transparent hover:bg-white/[0.06] transition-colors duration-150 cursor-pointer data-[active=true]:bg-white/15"
+                            className="p-1.5 bg-transparent hover:bg-muted transition-colors duration-150 cursor-pointer data-[active=true]:bg-gray-300 dark:data-[active=true]:bg-white/15"
                         >
-                            <img src={getPathIcon(p)} alt={p} className="w-5 h-5" />
+                            <img src={getPathIcon(p)} alt={p} className="w-5 h-5 invert dark:invert-0" />
                         </button>
                     ))}
                 </div>
@@ -96,7 +96,7 @@ export function RosterFilters({ filters, onChange }: RosterFiltersProps) {
                 <div className="w-full">
                     <button
                         onClick={() => onChange(EMPTY_FILTERS)}
-                        className="rounded-md border border-white/10 bg-white/[0.03] px-3 py-1 text-[10px] uppercase tracking-widest text-white/40 hover:border-white/20 hover:text-white/60 transition-all duration-150 cursor-pointer"
+                        className="rounded-md border border-border bg-card px-3 py-1 text-[10px] uppercase tracking-widest text-muted-foreground hover:border-foreground/25 hover:text-foreground/80 transition-all duration-150 cursor-pointer"
                     >
                         Clear filters
                     </button>

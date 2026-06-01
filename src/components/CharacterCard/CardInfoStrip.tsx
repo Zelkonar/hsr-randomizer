@@ -3,8 +3,8 @@ import { getElementStyles } from "../../lib/element";
 import type { Character } from "../../types/character";
 
 const rarityColors: Record<number, string> = {
-    5: "text-amber-400",
-    4: "text-purple-400",
+    5: "text-amber-500 dark:text-amber-400",
+    4: "text-purple-500 dark:text-purple-400",
 };
 
 export function CardInfoStrip({ character, short = false }: { character: Character; short?: boolean }) {
@@ -15,7 +15,7 @@ export function CardInfoStrip({ character, short = false }: { character: Charact
         return (
             <div className="flex flex-col gap-0.5 px-1.5 py-1 md:gap-1 md:px-2 md:py-1.5">
                 <div className="flex h-[2em] items-center md:h-[2.5em]">
-                    <p className="line-clamp-2 text-[10px] font-medium text-white leading-tight md:text-sm md:font-semibold">
+                    <p className="line-clamp-2 text-[10px] font-medium text-foreground leading-tight md:text-sm md:font-semibold">
                         {character.name}
                     </p>
                 </div>
@@ -33,7 +33,7 @@ export function CardInfoStrip({ character, short = false }: { character: Charact
                         src={getPathIcon(character.path)}
                         alt={character.path}
                         title={character.path}
-                        className="w-3 h-3 md:w-4 md:h-4"
+                        className="w-3 h-3 md:w-4 md:h-4 invert dark:invert-0"
                     />
                 </div>
             </div>
@@ -43,7 +43,7 @@ export function CardInfoStrip({ character, short = false }: { character: Charact
     return (
         <div className="flex items-center justify-between gap-2 px-3 py-2">
             <div className="flex h-[2.5em] flex-1 min-w-0 items-center">
-                <p className="line-clamp-2 text-sm font-semibold text-white leading-tight">
+                <p className="line-clamp-2 text-sm font-semibold text-foreground leading-tight">
                     <span className={`${rarityColor} mr-1 text-xs`} aria-label={`${character.rarity} star`}>
                         ★
                     </span>
@@ -56,7 +56,7 @@ export function CardInfoStrip({ character, short = false }: { character: Charact
                     src={getPathIcon(character.path)}
                     alt={character.path}
                     title={character.path}
-                    className="w-4 h-4"
+                    className="w-4 h-4 invert dark:invert-0"
                 />
             </div>
         </div>

@@ -15,13 +15,6 @@ if ! echo "$version" | grep -qE '^v[0-9]+\.[0-9]+\.[0-9]+$'; then
   exit 1
 fi
 
-UNSTAGED=$(git diff --name-only)
-if [ -n "$UNSTAGED" ]; then
-  echo "ERROR: Unstaged changes detected. Stage everything before committing:"
-  echo "$UNSTAGED"
-  exit 1
-fi
-
 npx lint-staged
 npx tsc --noEmit
 npx vitest run

@@ -9,37 +9,62 @@
         <link rel="manifest" href="/favicon/site.webmanifest" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>HSR Randomizer</title>
-    </head>
-    <body style="margin: 0; background-color: #030712">
-        <div id="root">
-            <div
-                style="
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    min-height: 100vh;
-                    background-color: #030712;
-                "
-            >
-                <div
-                    style="
-                        width: 2.5rem;
-                        height: 2.5rem;
-                        border: 3px solid rgba(255, 255, 255, 0.15);
-                        border-top-color: rgba(255, 255, 255, 0.7);
-                        border-radius: 50%;
-                        animation: hsr-spin 0.8s linear infinite;
-                    "
-                ></div>
-            </div>
-        </div>
+        <script>
+            // Resolve and apply the theme before first paint to avoid a flash of
+            // the wrong theme. Mirrors getInitialTheme() in src/lib/theme.ts.
+            (function () {
+                try {
+                    var stored = localStorage.getItem("hsr-randomizer:theme");
+                    var theme =
+                        stored === "light" || stored === "dark"
+                            ? stored
+                            : window.matchMedia("(prefers-color-scheme: light)").matches
+                              ? "light"
+                              : "dark";
+                    if (theme === "dark") document.documentElement.classList.add("dark");
+                    document.documentElement.style.colorScheme = theme;
+                } catch (e) {}
+            })();
+        </script>
         <style>
+            body {
+                margin: 0;
+                background-color: #e5e7eb;
+            }
+            html.dark body {
+                background-color: #030712;
+            }
+            #hsr-loading {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 100vh;
+            }
+            #hsr-loading .hsr-spinner {
+                width: 2.5rem;
+                height: 2.5rem;
+                border: 3px solid rgba(0, 0, 0, 0.15);
+                border-top-color: rgba(0, 0, 0, 0.6);
+                border-radius: 50%;
+                animation: hsr-spin 0.8s linear infinite;
+            }
+            html.dark #hsr-loading .hsr-spinner {
+                border-color: rgba(255, 255, 255, 0.15);
+                border-top-color: rgba(255, 255, 255, 0.7);
+            }
             @keyframes hsr-spin {
                 to {
                     transform: rotate(360deg);
                 }
             }
         </style>
+    </head>
+    <body>
+        <div id="root">
+            <div id="hsr-loading">
+                <div class="hsr-spinner"></div>
+            </div>
+        </div>
         <script type="module" src="/src/main.tsx"></script>
     </body>
 </html>

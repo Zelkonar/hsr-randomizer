@@ -20,19 +20,30 @@ The core product is a **Challenges** system - the randomizer is a secondary feat
 
 When suggesting features or scoping work, treat the Challenges tab as the primary product surface. Randomizer improvements are lower priority unless they feed into the constraint system.
 
-## Planned: Styling Refactor
+## Styling
 
-Replace the `const styles = {}` pattern across all component files with `cn` + `cva`.
+Tailwind v4 (CSS-based config, no `tailwind.config`). Styles are inline utility classes on JSX, composed with `cn()` from `src/lib/cn.ts` (clsx + tailwind-merge). State-driven components use `cva` (`ModeSelector`, `RandomizeButton`, `RosterCard`, `TeamView`). There is no `const styles = {}` pattern.
 
-Steps:
+### Semantic color tokens
 
-1. Install `clsx` and `tailwind-merge`
-2. Create `src/lib/cn.ts` - a `cn()` utility combining clsx + tailwind-merge
-3. Replace `const styles = {}` objects with inline `cn()` calls on JSX elements
-4. Extract variant logic to `cva` for components with states: `RandomizeButton` (active/disabled), `SavedRosters` save button (save/overwrite), `RosterModalHeader` saved button (open/closed)
-5. Add `darkMode: 'class'` to `tailwind.config` so dark variants work when theme toggle is built
+Colors are driven by semantic tokens (shadcn-style naming), not literal Tailwind colors with `dark:` pairs. The palette is defined once in `src/index.css`: light values in `:root`, dark overrides under `.dark`, exposed as utilities via `@theme inline`. Components reference roles, so a class like `border-border bg-card text-muted-foreground` themes itself with no `dark:` variant.
 
-After the refactor, theming is just adding `dark:` variants to existing `cn()` calls and a toggle that sets `class="dark"` on `<html>`.
+Token values point at Tailwind's own palette variables (e.g. `--card: var(--color-gray-900)`), so they stay in the same oklch color space as the rest of the system and compose with the opacity modifier.
+
+Token vocabulary:
+
+- Surfaces: `bg-background` (page), `bg-card` (cards/modals/popovers and controls), `bg-muted` (inset/hover on a surface). `popover` mirrors `card`.
+- Text: `text-foreground`, `text-muted-foreground`. For extra tiers, lean on the opacity modifier rather than new tokens: `text-foreground/80` (prominent secondary), `text-muted-foreground/70` (faint).
+- Borders: `border-border` (default), `input`/`ring` for form/focus. A stronger hover/active border is `border-foreground/25`.
+- Accent (the sky brand): `text-primary`, with soft fills and borders derived by opacity - `bg-primary/10`, `border-primary/50`.
+
+Prefer the opacity modifier over inventing new tokens (it works because values are channel-based). To retheme, edit the variable blocks in `src/index.css`. To add a role, add the variable to both blocks plus a `--color-*` mapping in `@theme inline`.
+
+Stay on tokens for structural/neutral UI. Literal colors are reserved for things outside the theme palette: element colors (`src/lib/element.ts`), rarity colors, status colors (red/amber/green/rose), and a few intentional one-offs (the deliberately dark tooltip, white monochrome icons toggled with `invert dark:invert-0`).
+
+### Theme switching
+
+`useTheme` (`src/hooks/useTheme.ts`) manages a `light | dark | system` preference, persisted to localStorage and applied as a `.dark` class on `<html>`. `system` defaults on first visit and tracks the OS live. An inline script in `index.html` applies the resolved theme before first paint to avoid a flash. `ThemeSelector` is the pinned bottom-left control.
 
 ## Writing Style
 

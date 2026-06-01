@@ -24,8 +24,8 @@ function CharacterCardImpl({
     const el = getElementStyles(character.element);
 
     const cardClass = [
-        "group relative flex flex-col overflow-hidden rounded-xl border transition-all duration-300 bg-gray-900",
-        selected ? `${el.border} shadow-lg ${el.glow}` : "border-white/10 hover:border-white/25",
+        "group relative flex flex-col overflow-hidden rounded-xl border transition-all duration-300 bg-card shadow-sm dark:shadow-none",
+        selected ? `${el.border} shadow-lg ${el.glow}` : "border-border hover:border-foreground/25",
         selected ? "scale-[1.03]" : "hover:scale-[1.02]",
         excluded ? "opacity-60 grayscale" : "",
     ].join(" ");

@@ -37,7 +37,7 @@ export function OptionsRow({
                             setRosterKey((k) => k + 1);
                             setRosterOpen(true);
                         }}
-                        className="flex items-center gap-1.5 rounded-md border border-white/10 bg-white/[0.03] px-3 py-1.5 text-[11px] font-semibold uppercase tracking-widest text-white/40 transition-all duration-150 hover:border-sky-500/40 hover:bg-sky-500/8 hover:text-sky-400/80 active:scale-95"
+                        className="flex items-center gap-1.5 rounded-md border border-border bg-card px-3 py-1.5 text-[11px] font-semibold uppercase tracking-widest text-muted-foreground transition-all duration-150 hover:border-primary/50 hover:bg-primary/10 hover:text-primary active:scale-95"
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -64,8 +64,8 @@ export function OptionsRow({
                             className={cn(
                                 "flex h-3.5 w-3.5 items-center justify-center rounded border transition-all duration-150",
                                 requireSustain
-                                    ? "border-sky-500/60 bg-sky-500/20 text-sky-300"
-                                    : "border-white/20 bg-white/5 group-hover:border-white/35"
+                                    ? "border-primary/50 bg-primary/10 text-primary"
+                                    : "border-border bg-card group-hover:border-foreground/25"
                             )}
                         >
                             {requireSustain && (
@@ -82,7 +82,7 @@ export function OptionsRow({
                                 </svg>
                             )}
                         </span>
-                        <span className="text-[11px] font-semibold uppercase tracking-widest text-white/40 transition-colors group-hover:text-white/60">
+                        <span className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground transition-colors group-hover:text-foreground/80">
                             Include sustain
                         </span>
                     </label>
