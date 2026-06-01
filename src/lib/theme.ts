@@ -1,24 +1,29 @@
-export type Theme = "light" | "dark";
+export type ThemePreference = "light" | "dark" | "system";
+export type ResolvedTheme = "light" | "dark";
 
 export const THEME_STORAGE_KEY = "hsr-randomizer:theme";
 
-export function getStoredTheme(): Theme | null {
+export function getStoredPreference(): ThemePreference | null {
     const value = localStorage.getItem(THEME_STORAGE_KEY);
-    return value === "light" || value === "dark" ? value : null;
+    return value === "light" || value === "dark" || value === "system" ? value : null;
 }
 
-export function getSystemTheme(): Theme {
-    return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+export function getSystemTheme(): ResolvedTheme {
+    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 }
 
-// Resolves the theme to use on first paint: an explicit saved choice wins,
-// otherwise fall back to the operating system preference.
-export function getInitialTheme(): Theme {
-    return getStoredTheme() ?? getSystemTheme();
+// No saved choice means follow the operating system.
+export function getInitialPreference(): ThemePreference {
+    return getStoredPreference() ?? "system";
 }
 
-export function applyTheme(theme: Theme): void {
+export function resolveTheme(preference: ThemePreference): ResolvedTheme {
+    return preference === "system" ? getSystemTheme() : preference;
+}
+
+export function applyTheme(preference: ThemePreference): void {
+    const resolved = resolveTheme(preference);
     const root = document.documentElement;
-    root.classList.toggle("dark", theme === "dark");
-    root.style.colorScheme = theme;
+    root.classList.toggle("dark", resolved === "dark");
+    root.style.colorScheme = resolved;
 }

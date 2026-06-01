@@ -1,5 +1,5 @@
 import VERSION, { BUILD_DATE } from "../data/version";
-import { ThemeToggle } from "./ThemeToggle";
+import { ThemeSelector } from "./ThemeSelector";
 
 export function AppHeader() {
     return (
@@ -10,7 +10,7 @@ export function AppHeader() {
             </span>
 
             <div className="absolute top-3 right-4 z-10">
-                <ThemeToggle />
+                <ThemeSelector />
             </div>
 
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">

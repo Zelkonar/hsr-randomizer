@@ -1,25 +1,25 @@
-import { useCallback, useState } from "react";
-import { applyTheme, getInitialTheme, THEME_STORAGE_KEY, type Theme } from "../lib/theme";
+import { useCallback, useEffect, useState } from "react";
+import { applyTheme, getInitialPreference, THEME_STORAGE_KEY, type ThemePreference } from "../lib/theme";
 
-// The .dark class is applied before React mounts (see the inline script in
-// index.html), so initial state only needs to mirror that resolved value.
+// The resolved theme is applied before React mounts (see the inline script in
+// index.html), so initial state only needs to mirror the saved preference.
 export function useTheme() {
-    const [theme, setThemeState] = useState<Theme>(getInitialTheme);
+    const [preference, setPreferenceState] = useState<ThemePreference>(getInitialPreference);
 
-    const setTheme = useCallback((next: Theme) => {
-        setThemeState(next);
+    const setPreference = useCallback((next: ThemePreference) => {
+        setPreferenceState(next);
         applyTheme(next);
         localStorage.setItem(THEME_STORAGE_KEY, next);
     }, []);
 
-    const toggleTheme = useCallback(() => {
-        setThemeState((prev) => {
-            const next = prev === "dark" ? "light" : "dark";
-            applyTheme(next);
-            localStorage.setItem(THEME_STORAGE_KEY, next);
-            return next;
-        });
-    }, []);
+    // While following the system, re-apply whenever the OS preference flips.
+    useEffect(() => {
+        if (preference !== "system") return;
+        const query = window.matchMedia("(prefers-color-scheme: dark)");
+        const handler = () => applyTheme("system");
+        query.addEventListener("change", handler);
+        return () => query.removeEventListener("change", handler);
+    }, [preference]);
 
-    return { theme, setTheme, toggleTheme };
+    return { preference, setPreference };
 }
