@@ -57,8 +57,8 @@ function App() {
                 </div>
             </footer>
 
-            {/* Pinned to the viewport bottom-left, always visible/clickable. */}
-            <div className="fixed bottom-4 left-4 z-40">
+            {/* Pinned to the viewport bottom-left, always visible/clickable (above modals). */}
+            <div className="fixed bottom-4 left-4 z-[70]">
                 <ThemeSelector />
             </div>
         </div>
