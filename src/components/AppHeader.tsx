@@ -1,6 +1,6 @@
 export function AppHeader() {
     return (
-        <header className="relative flex flex-col items-center justify-center border-b border-gray-300 dark:border-white/10 px-6 py-10 overflow-hidden">
+        <header className="relative flex flex-col items-center justify-center border-b border-line px-6 py-10 overflow-hidden">
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                 <div className="h-32 w-96 rounded-full bg-sky-500/10 blur-3xl" />
             </div>
@@ -25,9 +25,9 @@ export function AppHeader() {
             </h1>
 
             <div className="relative mt-4 flex items-center gap-2">
-                <span className="block h-px w-16 bg-gray-300 dark:bg-white/10" />
+                <span className="block h-px w-16 bg-line" />
                 <span className="block h-1 w-1 rounded-full bg-sky-500/60 dark:bg-sky-400/50" />
-                <span className="block h-px w-16 bg-gray-300 dark:bg-white/10" />
+                <span className="block h-px w-16 bg-line" />
             </div>
         </header>
     );

@@ -37,7 +37,8 @@
             "Bash(node drive-sel.mjs)",
             "Bash(pkill -f vite)",
             "Bash(taskkill //F //IM node.exe //FI \"WINDOWTITLE eq vite*\")",
-            "Bash(node drive-mobile.mjs)"
+            "Bash(node drive-mobile.mjs)",
+            "PowerShell(npx prettier --check CLAUDE.md)"
         ],
         "additionalDirectories": ["/Users/sallywood/src"]
     }

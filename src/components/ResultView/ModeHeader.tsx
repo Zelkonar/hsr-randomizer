@@ -13,11 +13,11 @@ function ModeIcon({ mode }: { mode: TwoTeamMode | "aa" }) {
 
 export function ModeHeader({ mode, label }: { mode: TwoTeamMode | "aa"; label: string }) {
     return (
-        <p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-widest text-gray-600 dark:text-white/70">
-            <span className="block h-px flex-1 bg-gray-300 dark:bg-white/10" />
+        <p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-widest text-fg-muted">
+            <span className="block h-px flex-1 bg-line" />
             <ModeIcon mode={mode} />
             {label}
-            <span className="block h-px flex-1 bg-gray-300 dark:bg-white/10" />
+            <span className="block h-px flex-1 bg-line" />
         </p>
     );
 }

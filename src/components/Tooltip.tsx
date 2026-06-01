@@ -36,7 +36,7 @@ export function Tooltip({ text }: TooltipProps) {
             <button
                 type="button"
                 onClick={() => setPinned((v) => !v)}
-                className="flex h-4 w-4 items-center justify-center rounded-full border border-gray-300 text-[9px] font-bold text-gray-500 hover:border-gray-400 hover:text-gray-700 transition-colors leading-none dark:border-white/20 dark:text-white/40 dark:hover:border-white/40 dark:hover:text-white/60"
+                className="flex h-4 w-4 items-center justify-center rounded-full border border-line text-[9px] font-bold text-fg-subtle hover:border-line-strong hover:text-fg-muted transition-colors leading-none"
                 aria-label="More info"
             >
                 ?

@@ -37,7 +37,7 @@ export function OptionsRow({
                             setRosterKey((k) => k + 1);
                             setRosterOpen(true);
                         }}
-                        className="flex items-center gap-1.5 rounded-md border border-gray-300 bg-white px-3 py-1.5 text-[11px] font-semibold uppercase tracking-widest text-gray-500 transition-all duration-150 hover:border-sky-500/40 hover:bg-sky-500/10 hover:text-sky-600 active:scale-95 dark:border-white/10 dark:bg-white/[0.03] dark:text-white/40 dark:hover:bg-sky-500/8 dark:hover:text-sky-400/80"
+                        className="flex items-center gap-1.5 rounded-md border border-line bg-fill px-3 py-1.5 text-[11px] font-semibold uppercase tracking-widest text-fg-subtle transition-all duration-150 hover:border-accent-line hover:bg-accent-soft hover:text-accent active:scale-95"
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -64,8 +64,8 @@ export function OptionsRow({
                             className={cn(
                                 "flex h-3.5 w-3.5 items-center justify-center rounded border transition-all duration-150",
                                 requireSustain
-                                    ? "border-sky-500/60 bg-sky-500/20 text-sky-600 dark:text-sky-300"
-                                    : "border-gray-300 bg-white group-hover:border-gray-400 dark:border-white/20 dark:bg-white/5 dark:group-hover:border-white/35"
+                                    ? "border-accent-line bg-accent-soft text-accent"
+                                    : "border-line bg-fill group-hover:border-line-strong"
                             )}
                         >
                             {requireSustain && (
@@ -82,7 +82,7 @@ export function OptionsRow({
                                 </svg>
                             )}
                         </span>
-                        <span className="text-[11px] font-semibold uppercase tracking-widest text-gray-500 transition-colors group-hover:text-gray-700 dark:text-white/40 dark:group-hover:text-white/60">
+                        <span className="text-[11px] font-semibold uppercase tracking-widest text-fg-subtle transition-colors group-hover:text-fg-muted">
                             Include sustain
                         </span>
                     </label>

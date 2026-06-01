@@ -15,7 +15,7 @@ export function CardInfoStrip({ character, short = false }: { character: Charact
         return (
             <div className="flex flex-col gap-0.5 px-1.5 py-1 md:gap-1 md:px-2 md:py-1.5">
                 <div className="flex h-[2em] items-center md:h-[2.5em]">
-                    <p className="line-clamp-2 text-[10px] font-medium text-gray-900 dark:text-white leading-tight md:text-sm md:font-semibold">
+                    <p className="line-clamp-2 text-[10px] font-medium text-fg leading-tight md:text-sm md:font-semibold">
                         {character.name}
                     </p>
                 </div>
@@ -43,7 +43,7 @@ export function CardInfoStrip({ character, short = false }: { character: Charact
     return (
         <div className="flex items-center justify-between gap-2 px-3 py-2">
             <div className="flex h-[2.5em] flex-1 min-w-0 items-center">
-                <p className="line-clamp-2 text-sm font-semibold text-gray-900 dark:text-white leading-tight">
+                <p className="line-clamp-2 text-sm font-semibold text-fg leading-tight">
                     <span className={`${rarityColor} mr-1 text-xs`} aria-label={`${character.rarity} star`}>
                         ★
                     </span>

@@ -41,9 +41,7 @@ const OPTIONS: { value: ThemePreference; label: string; Icon: () => React.ReactN
 function optionClass(active: boolean) {
     return cn(
         "flex h-8 w-8 items-center justify-center transition-colors",
-        active
-            ? "bg-sky-500/15 text-sky-600 dark:text-sky-300"
-            : "text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-white/50 dark:hover:bg-white/5 dark:hover:text-white"
+        active ? "bg-accent-soft text-accent" : "text-fg-subtle hover:bg-muted hover:text-fg"
     );
 }
 
@@ -74,7 +72,7 @@ export function ThemeSelector() {
             <div
                 role="group"
                 aria-label="Theme"
-                className="hidden sm:flex items-center overflow-hidden rounded-lg border border-gray-300 bg-white shadow-sm divide-x divide-gray-300 dark:border-white/10 dark:bg-gray-900 dark:divide-white/10"
+                className="hidden sm:flex items-center overflow-hidden rounded-lg border border-line bg-surface shadow-sm divide-x divide-line"
             >
                 {OPTIONS.map(({ value, label, Icon }) => (
                     <button
@@ -99,7 +97,7 @@ export function ThemeSelector() {
                     aria-haspopup="true"
                     aria-expanded={open}
                     aria-label="Theme"
-                    className="flex h-8 w-8 items-center justify-center rounded-lg border border-gray-300 bg-white text-gray-500 shadow-sm transition-colors hover:border-gray-400 hover:text-gray-900 dark:border-white/10 dark:bg-gray-900 dark:text-white/50 dark:hover:border-white/30 dark:hover:text-white"
+                    className="flex h-8 w-8 items-center justify-center rounded-lg border border-line bg-surface text-fg-subtle shadow-sm transition-colors hover:border-line-strong hover:text-fg"
                 >
                     <Current />
                 </button>
@@ -108,7 +106,7 @@ export function ThemeSelector() {
                     <div
                         role="group"
                         aria-label="Theme"
-                        className="absolute bottom-full left-0 mb-1.5 flex flex-col overflow-hidden rounded-lg border border-gray-300 bg-white shadow-lg divide-y divide-gray-300 dark:border-white/10 dark:bg-gray-900 dark:divide-white/10"
+                        className="absolute bottom-full left-0 mb-1.5 flex flex-col overflow-hidden rounded-lg border border-line bg-surface shadow-lg divide-y divide-line"
                     >
                         {OPTIONS.map(({ value, label, Icon }) => (
                             <button

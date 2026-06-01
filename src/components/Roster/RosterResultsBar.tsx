@@ -17,7 +17,7 @@ export function RosterResultsBar({
 }: RosterResultsBarProps) {
     return (
         <div className="px-5 py-2 shrink-0 flex items-center justify-between gap-3">
-            <p className="text-[10px] text-gray-500 dark:text-white/30 uppercase tracking-widest">
+            <p className="text-[10px] text-fg-subtle uppercase tracking-widest">
                 {filteredCount} character{filteredCount !== 1 ? "s" : ""}
                 {hasActiveFilters ? " matching" : " total"}
             </p>

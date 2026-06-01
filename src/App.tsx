@@ -25,7 +25,7 @@ function App() {
     );
 
     return (
-        <div className="flex min-h-screen flex-col bg-gray-200 text-gray-900 dark:bg-gray-950 dark:text-white">
+        <div className="flex min-h-screen flex-col bg-canvas text-fg">
             <SpeedInsights />
             <Analytics />
             <AppHeader />
@@ -50,7 +50,7 @@ function App() {
             </main>
 
             {/* In-flow footer. Version sits bottom-right, clear of the bottom-left pinned selector. */}
-            <footer className="border-t border-gray-300 px-4 pt-3 pb-4 sm:px-6 dark:border-white/10">
+            <footer className="border-t border-line px-4 pt-3 pb-4 sm:px-6">
                 <div className="flex flex-col items-end text-right text-[10px] font-mono tracking-widest text-purple-500/50 dark:text-purple-300/40">
                     <span className="select-all">{VERSION}</span>
                     {BUILD_DATE && <span className="select-all">{BUILD_DATE}</span>}

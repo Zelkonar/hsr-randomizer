@@ -61,14 +61,14 @@ export function RosterDataModal({ mode, rosterIds, onImport, onClose }: RosterDa
     return (
         <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
             <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
-            <div className="relative z-10 flex flex-col w-full max-w-sm rounded-2xl bg-white border border-gray-200 shadow-2xl dark:bg-gray-900 dark:border-white/10">
-                <div className="flex items-center justify-between px-5 py-4 border-b border-gray-200 dark:border-white/10">
-                    <h2 className="text-sm font-bold tracking-widest uppercase text-gray-900 dark:text-white">
+            <div className="relative z-10 flex flex-col w-full max-w-sm rounded-2xl bg-surface border border-line shadow-2xl">
+                <div className="flex items-center justify-between px-5 py-4 border-b border-line">
+                    <h2 className="text-sm font-bold tracking-widest uppercase text-fg">
                         {mode === "export" ? "Export Roster" : "Import Roster"}
                     </h2>
                     <button
                         onClick={onClose}
-                        className="flex h-8 w-8 items-center justify-center rounded-lg border border-gray-300 text-gray-500 hover:text-gray-900 hover:border-gray-400 transition-colors dark:border-white/10 dark:text-white/50 dark:hover:text-white dark:hover:border-white/30"
+                        className="flex h-8 w-8 items-center justify-center rounded-lg border border-line text-fg-subtle hover:text-fg hover:border-line-strong transition-colors"
                     >
                         ✕
                     </button>
@@ -76,7 +76,7 @@ export function RosterDataModal({ mode, rosterIds, onImport, onClose }: RosterDa
                 <div className="p-5">
                     <textarea
                         ref={textareaRef}
-                        className="w-full h-40 resize-none rounded-lg border border-gray-300 bg-gray-50 text-gray-700 text-xs font-mono px-3 py-2.5 focus:outline-none focus:border-gray-400 dark:border-white/10 dark:bg-white/5 dark:text-white/70 dark:focus:border-white/30"
+                        className="w-full h-40 resize-none rounded-lg border border-line bg-muted text-fg-muted text-xs font-mono px-3 py-2.5 focus:outline-none focus:border-line-strong"
                         value={text}
                         onChange={(e) => {
                             setText(e.target.value);
@@ -112,7 +112,7 @@ export function RosterDataModal({ mode, rosterIds, onImport, onClose }: RosterDa
                         ) : (
                             <button
                                 onClick={handleCopy}
-                                className="flex items-center h-8 px-4 rounded-lg border border-gray-300 text-gray-500 text-[11px] font-semibold uppercase tracking-widest hover:text-gray-900 hover:border-gray-400 transition-colors dark:border-white/10 dark:text-white/50 dark:hover:text-white dark:hover:border-white/30"
+                                className="flex items-center h-8 px-4 rounded-lg border border-line text-fg-subtle text-[11px] font-semibold uppercase tracking-widest hover:text-fg hover:border-line-strong transition-colors"
                             >
                                 {copied ? "Copied!" : "Copy"}
                             </button>

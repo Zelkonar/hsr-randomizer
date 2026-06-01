@@ -21,22 +21,22 @@ export function RosterSearchBar({
     const filtersActive = filtersOpen || nonSearchFilterCount > 0;
 
     return (
-        <div className="flex items-center gap-2 px-5 py-3 border-b border-gray-200 dark:border-white/10 shrink-0">
+        <div className="flex items-center gap-2 px-5 py-3 border-b border-line shrink-0">
             <input
                 ref={searchRef}
                 type="text"
                 placeholder="Search by name…"
                 value={search}
                 onChange={(e) => onSearchChange(e.target.value)}
-                className="flex-1 rounded-lg border border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-900 placeholder-gray-400 outline-none focus:border-sky-500/60 transition-colors dark:border-white/10 dark:bg-white/5 dark:text-white dark:placeholder-white/30"
+                className="flex-1 rounded-lg border border-line bg-muted px-3 py-2 text-sm text-fg placeholder-fg-faint outline-none focus:border-accent-line transition-colors"
             />
             <button
                 onClick={onToggleFilters}
                 className={cn(
                     "flex items-center gap-1.5 rounded-lg border px-3 py-2 text-[11px] font-semibold uppercase tracking-widest transition-all duration-150 shrink-0",
                     filtersActive
-                        ? "border-sky-500/50 bg-sky-500/10 text-sky-600 dark:text-sky-300"
-                        : "border-gray-300 bg-gray-50 text-gray-500 hover:border-gray-400 hover:text-gray-700 dark:border-white/10 dark:bg-white/5 dark:text-white/50 dark:hover:border-white/20 dark:hover:text-white/80"
+                        ? "border-accent-line bg-accent-soft text-accent"
+                        : "border-line bg-muted text-fg-subtle hover:border-line-strong hover:text-fg-muted"
                 )}
             >
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="h-3 w-3">
