@@ -22,8 +22,8 @@ export function CardPortrait({
 }) {
     const src = imageSrc ?? character.preview;
     const portraitClass = short
-        ? "relative aspect-square w-full overflow-hidden bg-gray-800"
-        : "relative aspect-[3/4] w-full overflow-hidden bg-gray-800";
+        ? "relative aspect-square w-full overflow-hidden bg-gray-200 dark:bg-gray-800"
+        : "relative aspect-[3/4] w-full overflow-hidden bg-gray-200 dark:bg-gray-800";
 
     return (
         <div className={portraitClass}>
@@ -31,7 +31,7 @@ export function CardPortrait({
                 src={getPathIconLarge(character.path)}
                 alt=""
                 aria-hidden
-                className="absolute inset-0 w-full h-full object-contain mix-blend-screen opacity-40"
+                className="absolute inset-0 w-full h-full object-contain invert opacity-[0.08] mix-blend-multiply dark:invert-0 dark:opacity-40 dark:mix-blend-screen"
             />
             <img src={src} alt={character.name} loading="lazy" className={imgStyles[imageFit]} />
             <div className={`absolute inset-0 bg-gradient-to-t ${GRADIENT}`} />

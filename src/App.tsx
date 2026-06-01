@@ -23,7 +23,7 @@ function App() {
     );
 
     return (
-        <div className="min-h-screen bg-gray-950 text-white">
+        <div className="min-h-screen bg-gray-200 text-gray-900 dark:bg-gray-950 dark:text-white">
             <SpeedInsights />
             <Analytics />
             <AppHeader />

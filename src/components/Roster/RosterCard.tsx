@@ -14,8 +14,8 @@ const cardButton = cva(
     {
         variants: {
             excluded: {
-                false: "border-sky-500/40 bg-sky-500/8 shadow-[0_0_10px_rgba(14,165,233,0.1)] hover:border-sky-400/60",
-                true: "border-white/5 bg-white/3 opacity-40 hover:opacity-60",
+                false: "border-sky-500/50 bg-sky-500/10 shadow-[0_0_10px_rgba(14,165,233,0.1)] hover:border-sky-400/60 dark:border-sky-500/40 dark:bg-sky-500/8",
+                true: "border-gray-200 bg-gray-100 opacity-50 hover:opacity-75 dark:border-white/5 dark:bg-white/3 dark:opacity-40 dark:hover:opacity-60",
             },
         },
     }
@@ -42,7 +42,7 @@ export function RosterCard({ character, excluded, onToggle }: RosterCardProps) {
             />
 
             {excluded && (
-                <span className="absolute top-1.5 left-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-white/20 text-[9px] text-white/60 font-bold">
+                <span className="absolute top-1.5 left-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-gray-300 text-[9px] text-gray-600 font-bold dark:bg-white/20 dark:text-white/60">
                     ✕
                 </span>
             )}
@@ -55,14 +55,20 @@ export function RosterCard({ character, excluded, onToggle }: RosterCardProps) {
             />
 
             <div className="w-full text-center">
-                <p className="truncate text-[10px] font-semibold text-white/90 leading-tight">{character.name}</p>
+                <p className="truncate text-[10px] font-semibold text-gray-700 dark:text-white/90 leading-tight">
+                    {character.name}
+                </p>
                 <div className="flex items-center justify-center gap-1 mt-0.5">
                     <img
                         src={getElementStyles(character.element).icon}
                         alt={character.element}
                         className="w-3 h-3 opacity-70"
                     />
-                    <img src={getPathIconSmall(character.path)} alt={character.path} className="w-3 h-3 opacity-70" />
+                    <img
+                        src={getPathIconSmall(character.path)}
+                        alt={character.path}
+                        className="w-3 h-3 opacity-70 invert dark:invert-0"
+                    />
                 </div>
             </div>
         </button>

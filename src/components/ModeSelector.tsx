@@ -14,8 +14,8 @@ const modeButton = cva(
     {
         variants: {
             active: {
-                true: "border-sky-500/40 bg-sky-500/8 text-sky-400/80",
-                false: "border-white/10 bg-white/[0.03] text-white/40 hover:border-white/20 hover:text-white/60",
+                true: "border-sky-500/50 bg-sky-500/10 text-sky-600 dark:border-sky-500/40 dark:bg-sky-500/8 dark:text-sky-400/80",
+                false: "border-gray-300 bg-white text-gray-500 hover:border-gray-400 hover:text-gray-700 dark:border-white/10 dark:bg-white/[0.03] dark:text-white/40 dark:hover:border-white/20 dark:hover:text-white/60",
             },
         },
     }

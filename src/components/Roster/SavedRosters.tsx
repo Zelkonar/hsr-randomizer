@@ -59,23 +59,23 @@ export function SavedRosters({ savedRosters, rosterIds, onLoad, onSave, onDelete
     }
 
     return (
-        <div className="border-b border-white/10 bg-white/[0.02]">
+        <div className="border-b border-gray-200 bg-gray-50 dark:border-white/10 dark:bg-white/[0.02]">
             <div className="px-5 py-3 flex flex-col gap-2">
                 {entries.length === 0 ? (
-                    <p className="text-[11px] text-white/30 italic py-1">No saved rosters yet.</p>
+                    <p className="text-[11px] text-gray-500 dark:text-white/30 italic py-1">No saved rosters yet.</p>
                 ) : (
                     <div className="flex flex-col gap-0.5 max-h-36 overflow-y-auto">
                         {entries.map(([rosterName, ids]) =>
                             pendingDelete === rosterName ? (
                                 <div
                                     key={rosterName}
-                                    className="flex items-center gap-2 rounded-lg px-2 py-1.5 bg-red-500/5 border border-red-500/20"
+                                    className="flex items-center gap-2 rounded-lg px-2 py-1.5 bg-red-50 border border-red-200 dark:bg-red-500/5 dark:border-red-500/20"
                                 >
-                                    <span className="flex-1 min-w-0 text-[12px] text-red-400/80 truncate font-medium">
+                                    <span className="flex-1 min-w-0 text-[12px] text-red-600 dark:text-red-400/80 truncate font-medium">
                                         Delete "{rosterName}"?
                                     </span>
                                     <div className="flex items-center gap-2 shrink-0">
-                                        <label className="flex items-center gap-1.5 text-[10px] text-white/30 cursor-pointer select-none hover:text-white/50 transition-colors">
+                                        <label className="flex items-center gap-1.5 text-[10px] text-gray-500 cursor-pointer select-none hover:text-gray-700 transition-colors dark:text-white/30 dark:hover:text-white/50">
                                             <input
                                                 type="checkbox"
                                                 className="accent-red-400 cursor-pointer"
@@ -85,13 +85,13 @@ export function SavedRosters({ savedRosters, rosterIds, onLoad, onSave, onDelete
                                             Don't ask again
                                         </label>
                                         <button
-                                            className="h-6 px-2.5 rounded border border-white/10 text-white/40 text-[10px] font-semibold uppercase tracking-widest hover:text-white hover:border-white/30 transition-colors"
+                                            className="h-6 px-2.5 rounded border border-gray-300 text-gray-500 text-[10px] font-semibold uppercase tracking-widest hover:text-gray-900 hover:border-gray-400 transition-colors dark:border-white/10 dark:text-white/40 dark:hover:text-white dark:hover:border-white/30"
                                             onClick={() => setPendingDelete(null)}
                                         >
                                             Cancel
                                         </button>
                                         <button
-                                            className="h-6 px-2.5 rounded border border-red-500/30 text-red-400/70 text-[10px] font-semibold uppercase tracking-widest hover:text-red-300 hover:border-red-400/50 transition-colors"
+                                            className="h-6 px-2.5 rounded border border-red-300 text-red-600 text-[10px] font-semibold uppercase tracking-widest hover:text-red-700 hover:border-red-400 transition-colors dark:border-red-500/30 dark:text-red-400/70 dark:hover:text-red-300 dark:hover:border-red-400/50"
                                             onClick={handleConfirmDelete}
                                         >
                                             Delete
@@ -101,22 +101,22 @@ export function SavedRosters({ savedRosters, rosterIds, onLoad, onSave, onDelete
                             ) : (
                                 <div
                                     key={rosterName}
-                                    className="flex items-center gap-2 rounded-lg px-2 py-1.5 hover:bg-white/5 transition-colors"
+                                    className="flex items-center gap-2 rounded-lg px-2 py-1.5 hover:bg-gray-100 transition-colors dark:hover:bg-white/5"
                                 >
-                                    <span className="flex-1 min-w-0 text-[12px] text-white/70 truncate font-medium">
+                                    <span className="flex-1 min-w-0 text-[12px] text-gray-700 dark:text-white/70 truncate font-medium">
                                         {rosterName}
                                     </span>
-                                    <span className="text-[11px] text-white/30 shrink-0 tabular-nums">
+                                    <span className="text-[11px] text-gray-400 dark:text-white/30 shrink-0 tabular-nums">
                                         {ids.length}/{TOTAL}
                                     </span>
                                     <button
-                                        className="shrink-0 h-6 px-2.5 rounded border border-white/10 text-white/40 text-[10px] font-semibold uppercase tracking-widest hover:text-white hover:border-white/30 transition-colors"
+                                        className="shrink-0 h-6 px-2.5 rounded border border-gray-300 text-gray-500 text-[10px] font-semibold uppercase tracking-widest hover:text-gray-900 hover:border-gray-400 transition-colors dark:border-white/10 dark:text-white/40 dark:hover:text-white dark:hover:border-white/30"
                                         onClick={() => onLoad(ids)}
                                     >
                                         Load
                                     </button>
                                     <button
-                                        className="shrink-0 h-6 w-6 flex items-center justify-center rounded border border-white/10 text-white/30 text-[10px] hover:text-red-400 hover:border-red-400/30 transition-colors"
+                                        className="shrink-0 h-6 w-6 flex items-center justify-center rounded border border-gray-300 text-gray-400 text-[10px] hover:text-red-600 hover:border-red-400 transition-colors dark:border-white/10 dark:text-white/30 dark:hover:text-red-400 dark:hover:border-red-400/30"
                                         onClick={() => handleDeleteClick(rosterName)}
                                         aria-label={`Delete ${rosterName}`}
                                     >
@@ -127,10 +127,10 @@ export function SavedRosters({ savedRosters, rosterIds, onLoad, onSave, onDelete
                         )}
                     </div>
                 )}
-                <div className="flex items-center gap-2 pt-2 border-t border-white/10">
+                <div className="flex items-center gap-2 pt-2 border-t border-gray-200 dark:border-white/10">
                     <input
                         ref={inputRef}
-                        className="flex-1 h-7 rounded border border-white/10 bg-white/5 text-white/70 text-xs px-2.5 focus:outline-none focus:border-white/30 placeholder:text-white/20"
+                        className="flex-1 h-7 rounded border border-gray-300 bg-gray-50 text-gray-700 text-xs px-2.5 focus:outline-none focus:border-gray-400 placeholder:text-gray-400 dark:border-white/10 dark:bg-white/5 dark:text-white/70 dark:focus:border-white/30 dark:placeholder:text-white/20"
                         placeholder="Save current roster as…"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
@@ -141,8 +141,8 @@ export function SavedRosters({ savedRosters, rosterIds, onLoad, onSave, onDelete
                         className={cn(
                             "shrink-0 h-7 px-3 rounded border text-[10px] font-semibold uppercase tracking-widest transition-colors disabled:opacity-30 disabled:cursor-not-allowed",
                             isOverwrite
-                                ? "border-amber-500/30 text-amber-400/70 hover:text-amber-300 hover:border-amber-400/50"
-                                : "border-white/10 text-white/50 hover:text-white hover:border-white/30"
+                                ? "border-amber-400 text-amber-600 hover:text-amber-700 hover:border-amber-500 dark:border-amber-500/30 dark:text-amber-400/70 dark:hover:text-amber-300 dark:hover:border-amber-400/50"
+                                : "border-gray-300 text-gray-500 hover:text-gray-900 hover:border-gray-400 dark:border-white/10 dark:text-white/50 dark:hover:text-white dark:hover:border-white/30"
                         )}
                         disabled={!trimmed}
                         onClick={handleSave}
