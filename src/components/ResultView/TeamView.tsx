@@ -6,8 +6,8 @@ const section = cva("flex flex-col gap-3", {
     variants: {
         layout: {
             full: "",
-            half: "rounded-xl border border-line-subtle bg-fill p-4",
-            knight: "rounded-xl border border-line-subtle bg-fill p-4",
+            half: "rounded-xl border border-border bg-card p-4",
+            knight: "rounded-xl border border-border bg-card p-4",
         },
     },
 });
@@ -38,13 +38,15 @@ export function TeamView({
     return (
         <section className={section({ layout })}>
             {layout === "full" ? (
-                <p className="flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] text-fg-faint">
-                    <span className="block h-px flex-1 bg-line" />
+                <p className="flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] text-muted-foreground/70">
+                    <span className="block h-px flex-1 bg-border" />
                     {label}
-                    <span className="block h-px flex-1 bg-line" />
+                    <span className="block h-px flex-1 bg-border" />
                 </p>
             ) : (
-                <p className="text-center text-xs font-semibold uppercase tracking-widest text-fg-muted">{label}</p>
+                <p className="text-center text-xs font-semibold uppercase tracking-widest text-foreground/80">
+                    {label}
+                </p>
             )}
             <div className={grid({ layout })}>
                 {team.members.map((member) => (

@@ -26,16 +26,18 @@ Tailwind v4 (CSS-based config, no `tailwind.config`). Styles are inline utility 
 
 ### Semantic color tokens
 
-Colors are driven by semantic tokens, not literal Tailwind colors with `dark:` pairs. The palette is defined once in `src/index.css`: light values in `:root`, dark overrides under `.dark`, exposed as utilities via `@theme inline`. Components reference roles, so a class like `border-line bg-fill text-fg-subtle` themes itself with no `dark:` variant.
+Colors are driven by semantic tokens (shadcn-style naming), not literal Tailwind colors with `dark:` pairs. The palette is defined once in `src/index.css`: light values in `:root`, dark overrides under `.dark`, exposed as utilities via `@theme inline`. Components reference roles, so a class like `border-border bg-card text-muted-foreground` themes itself with no `dark:` variant.
+
+Token values point at Tailwind's own palette variables (e.g. `--card: var(--color-gray-900)`), so they stay in the same oklch color space as the rest of the system and compose with the opacity modifier.
 
 Token vocabulary:
 
-- Surfaces: `bg-canvas` (page), `bg-surface` (cards/modals/popovers), `bg-fill` (controls on canvas), `bg-muted` (inset/hover on a surface)
-- Text: `text-fg`, `text-fg-muted`, `text-fg-subtle`, `text-fg-faint`
-- Borders: `border-line`, `border-line-strong` (hover/active), `border-line-subtle` (faint edges)
-- Accent: `text-accent`, `bg-accent-soft`, `border-accent-line`
+- Surfaces: `bg-background` (page), `bg-card` (cards/modals/popovers and controls), `bg-muted` (inset/hover on a surface). `popover` mirrors `card`.
+- Text: `text-foreground`, `text-muted-foreground`. For extra tiers, lean on the opacity modifier rather than new tokens: `text-foreground/80` (prominent secondary), `text-muted-foreground/70` (faint).
+- Borders: `border-border` (default), `input`/`ring` for form/focus. A stronger hover/active border is `border-foreground/25`.
+- Accent (the sky brand): `text-primary`, with soft fills and borders derived by opacity - `bg-primary/10`, `border-primary/50`.
 
-To retheme or add a theme, edit the variable blocks in `src/index.css`. To add a new role, add the variable to both blocks plus a `--color-*` mapping in `@theme inline`.
+Prefer the opacity modifier over inventing new tokens (it works because values are channel-based). To retheme, edit the variable blocks in `src/index.css`. To add a role, add the variable to both blocks plus a `--color-*` mapping in `@theme inline`.
 
 Stay on tokens for structural/neutral UI. Literal colors are reserved for things outside the theme palette: element colors (`src/lib/element.ts`), rarity colors, status colors (red/amber/green/rose), and a few intentional one-offs (the deliberately dark tooltip, white monochrome icons toggled with `invert dark:invert-0`).
 

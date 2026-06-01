@@ -1,11 +1,11 @@
 import { cva } from "class-variance-authority";
 
 const randomizeButton = cva(
-    "group relative inline-flex items-center gap-2 overflow-hidden rounded-full px-10 py-3 font-bold uppercase tracking-widest text-sm transition-all duration-300 bg-fill border border-line",
+    "group relative inline-flex items-center gap-2 overflow-hidden rounded-full px-10 py-3 font-bold uppercase tracking-widest text-sm transition-all duration-300 bg-card border border-border",
     {
         variants: {
             active: {
-                true: "border-accent-line shadow-[0_0_28px_rgba(14,165,233,0.22)] hover:bg-accent-soft hover:text-accent hover:shadow-lg hover:shadow-sky-500/20 active:bg-accent-soft active:text-accent active:shadow-lg active:shadow-sky-500/20 active:scale-95",
+                true: "border-primary/50 shadow-[0_0_28px_rgba(14,165,233,0.22)] hover:bg-primary/10 hover:text-primary hover:shadow-lg hover:shadow-sky-500/20 active:bg-primary/10 active:text-primary active:shadow-lg active:shadow-sky-500/20 active:scale-95",
                 false: "opacity-50 cursor-not-allowed",
             },
         },

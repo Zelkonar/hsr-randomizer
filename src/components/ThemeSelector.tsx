@@ -41,7 +41,7 @@ const OPTIONS: { value: ThemePreference; label: string; Icon: () => React.ReactN
 function optionClass(active: boolean) {
     return cn(
         "flex h-8 w-8 items-center justify-center transition-colors",
-        active ? "bg-accent-soft text-accent" : "text-fg-subtle hover:bg-muted hover:text-fg"
+        active ? "bg-primary/10 text-primary" : "text-muted-foreground hover:bg-muted hover:text-foreground"
     );
 }
 
@@ -72,7 +72,7 @@ export function ThemeSelector() {
             <div
                 role="group"
                 aria-label="Theme"
-                className="hidden sm:flex items-center overflow-hidden rounded-lg border border-line bg-surface shadow-sm divide-x divide-line"
+                className="hidden sm:flex items-center overflow-hidden rounded-lg border border-border bg-card shadow-sm divide-x divide-border"
             >
                 {OPTIONS.map(({ value, label, Icon }) => (
                     <button
@@ -97,7 +97,7 @@ export function ThemeSelector() {
                     aria-haspopup="true"
                     aria-expanded={open}
                     aria-label="Theme"
-                    className="flex h-8 w-8 items-center justify-center rounded-lg border border-line bg-surface text-fg-subtle shadow-sm transition-colors hover:border-line-strong hover:text-fg"
+                    className="flex h-8 w-8 items-center justify-center rounded-lg border border-border bg-card text-muted-foreground shadow-sm transition-colors hover:border-foreground/25 hover:text-foreground"
                 >
                     <Current />
                 </button>
@@ -106,7 +106,7 @@ export function ThemeSelector() {
                     <div
                         role="group"
                         aria-label="Theme"
-                        className="absolute bottom-full left-0 mb-1.5 flex flex-col overflow-hidden rounded-lg border border-line bg-surface shadow-lg divide-y divide-line"
+                        className="absolute bottom-full left-0 mb-1.5 flex flex-col overflow-hidden rounded-lg border border-border bg-card shadow-lg divide-y divide-border"
                     >
                         {OPTIONS.map(({ value, label, Icon }) => (
                             <button

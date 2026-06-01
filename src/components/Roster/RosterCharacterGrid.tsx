@@ -10,7 +10,7 @@ interface RosterCharacterGridProps {
 export function RosterCharacterGrid({ characters, rosterIds, onToggle }: RosterCharacterGridProps) {
     if (characters.length === 0) {
         return (
-            <div className="flex flex-col items-center justify-center py-16 text-fg-faint">
+            <div className="flex flex-col items-center justify-center py-16 text-muted-foreground/70">
                 <span className="text-3xl mb-2">∅</span>
                 <p className="text-sm">No characters match your filters</p>
             </div>

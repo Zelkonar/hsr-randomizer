@@ -14,8 +14,8 @@ const modeButton = cva(
     {
         variants: {
             active: {
-                true: "border-accent-line bg-accent-soft text-accent",
-                false: "border-line bg-fill text-fg-subtle hover:border-line-strong hover:text-fg-muted",
+                true: "border-primary/50 bg-primary/10 text-primary",
+                false: "border-border bg-card text-muted-foreground hover:border-foreground/25 hover:text-foreground/80",
             },
         },
     }

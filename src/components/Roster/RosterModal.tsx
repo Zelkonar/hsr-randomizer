@@ -75,7 +75,7 @@ export function RosterModal({
             <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4">
                 <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={onClose} />
 
-                <div className="relative z-10 flex flex-col w-full max-w-5xl h-[92dvh] sm:h-[90dvh] rounded-t-2xl sm:rounded-2xl bg-surface border border-line shadow-2xl overflow-hidden">
+                <div className="relative z-10 flex flex-col w-full max-w-5xl h-[92dvh] sm:h-[90dvh] rounded-t-2xl sm:rounded-2xl bg-card border border-border shadow-2xl overflow-hidden">
                     <RosterModalHeader
                         rosterIds={rosterIds}
                         savedCount={Object.keys(savedRosters).length}
@@ -106,7 +106,7 @@ export function RosterModal({
                     />
 
                     {filtersOpen && (
-                        <div className="shrink-0 border-b border-line">
+                        <div className="shrink-0 border-b border-border">
                             <RosterFilters filters={filters} onChange={setFilters} />
                         </div>
                     )}

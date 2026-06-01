@@ -35,8 +35,8 @@ export function RosterFilters({ filters, onChange }: RosterFiltersProps) {
     return (
         <div className="flex flex-wrap items-center gap-3 px-5 py-3">
             <div className="flex items-center gap-2">
-                <span className="text-[10px] uppercase tracking-widest text-fg-subtle shrink-0">Rarity</span>
-                <div className="flex rounded-lg border border-line overflow-hidden divide-x divide-line">
+                <span className="text-[10px] uppercase tracking-widest text-muted-foreground shrink-0">Rarity</span>
+                <div className="flex rounded-lg border border-border overflow-hidden divide-x divide-border">
                     {([5, 4] as (4 | 5)[]).map((r) => (
                         <button
                             key={r}
@@ -56,8 +56,8 @@ export function RosterFilters({ filters, onChange }: RosterFiltersProps) {
             </div>
 
             <div className="flex items-center gap-2">
-                <span className="text-[10px] uppercase tracking-widest text-fg-subtle shrink-0">Element</span>
-                <div className="flex rounded-lg border border-line overflow-hidden divide-x divide-line">
+                <span className="text-[10px] uppercase tracking-widest text-muted-foreground shrink-0">Element</span>
+                <div className="flex rounded-lg border border-border overflow-hidden divide-x divide-border">
                     {ELEMENTS.map((el) => (
                         <button
                             key={el}
@@ -76,8 +76,8 @@ export function RosterFilters({ filters, onChange }: RosterFiltersProps) {
             </div>
 
             <div className="flex items-center gap-2">
-                <span className="text-[10px] uppercase tracking-widest text-fg-subtle shrink-0">Path</span>
-                <div className="flex rounded-lg border border-line overflow-hidden divide-x divide-line">
+                <span className="text-[10px] uppercase tracking-widest text-muted-foreground shrink-0">Path</span>
+                <div className="flex rounded-lg border border-border overflow-hidden divide-x divide-border">
                     {PATHS.map((p) => (
                         <button
                             key={p}
@@ -96,7 +96,7 @@ export function RosterFilters({ filters, onChange }: RosterFiltersProps) {
                 <div className="w-full">
                     <button
                         onClick={() => onChange(EMPTY_FILTERS)}
-                        className="rounded-md border border-line bg-fill px-3 py-1 text-[10px] uppercase tracking-widest text-fg-subtle hover:border-line-strong hover:text-fg-muted transition-all duration-150 cursor-pointer"
+                        className="rounded-md border border-border bg-card px-3 py-1 text-[10px] uppercase tracking-widest text-muted-foreground hover:border-foreground/25 hover:text-foreground/80 transition-all duration-150 cursor-pointer"
                     >
                         Clear filters
                     </button>

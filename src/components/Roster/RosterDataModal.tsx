@@ -61,14 +61,14 @@ export function RosterDataModal({ mode, rosterIds, onImport, onClose }: RosterDa
     return (
         <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
             <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
-            <div className="relative z-10 flex flex-col w-full max-w-sm rounded-2xl bg-surface border border-line shadow-2xl">
-                <div className="flex items-center justify-between px-5 py-4 border-b border-line">
-                    <h2 className="text-sm font-bold tracking-widest uppercase text-fg">
+            <div className="relative z-10 flex flex-col w-full max-w-sm rounded-2xl bg-card border border-border shadow-2xl">
+                <div className="flex items-center justify-between px-5 py-4 border-b border-border">
+                    <h2 className="text-sm font-bold tracking-widest uppercase text-foreground">
                         {mode === "export" ? "Export Roster" : "Import Roster"}
                     </h2>
                     <button
                         onClick={onClose}
-                        className="flex h-8 w-8 items-center justify-center rounded-lg border border-line text-fg-subtle hover:text-fg hover:border-line-strong transition-colors"
+                        className="flex h-8 w-8 items-center justify-center rounded-lg border border-border text-muted-foreground hover:text-foreground hover:border-foreground/25 transition-colors"
                     >
                         ✕
                     </button>
@@ -76,7 +76,7 @@ export function RosterDataModal({ mode, rosterIds, onImport, onClose }: RosterDa
                 <div className="p-5">
                     <textarea
                         ref={textareaRef}
-                        className="w-full h-40 resize-none rounded-lg border border-line bg-muted text-fg-muted text-xs font-mono px-3 py-2.5 focus:outline-none focus:border-line-strong"
+                        className="w-full h-40 resize-none rounded-lg border border-border bg-muted text-foreground/80 text-xs font-mono px-3 py-2.5 focus:outline-none focus:border-foreground/25"
                         value={text}
                         onChange={(e) => {
                             setText(e.target.value);
@@ -112,7 +112,7 @@ export function RosterDataModal({ mode, rosterIds, onImport, onClose }: RosterDa
                         ) : (
                             <button
                                 onClick={handleCopy}
-                                className="flex items-center h-8 px-4 rounded-lg border border-line text-fg-subtle text-[11px] font-semibold uppercase tracking-widest hover:text-fg hover:border-line-strong transition-colors"
+                                className="flex items-center h-8 px-4 rounded-lg border border-border text-muted-foreground text-[11px] font-semibold uppercase tracking-widest hover:text-foreground hover:border-foreground/25 transition-colors"
                             >
                                 {copied ? "Copied!" : "Copy"}
                             </button>

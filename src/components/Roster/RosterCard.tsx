@@ -14,8 +14,8 @@ const cardButton = cva(
     {
         variants: {
             excluded: {
-                false: "border-accent-line bg-accent-soft shadow-[0_0_10px_rgba(14,165,233,0.1)] hover:border-sky-400/60",
-                true: "border-line-subtle bg-muted opacity-50 hover:opacity-75 dark:opacity-40 dark:hover:opacity-60",
+                false: "border-primary/50 bg-primary/10 shadow-[0_0_10px_rgba(14,165,233,0.1)] hover:border-sky-400/60",
+                true: "border-border bg-muted opacity-50 hover:opacity-75 dark:opacity-40 dark:hover:opacity-60",
             },
         },
     }
@@ -55,7 +55,7 @@ export function RosterCard({ character, excluded, onToggle }: RosterCardProps) {
             />
 
             <div className="w-full text-center">
-                <p className="truncate text-[10px] font-semibold text-fg-muted leading-tight">{character.name}</p>
+                <p className="truncate text-[10px] font-semibold text-foreground/80 leading-tight">{character.name}</p>
                 <div className="flex items-center justify-center gap-1 mt-0.5">
                     <img
                         src={getElementStyles(character.element).icon}

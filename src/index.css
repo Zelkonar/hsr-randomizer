@@ -2,61 +2,62 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /*
- * Semantic color tokens. Components reference these by role (bg-surface,
- * text-fg-muted, border-line) instead of literal colors + dark: pairs.
- * Light values live in :root, dark values override under .dark, and
+ * Semantic color tokens, shadcn-style naming. Components reference roles
+ * (bg-card, text-muted-foreground, border-border) instead of literal colors
+ * + dark: pairs. Light values live in :root, dark overrides under .dark, and
  * @theme inline exposes them as Tailwind utilities that read the variables
  * live, so theming happens here and nowhere else.
+ *
+ * Values point at Tailwind's own palette variables, so they stay in the same
+ * oklch color space as the rest of the system and compose with the opacity
+ * modifier (e.g. bg-primary/10, text-muted-foreground/70).
  */
 :root {
-    --canvas: #e5e7eb; /* page background        (gray-200) */
-    --surface: #ffffff; /* cards, modals, popovers */
-    --fill: #ffffff; /* control fill on canvas  */
-    --muted: #f3f4f6; /* inset / hover on surface (gray-100) */
-    --fg: #111827; /* primary text           (gray-900) */
-    --fg-muted: #4b5563; /* secondary text         (gray-600) */
-    --fg-subtle: #6b7280; /* labels / quiet text    (gray-500) */
-    --fg-faint: #9ca3af; /* faint counts / hints   (gray-400) */
-    --line: #d1d5db; /* default border         (gray-300) */
-    --line-strong: #9ca3af; /* hover border           (gray-400) */
-    --line-subtle: #e5e7eb; /* faint divider / edge   (gray-200) */
-    --accent: #0284c7; /* accent text            (sky-600) */
-    --accent-soft: rgb(14 165 233 / 0.12); /* accent fill */
-    --accent-line: rgb(14 165 233 / 0.5); /* accent border */
+    --background: var(--color-gray-200);
+    --foreground: var(--color-gray-900);
+    --card: var(--color-white);
+    --card-foreground: var(--color-gray-900);
+    --popover: var(--color-white);
+    --popover-foreground: var(--color-gray-900);
+    --muted: var(--color-gray-100);
+    --muted-foreground: var(--color-gray-500);
+    --border: var(--color-gray-300);
+    --input: var(--color-gray-300);
+    --ring: var(--color-sky-500);
+    --primary: var(--color-sky-600);
+    --primary-foreground: var(--color-white);
 }
 
 .dark {
-    --canvas: #030712; /* gray-950 */
-    --surface: #111827; /* gray-900 */
-    --fill: rgb(255 255 255 / 0.05);
-    --muted: rgb(255 255 255 / 0.06);
-    --fg: #ffffff;
-    --fg-muted: rgb(255 255 255 / 0.7);
-    --fg-subtle: rgb(255 255 255 / 0.4);
-    --fg-faint: rgb(255 255 255 / 0.3);
-    --line: rgb(255 255 255 / 0.1);
-    --line-strong: rgb(255 255 255 / 0.25);
-    --line-subtle: rgb(255 255 255 / 0.08);
-    --accent: #7dd3fc; /* sky-300 */
-    --accent-soft: rgb(14 165 233 / 0.1);
-    --accent-line: rgb(14 165 233 / 0.45);
+    --background: var(--color-gray-950);
+    --foreground: var(--color-white);
+    --card: var(--color-gray-900);
+    --card-foreground: var(--color-white);
+    --popover: var(--color-gray-900);
+    --popover-foreground: var(--color-white);
+    --muted: var(--color-gray-800);
+    --muted-foreground: var(--color-gray-500);
+    --border: var(--color-gray-800);
+    --input: var(--color-gray-700);
+    --ring: var(--color-sky-400);
+    --primary: var(--color-sky-300);
+    --primary-foreground: var(--color-gray-950);
 }
 
 @theme inline {
-    --color-canvas: var(--canvas);
-    --color-surface: var(--surface);
-    --color-fill: var(--fill);
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-card: var(--card);
+    --color-card-foreground: var(--card-foreground);
+    --color-popover: var(--popover);
+    --color-popover-foreground: var(--popover-foreground);
     --color-muted: var(--muted);
-    --color-fg: var(--fg);
-    --color-fg-muted: var(--fg-muted);
-    --color-fg-subtle: var(--fg-subtle);
-    --color-fg-faint: var(--fg-faint);
-    --color-line: var(--line);
-    --color-line-strong: var(--line-strong);
-    --color-line-subtle: var(--line-subtle);
-    --color-accent: var(--accent);
-    --color-accent-soft: var(--accent-soft);
-    --color-accent-line: var(--accent-line);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-border: var(--border);
+    --color-input: var(--input);
+    --color-ring: var(--ring);
+    --color-primary: var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
 }
 
 @layer base {

@@ -37,7 +37,7 @@ export function OptionsRow({
                             setRosterKey((k) => k + 1);
                             setRosterOpen(true);
                         }}
-                        className="flex items-center gap-1.5 rounded-md border border-line bg-fill px-3 py-1.5 text-[11px] font-semibold uppercase tracking-widest text-fg-subtle transition-all duration-150 hover:border-accent-line hover:bg-accent-soft hover:text-accent active:scale-95"
+                        className="flex items-center gap-1.5 rounded-md border border-border bg-card px-3 py-1.5 text-[11px] font-semibold uppercase tracking-widest text-muted-foreground transition-all duration-150 hover:border-primary/50 hover:bg-primary/10 hover:text-primary active:scale-95"
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -64,8 +64,8 @@ export function OptionsRow({
                             className={cn(
                                 "flex h-3.5 w-3.5 items-center justify-center rounded border transition-all duration-150",
                                 requireSustain
-                                    ? "border-accent-line bg-accent-soft text-accent"
-                                    : "border-line bg-fill group-hover:border-line-strong"
+                                    ? "border-primary/50 bg-primary/10 text-primary"
+                                    : "border-border bg-card group-hover:border-foreground/25"
                             )}
                         >
                             {requireSustain && (
@@ -82,7 +82,7 @@ export function OptionsRow({
                                 </svg>
                             )}
                         </span>
-                        <span className="text-[11px] font-semibold uppercase tracking-widest text-fg-subtle transition-colors group-hover:text-fg-muted">
+                        <span className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground transition-colors group-hover:text-foreground/80">
                             Include sustain
                         </span>
                     </label>
