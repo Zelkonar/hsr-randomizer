@@ -7,11 +7,13 @@ import type { GameMode } from "../types/gameMode";
 export type Result =
     | { mode: "team"; team: Team }
     | { mode: "twoteam"; teams: [Team, Team] }
+    | { mode: "starward"; nodes: [Team, Team, Team] }
     | { mode: "aa"; knights: [Team, Team, Team]; king: Team };
 
 const TEAM_COUNT: Record<GameMode, number> = {
     team: 1,
     twoteam: 2,
+    starward: 3,
     aa: 3, // really 4, but actually 3 as far as validations are concerened
 };
 
@@ -40,13 +42,16 @@ export function useRandomizer(rosterIds: number[], mode: GameMode, requireSustai
         if (mode === "aa") {
             const [k1, k2, k3] = rollMultipleTeams(CHARACTERS, 3, 4, filter);
             const [king] = rollMultipleTeams(CHARACTERS, 1, 4, filter);
-            setResult({ mode: "aa", knights: [k1, k2, k3], king });
+            setResult({ mode, knights: [k1, k2, k3], king });
+        } else if (mode === "starward") {
+            const [n1, n2, n3] = rollMultipleTeams(CHARACTERS, 3, 4, filter);
+            setResult({ mode, nodes: [n1, n2, n3] });
         } else if (mode === "twoteam") {
             const [side1, side2] = rollMultipleTeams(CHARACTERS, 2, 4, filter);
-            setResult({ mode: "twoteam", teams: [side1, side2] });
+            setResult({ mode, teams: [side1, side2] });
         } else {
             const [team] = rollMultipleTeams(CHARACTERS, 1, 4, filter);
-            setResult({ mode: "team", team });
+            setResult({ mode, team });
         }
     }, [rosterIds, requireSustain, mode]);
 

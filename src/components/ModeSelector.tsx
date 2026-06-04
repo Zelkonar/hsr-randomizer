@@ -2,8 +2,9 @@ import { cva } from "class-variance-authority";
 import type { GameMode } from "../types/gameMode";
 
 const MODES: { id: GameMode; label: string }[] = [
-    { id: "team", label: "Random Team" },
+    { id: "team", label: "Single Team" },
     { id: "twoteam", label: "MoC / PF / AS" },
+    { id: "starward", label: "Starward" },
     { id: "aa", label: "Anomaly Arbitration" },
 ];
 

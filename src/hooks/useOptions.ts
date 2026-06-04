@@ -13,7 +13,7 @@ function loadOptions(): Options {
         const raw = localStorage.getItem(OPTIONS_KEY);
         if (raw) {
             const { requireSustain = false, mode } = JSON.parse(raw) as Partial<Options>;
-            const valid = mode === "team" || mode === "twoteam" || mode === "aa";
+            const valid = mode === "team" || mode === "twoteam" || mode === "starward" || mode === "aa";
             return { requireSustain, mode: valid ? mode : "team" };
         }
     } catch {

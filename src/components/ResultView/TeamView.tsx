@@ -2,22 +2,14 @@ import { cva } from "class-variance-authority";
 import type { Team } from "../../types/character";
 import { CharacterCard } from "../CharacterCard";
 
-const section = cva("flex flex-col gap-3", {
-    variants: {
-        layout: {
-            full: "",
-            half: "rounded-xl border border-border bg-card p-4",
-            knight: "rounded-xl border border-border bg-card p-4",
-        },
-    },
-});
+const section = "flex flex-col gap-3 rounded-xl border border-border bg-card p-4";
 
 const grid = cva("grid", {
     variants: {
         layout: {
-            full: "grid-cols-2 gap-6 sm:grid-cols-4",
-            half: "grid-cols-2 gap-4 md:grid-cols-4 md:gap-5",
-            knight: "grid-cols-4 gap-2 md:grid-cols-2 md:gap-4",
+            solo: "grid-cols-2 gap-6 sm:grid-cols-4",
+            panel: "grid-cols-2 gap-4 md:grid-cols-4 md:gap-5",
+            compact: "grid-cols-4 gap-2 md:grid-cols-2 md:gap-4",
         },
     },
 });
@@ -26,28 +18,19 @@ export function TeamView({
     team,
     isInRoster,
     label,
-    layout = "full",
+    layout = "solo",
 }: {
     team: Team;
     isInRoster: (id: number) => boolean;
     label: string;
-    layout?: "full" | "half" | "knight";
+    layout?: "solo" | "panel" | "compact";
 }) {
-    const isKnight = layout === "knight";
+    // Compact is the only short card, and the only one showing the wide splash art.
+    const isShort = layout === "compact";
 
     return (
-        <section className={section({ layout })}>
-            {layout === "full" ? (
-                <p className="flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] text-muted-foreground/70">
-                    <span className="block h-px flex-1 bg-border" />
-                    {label}
-                    <span className="block h-px flex-1 bg-border" />
-                </p>
-            ) : (
-                <p className="text-center text-xs font-semibold uppercase tracking-widest text-foreground/80">
-                    {label}
-                </p>
-            )}
+        <section className={section}>
+            <p className="text-center text-xs font-semibold uppercase tracking-widest text-foreground/80">{label}</p>
             <div className={grid({ layout })}>
                 {team.members.map((member) => (
                     <CharacterCard
@@ -55,9 +38,9 @@ export function TeamView({
                         character={member}
                         selected
                         excluded={!isInRoster(member.id)}
-                        imageSrc={isKnight ? member.preview : member.portrait}
+                        imageSrc={isShort ? member.preview : member.portrait}
                         imageFit="cover"
-                        short={isKnight}
+                        short={isShort}
                     />
                 ))}
             </div>

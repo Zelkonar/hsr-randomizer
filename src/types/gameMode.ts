@@ -1,1 +1,1 @@
-export type GameMode = "team" | "twoteam" | "aa";
+export type GameMode = "team" | "twoteam" | "starward" | "aa";
