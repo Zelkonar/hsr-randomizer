@@ -1,61 +1,32 @@
-import { useState, useCallback } from "react";
+import { useCallback } from "react";
 import { CHARACTERS } from "../data/characters";
+import { useLocalStorageState } from "./useLocalStorageState";
 
 const ROSTER_KEY = "hsr-randomizer:roster";
 
-const ALL_IDS = CHARACTERS.map((c) => c.id);
-
-function loadRoster(): number[] {
-    try {
-        const raw = localStorage.getItem(ROSTER_KEY);
-        if (raw !== null) return JSON.parse(raw) as number[];
-    } catch {
-        // fall through
-    }
-    // Fresh install: all current characters included
-    localStorage.setItem(ROSTER_KEY, JSON.stringify(ALL_IDS));
-    return [...ALL_IDS];
-}
-
-function saveIds(ids: number[]) {
-    localStorage.setItem(ROSTER_KEY, JSON.stringify(ids));
-}
-
 export function useRoster() {
-    const [rosterIds, setRosterIds] = useState<number[]>(() => loadRoster());
+    // Fresh install: every current character is included. Read at first render
+    // so the populated CHARACTERS array is in scope (see data/characters.ts).
+    const [rosterIds, setRosterIds] = useLocalStorageState<number[]>(ROSTER_KEY, () => CHARACTERS.map((c) => c.id));
 
     const isInRoster = useCallback((id: number) => rosterIds.includes(id), [rosterIds]);
 
-    const toggleRoster = useCallback((id: number) => {
-        setRosterIds((prev) => {
-            const next = prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id];
-            saveIds(next);
-            return next;
-        });
-    }, []);
+    const toggleRoster = useCallback(
+        (id: number) => setRosterIds((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id])),
+        [setRosterIds]
+    );
 
-    const enableAll = useCallback((ids: number[]) => {
-        setRosterIds((prev) => {
-            const next = Array.from(new Set([...prev, ...ids]));
-            saveIds(next);
-            return next;
-        });
-    }, []);
+    const enableAll = useCallback(
+        (ids: number[]) => setRosterIds((prev) => Array.from(new Set([...prev, ...ids]))),
+        [setRosterIds]
+    );
 
-    const disableAll = useCallback((ids: number[]) => {
-        setRosterIds((prev) => {
-            const next = prev.filter((id) => !ids.includes(id));
-            saveIds(next);
-            return next;
-        });
-    }, []);
+    const disableAll = useCallback(
+        (ids: number[]) => setRosterIds((prev) => prev.filter((id) => !ids.includes(id))),
+        [setRosterIds]
+    );
 
-    const importRoster = useCallback((ids: number[]) => {
-        setRosterIds(() => {
-            saveIds(ids);
-            return ids;
-        });
-    }, []);
+    const importRoster = useCallback((ids: number[]) => setRosterIds(ids), [setRosterIds]);
 
     return { rosterIds, isInRoster, toggleRoster, enableAll, disableAll, importRoster };
 }

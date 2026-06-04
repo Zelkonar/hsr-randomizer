@@ -1,40 +1,25 @@
-import { useState, useCallback } from "react";
+import { useCallback } from "react";
+import { useLocalStorageState } from "./useLocalStorageState";
 
 const SAVED_ROSTERS_KEY = "hsr-randomizer:saved-rosters";
 
-function loadSavedRosters(): Record<string, number[]> {
-    try {
-        const raw = localStorage.getItem(SAVED_ROSTERS_KEY);
-        if (raw !== null) return JSON.parse(raw) as Record<string, number[]>;
-    } catch {
-        // fall through
-    }
-    return {};
-}
-
-function persistSavedRosters(rosters: Record<string, number[]>) {
-    localStorage.setItem(SAVED_ROSTERS_KEY, JSON.stringify(rosters));
-}
-
 export function useSavedRosters() {
-    const [savedRosters, setSavedRosters] = useState<Record<string, number[]>>(() => loadSavedRosters());
+    const [savedRosters, setSavedRosters] = useLocalStorageState<Record<string, number[]>>(SAVED_ROSTERS_KEY, {});
 
-    const saveRoster = useCallback((name: string, ids: number[]) => {
-        setSavedRosters((prev) => {
-            const next = { ...prev, [name]: ids };
-            persistSavedRosters(next);
-            return next;
-        });
-    }, []);
+    const saveRoster = useCallback(
+        (name: string, ids: number[]) => setSavedRosters((prev) => ({ ...prev, [name]: ids })),
+        [setSavedRosters]
+    );
 
-    const deleteSavedRoster = useCallback((name: string) => {
-        setSavedRosters((prev) => {
-            const next = { ...prev };
-            delete next[name];
-            persistSavedRosters(next);
-            return next;
-        });
-    }, []);
+    const deleteSavedRoster = useCallback(
+        (name: string) =>
+            setSavedRosters((prev) => {
+                const next = { ...prev };
+                delete next[name];
+                return next;
+            }),
+        [setSavedRosters]
+    );
 
     return { savedRosters, saveRoster, deleteSavedRoster };
 }

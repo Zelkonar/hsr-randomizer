@@ -1,5 +1,6 @@
-import { useState, useCallback } from "react";
+import { useCallback } from "react";
 import type { GameMode } from "../types/gameMode";
+import { useLocalStorageState } from "./useLocalStorageState";
 
 const OPTIONS_KEY = "hsr-randomizer:options";
 
@@ -8,42 +9,27 @@ interface Options {
     mode: GameMode;
 }
 
-function loadOptions(): Options {
-    try {
-        const raw = localStorage.getItem(OPTIONS_KEY);
-        if (raw) {
-            const { requireSustain = false, mode } = JSON.parse(raw) as Partial<Options>;
-            const valid = mode === "team" || mode === "twoteam" || mode === "starward" || mode === "aa";
-            return { requireSustain, mode: valid ? mode : "team" };
-        }
-    } catch {
-        // fall through
-    }
-    return { requireSustain: false, mode: "team" };
-}
-
-function saveOptions(opts: Options) {
-    localStorage.setItem(OPTIONS_KEY, JSON.stringify(opts));
+// The two-team modes (moc/pf/as) collapsed into "twoteam", so a stored mode that
+// is no longer a valid value falls back to "team" rather than being trusted.
+function parseOptions(stored: unknown): Options {
+    const { requireSustain = false, mode } = (stored ?? {}) as Partial<Options>;
+    const validMode = mode === "team" || mode === "twoteam" || mode === "starward" || mode === "aa" ? mode : "team";
+    return { requireSustain, mode: validMode };
 }
 
 export function useOptions() {
-    const [options, setOptions] = useState<Options>(() => loadOptions());
+    const [options, setOptions] = useLocalStorageState<Options>(
+        OPTIONS_KEY,
+        { requireSustain: false, mode: "team" },
+        parseOptions
+    );
 
-    const setRequireSustain = useCallback((value: boolean) => {
-        setOptions((prev) => {
-            const next = { ...prev, requireSustain: value };
-            saveOptions(next);
-            return next;
-        });
-    }, []);
+    const setRequireSustain = useCallback(
+        (value: boolean) => setOptions((prev) => ({ ...prev, requireSustain: value })),
+        [setOptions]
+    );
 
-    const setMode = useCallback((value: GameMode) => {
-        setOptions((prev) => {
-            const next = { ...prev, mode: value };
-            saveOptions(next);
-            return next;
-        });
-    }, []);
+    const setMode = useCallback((value: GameMode) => setOptions((prev) => ({ ...prev, mode: value })), [setOptions]);
 
     return { ...options, setRequireSustain, setMode };
 }
