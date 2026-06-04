@@ -12,5 +12,5 @@ export function ResultView({ result, isInRoster }: { result: Result; isInRoster:
         return <AnomalyArbitrationResult knights={result.knights} king={result.king} isInRoster={isInRoster} />;
     }
 
-    return <TwoTeamResult mode={result.mode} teams={result.teams} isInRoster={isInRoster} />;
+    return <TwoTeamResult teams={result.teams} isInRoster={isInRoster} />;
 }

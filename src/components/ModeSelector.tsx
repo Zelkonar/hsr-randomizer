@@ -3,9 +3,7 @@ import type { GameMode } from "../types/gameMode";
 
 const MODES: { id: GameMode; label: string }[] = [
     { id: "team", label: "Random Team" },
-    { id: "moc", label: "Memory of Chaos" },
-    { id: "pf", label: "Pure Fiction" },
-    { id: "as", label: "Apocalyptic Shadow" },
+    { id: "twoteam", label: "MoC / PF / AS" },
     { id: "aa", label: "Anomaly Arbitration" },
 ];
 

@@ -11,7 +11,11 @@ interface Options {
 function loadOptions(): Options {
     try {
         const raw = localStorage.getItem(OPTIONS_KEY);
-        if (raw) return { requireSustain: false, mode: "team", ...JSON.parse(raw) };
+        if (raw) {
+            const { requireSustain = false, mode } = JSON.parse(raw) as Partial<Options>;
+            const valid = mode === "team" || mode === "twoteam" || mode === "aa";
+            return { requireSustain, mode: valid ? mode : "team" };
+        }
     } catch {
         // fall through
     }
