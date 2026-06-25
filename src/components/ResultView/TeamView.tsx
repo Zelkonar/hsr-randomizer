@@ -1,6 +1,7 @@
 import { cva } from "class-variance-authority";
 import type { Team } from "../../types/character";
 import { CharacterCard } from "../CharacterCard";
+import { EmptySlotCard } from "../CharacterCard/EmptySlotCard";
 
 const section = "flex flex-col gap-3 rounded-xl border border-border bg-card p-4";
 
@@ -20,7 +21,7 @@ export function TeamView({
     label,
     layout = "solo",
 }: {
-    team: Team;
+    team?: Team;
     isInRoster: (id: number) => boolean;
     label: string;
     layout?: "solo" | "panel" | "compact";
@@ -32,17 +33,19 @@ export function TeamView({
         <section className={section}>
             <p className="text-center text-xs font-semibold uppercase tracking-widest text-foreground/80">{label}</p>
             <div className={grid({ layout })}>
-                {team.members.map((member) => (
-                    <CharacterCard
-                        key={member.id}
-                        character={member}
-                        selected
-                        excluded={!isInRoster(member.id)}
-                        imageSrc={isShort ? member.preview : member.portrait}
-                        imageFit="cover"
-                        short={isShort}
-                    />
-                ))}
+                {team
+                    ? team.members.map((member) => (
+                          <CharacterCard
+                              key={member.id}
+                              character={member}
+                              selected
+                              excluded={!isInRoster(member.id)}
+                              imageSrc={isShort ? member.preview : member.portrait}
+                              imageFit="cover"
+                              short={isShort}
+                          />
+                      ))
+                    : Array.from({ length: 4 }, (_, i) => <EmptySlotCard key={i} short={isShort} />)}
             </div>
         </section>
     );

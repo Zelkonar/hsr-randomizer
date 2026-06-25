@@ -18,7 +18,10 @@ const TEAM_COUNT: Record<GameMode, number> = {
 };
 
 export function useRandomizer(rosterIds: number[], mode: GameMode, requireSustain: boolean) {
-    const [result, setResult] = useState<Result | null>(null);
+    // One cached result per mode, so switching modes never discards another
+    // mode's last roll. In-memory only; not persisted across page loads.
+    const [resultsByMode, setResultsByMode] = useState<Partial<Record<GameMode, Result>>>({});
+    const result = resultsByMode[mode] ?? null;
 
     const availableCharacters = useMemo(() => applyFilter(CHARACTERS, { includeIds: rosterIds }), [rosterIds]);
 
@@ -39,20 +42,22 @@ export function useRandomizer(rosterIds: number[], mode: GameMode, requireSustai
 
     const randomize = useCallback(() => {
         const filter = { includeIds: rosterIds, requireSustain };
+        let next: Result;
         if (mode === "aa") {
             const [k1, k2, k3] = rollMultipleTeams(CHARACTERS, 3, 4, filter);
             const [king] = rollMultipleTeams(CHARACTERS, 1, 4, filter);
-            setResult({ mode, knights: [k1, k2, k3], king });
+            next = { mode, knights: [k1, k2, k3], king };
         } else if (mode === "starward") {
             const [n1, n2, n3] = rollMultipleTeams(CHARACTERS, 3, 4, filter);
-            setResult({ mode, nodes: [n1, n2, n3] });
+            next = { mode, nodes: [n1, n2, n3] };
         } else if (mode === "twoteam") {
             const [side1, side2] = rollMultipleTeams(CHARACTERS, 2, 4, filter);
-            setResult({ mode, teams: [side1, side2] });
+            next = { mode, teams: [side1, side2] };
         } else {
             const [team] = rollMultipleTeams(CHARACTERS, 1, 4, filter);
-            setResult({ mode, team });
+            next = { mode, team };
         }
+        setResultsByMode((prev) => ({ ...prev, [mode]: next }));
     }, [rosterIds, requireSustain, mode]);
 
     return { result, randomize, disabledReason };

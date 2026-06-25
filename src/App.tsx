@@ -46,7 +46,7 @@ function App() {
                     />
                 </div>
 
-                {result && <ResultView result={result} isInRoster={roster.isInRoster} />}
+                <ResultView mode={options.mode} result={result} isInRoster={roster.isInRoster} />
             </main>
 
             {/* In-flow footer. Version sits bottom-right, clear of the bottom-left pinned selector. */}
