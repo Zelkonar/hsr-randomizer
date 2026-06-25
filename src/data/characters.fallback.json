@@ -1,5 +1,5 @@
 {
-    "hash": "b59d1ce356",
+    "hash": "c000c9f237",
     "characters": [
         {
             "id": 1001,
@@ -810,6 +810,16 @@
             "icon": "https://assets.hsr-randomizer.zelkonar.com/characters/icon/1506.webp",
             "preview": "https://assets.hsr-randomizer.zelkonar.com/characters/preview/1506.webp",
             "portrait": "https://assets.hsr-randomizer.zelkonar.com/characters/portrait/1506.webp"
+        },
+        {
+            "id": 1507,
+            "name": "Mortenax Blade",
+            "element": "Fire",
+            "path": "Nihility",
+            "rarity": 5,
+            "icon": "https://assets.hsr-randomizer.zelkonar.com/characters/icon/1507.webp",
+            "preview": "https://assets.hsr-randomizer.zelkonar.com/characters/preview/1507.webp",
+            "portrait": "https://assets.hsr-randomizer.zelkonar.com/characters/portrait/1507.webp"
         },
         {
             "id": 8001,
