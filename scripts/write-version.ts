@@ -1,8 +1,16 @@
+// Generates src/data/version.ts for the footer build stamp.
+//
+// package.json is the single source of truth for the version: release-please
+// bumps it from Conventional Commit subjects and tags the result, so nothing
+// here is maintained by hand. The "v" prefix is display only, matching the tag.
 import fs from "fs";
 
-const semver = fs.existsSync("VERSION") ? fs.readFileSync("VERSION", "utf8").trim() : "v0.0.0";
+interface PackageManifest {
+    version?: string;
+}
 
-const version = semver;
+const manifest = JSON.parse(fs.readFileSync("package.json", "utf8")) as PackageManifest;
+const version = `v${manifest.version ?? "0.0.0"}`;
 const buildDate = new Date().toISOString().slice(0, 16) + "Z";
 
 const out = [
