@@ -1,0 +1,60 @@
+# Opens the main -> release pull request that ships a cut version to production.
+#
+# release-please tags a version but does not deploy it: production tracks the
+# release branch. This fires when that GitHub Release is published, so a deploy
+# PR exists exactly when there is a new version to ship. Merging it stays a
+# deliberate human step, and quality.yml runs on the PR before you do.
+name: Deploy PR
+
+on:
+    release:
+        types: [published]
+    # Lets you re-open the deploy PR by hand if it was closed without merging.
+    workflow_dispatch:
+
+permissions:
+    contents: read
+    pull-requests: write
+
+jobs:
+    open-deploy-pr:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v5
+              with:
+                  fetch-depth: 0
+
+            - name: Open or update the deploy PR
+              env:
+                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  # Through the environment, never interpolated into the script.
+                  TAG: ${{ github.event.release.tag_name }}
+              run: |
+                  set -euo pipefail
+
+                  version="${TAG:-$(git describe --tags --abbrev=0 origin/main)}"
+
+                  # Nothing to ship if release already contains everything on main.
+                  ahead=$(git rev-list --count origin/release..origin/main)
+                  if [ "$ahead" -eq 0 ]; then
+                    echo "release is already up to date with main; nothing to deploy"
+                    exit 0
+                  fi
+                  echo "main is $ahead commit(s) ahead of release"
+
+                  title="deploy: $version"
+                  body="Ships \`$version\` to production.
+
+                  Merging deploys the release branch to Vercel. Review the diff first: it is
+                  everything on main that production has not seen yet.
+
+                  Opened automatically by .github/workflows/deploy-pr.yml"
+
+                  existing=$(gh pr list --base release --head main --state open --json number --jq '.[0].number // empty')
+
+                  if [ -n "$existing" ]; then
+                    gh pr edit "$existing" --title "$title" --body "$body"
+                    echo "updated existing deploy PR #$existing"
+                  else
+                    gh pr create --base release --head main --title "$title" --body "$body"
+                  fi
