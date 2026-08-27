@@ -8,7 +8,53 @@
         <meta name="apple-mobile-web-app-title" content="HSR Randomizer" />
         <link rel="manifest" href="/favicon/site.webmanifest" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>HSR Randomizer</title>
+        <title>HSR Randomizer: Honkai: Star Rail Team Randomizer</title>
+        <meta
+            name="description"
+            content="HSR Randomizer generates random Honkai: Star Rail teams from the characters you own. Configure your roster, require a sustain, and roll up to four teams at once. Made by Zelkonar."
+        />
+        <link rel="canonical" href="https://hsr-randomizer.zelkonar.com/" />
+        <meta name="author" content="Zelkonar" />
+        <meta name="robots" content="index, follow, max-image-preview:large" />
+        <meta name="theme-color" content="#030712" />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="HSR Randomizer" />
+        <meta property="og:title" content="HSR Randomizer: Honkai: Star Rail Team Randomizer" />
+        <meta
+            property="og:description"
+            content="Generate random Honkai: Star Rail teams from the characters you own. Made by Zelkonar."
+        />
+        <meta property="og:url" content="https://hsr-randomizer.zelkonar.com/" />
+        <meta property="og:image" content="https://hsr-randomizer.zelkonar.com/favicon/web-app-manifest-512x512.png" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="HSR Randomizer: Honkai: Star Rail Team Randomizer" />
+        <meta
+            name="twitter:description"
+            content="Generate random Honkai: Star Rail teams from the characters you own. Made by Zelkonar."
+        />
+        <meta name="twitter:image" content="https://hsr-randomizer.zelkonar.com/favicon/web-app-manifest-512x512.png" />
+
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "WebApplication",
+                "name": "HSR Randomizer",
+                "alternateName": "Honkai: Star Rail Team Randomizer",
+                "url": "https://hsr-randomizer.zelkonar.com/",
+                "applicationCategory": "GameApplication",
+                "operatingSystem": "Any",
+                "description": "Generate random Honkai: Star Rail teams from the characters you own.",
+                "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+                "author": {
+                    "@type": "Person",
+                    "name": "Zelkonar",
+                    "alternateName": ["Zelk", "Zelkanar"],
+                    "url": "https://github.com/Zelkonar",
+                    "sameAs": ["https://github.com/Zelkonar"]
+                }
+            }
+        </script>
         <script>
             // Resolve and apply the theme before first paint to avoid a flash of
             // the wrong theme. Mirrors getInitialTheme() in src/lib/theme.ts.
@@ -64,6 +110,13 @@
             <div id="hsr-loading">
                 <div class="hsr-spinner"></div>
             </div>
+            <noscript>
+                <h1>HSR Randomizer</h1>
+                <p>
+                    A Honkai: Star Rail team randomizer by Zelkonar. Configure the characters you own, pick a mode, and
+                    generate random teams from your roster. JavaScript is required to run the app.
+                </p>
+            </noscript>
         </div>
         <script type="module" src="/src/main.tsx"></script>
     </body>
