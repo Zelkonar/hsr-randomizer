@@ -33,7 +33,7 @@ export function CardPortrait({
                 aria-hidden
                 className="absolute inset-0 w-full h-full object-contain invert opacity-[0.08] mix-blend-multiply dark:invert-0 dark:opacity-40 dark:mix-blend-screen"
             />
-            <img src={src} alt={character.name} loading="lazy" className={imgStyles[imageFit]} />
+            <img src={src} alt={character.name} fetchPriority="high" decoding="async" className={imgStyles[imageFit]} />
             <div className={`absolute inset-0 bg-gradient-to-t ${GRADIENT}`} />
         </div>
     );
