@@ -11,11 +11,14 @@ import VERSION, { BUILD_DATE } from "./data/version";
 import { useRoster } from "./hooks/useRoster";
 import { useOptions } from "./hooks/useOptions";
 import { useRandomizer } from "./hooks/useRandomizer";
+import { useImagePrefetch } from "./hooks/useImagePrefetch";
 
 function App() {
     const roster = useRoster();
     const options = useOptions();
     const { result, randomize, disabledReason } = useRandomizer(roster.rosterIds, options.mode, options.requireSustain);
+
+    useImagePrefetch(roster.rosterIds);
 
     const handleModeChange = useCallback(
         (m: typeof options.mode) => {
