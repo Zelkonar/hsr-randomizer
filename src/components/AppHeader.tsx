@@ -12,6 +12,9 @@ export function AppHeader() {
             </p>
 
             <h1 className="relative text-4xl sm:text-5xl font-black uppercase tracking-[0.15em] text-white drop-shadow-lg">
+                {/* Visually the title reads "Randomizer" under the eyebrow. The hidden prefix
+                    gives crawlers and screen readers a complete heading. */}
+                <span className="sr-only">Honkai: Star Rail </span>
                 <span
                     style={{
                         background: "linear-gradient(90deg, #7dd3fc, #a78bfa, #7dd3fc)",

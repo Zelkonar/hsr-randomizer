@@ -43,12 +43,8 @@
     "optionalDependencies": {
         "@rolldown/binding-darwin-arm64": "1.1.1",
         "@rolldown/binding-darwin-x64": "1.1.1",
-        "@rolldown/binding-win32-arm64-msvc": "1.1.1",
-        "@rolldown/binding-win32-x64-msvc": "1.1.1",
         "@tailwindcss/oxide-darwin-arm64": "4.3.1",
-        "@tailwindcss/oxide-darwin-x64": "4.3.1",
-        "@tailwindcss/oxide-win32-arm64-msvc": "4.3.1",
-        "@tailwindcss/oxide-win32-x64-msvc": "4.3.1"
+        "@tailwindcss/oxide-darwin-x64": "4.3.1"
     },
     "devDependencies": {
         "@eslint/js": "^10.0.1",
