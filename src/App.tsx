@@ -52,10 +52,10 @@ function App() {
                 <ResultView mode={options.mode} result={result} isInRoster={roster.isInRoster} />
             </main>
 
-            {/* In-flow footer. Version sits bottom-right, clear of the bottom-left pinned selector. */}
+            {/* In-flow footer. Everything sits bottom-right, clear of the bottom-left pinned selector. */}
             <footer className="border-t border-border px-4 pt-3 pb-4 sm:px-6">
-                <div className="flex items-end justify-between gap-4">
-                    <p className="text-[10px] text-muted-foreground/70">
+                <div className="flex flex-col items-end gap-0.5 text-right text-[10px]">
+                    <p className="text-muted-foreground/70">
                         HSR Randomizer, made by{" "}
                         <a
                             href="https://github.com/Zelkonar/hsr-randomizer"
@@ -66,7 +66,7 @@ function App() {
                             Zelkonar
                         </a>
                     </p>
-                    <div className="flex flex-col items-end text-right text-[10px] font-mono tracking-widest text-purple-500/50 dark:text-purple-300/40">
+                    <div className="flex flex-col items-end font-mono tracking-widest text-purple-500/50 dark:text-purple-300/40">
                         <span className="select-all">{VERSION}</span>
                         {BUILD_DATE && <span className="select-all">{BUILD_DATE}</span>}
                     </div>
