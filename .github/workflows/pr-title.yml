@@ -1,0 +1,33 @@
+# With squash merging, the PR title becomes the commit subject on main, and that
+# subject is what release-please reads to compute the version and changelog. A
+# non-conventional title silently produces no release, so check it here: the
+# commit-msg hook cannot, because it only runs on the contributor's machine.
+name: PR Title
+
+on:
+    pull_request:
+        types: [opened, edited, reopened, synchronize]
+
+permissions:
+    contents: read
+
+jobs:
+    lint-title:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v5
+
+            - uses: actions/setup-node@v5
+              with:
+                  node-version: 22
+                  cache: npm
+
+            - run: npm ci
+
+            # The title goes through the environment rather than being
+            # interpolated into the script, so a title containing shell syntax
+            # cannot execute anything.
+            - name: Lint PR title
+              env:
+                  PR_TITLE: ${{ github.event.pull_request.title }}
+              run: echo "$PR_TITLE" | npx commitlint
