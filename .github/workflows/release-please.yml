@@ -1,0 +1,26 @@
+# Version bumps, CHANGELOG, and tags are computed from Conventional Commit
+# subjects, so nothing has to be bumped by hand.
+#
+# Flow: every push to main updates a standing "chore: release" PR showing the
+# next version and its changelog. Merging that PR bumps package.json, writes
+# CHANGELOG.md, and creates the vX.Y.Z tag and GitHub Release. Deploying is
+# still a separate, deliberate step: open a PR from main to release.
+name: Release Please
+
+on:
+    push:
+        branches:
+            - main
+
+permissions:
+    contents: write
+    pull-requests: write
+
+jobs:
+    release-please:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: googleapis/release-please-action@v4
+              with:
+                  config-file: release-please-config.json
+                  manifest-file: .release-please-manifest.json

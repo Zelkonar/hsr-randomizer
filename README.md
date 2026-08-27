@@ -47,4 +47,24 @@ Character data is **generated and uploaded from [`hsr-randomizer-infra`](https:/
 | `main`           | Staging / preview | Preview            |
 | Feature branches | Development       | Not deployed       |
 
-Pushing to `release` creates a GitHub Release tagged with the `VERSION` file contents. PRs targeting `release` must contain a `VERSION` bump greater than what's currently on `release`.
+## Versioning and releases
+
+Versions are computed from [Conventional Commit](https://www.conventionalcommits.org/) subjects by
+[release-please](https://github.com/googleapis/release-please); nothing is bumped by hand. `package.json` holds the
+version, and a `commit-msg` hook runs commitlint so a malformed subject fails before it reaches CI.
+
+| Prefix                       | Effect on version      |
+| ---------------------------- | ---------------------- |
+| `fix:`                       | patch (0.2.0 -> 0.2.1) |
+| `feat:`                      | minor (0.2.0 -> 0.3.0) |
+| `feat!:` / `BREAKING CHANGE` | minor while pre-1.0    |
+| `chore:`, `docs:`, `test:`   | no release             |
+
+Cutting a release:
+
+1. Merge work into `main` with Conventional Commit subjects.
+2. release-please keeps a `chore: release` PR open showing the next version and its changelog. Merge it when ready:
+   that bumps `package.json`, writes `CHANGELOG.md`, and creates the `vX.Y.Z` tag and GitHub Release.
+3. Deploy by opening a PR from `main` to `release`. Merging it ships to production.
+
+Step 3 is deliberate and separate: tagging a version does not deploy it.
