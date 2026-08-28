@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.4](https://github.com/Zelkonar/hsr-randomizer/compare/v0.2.3...v0.2.4) (2026-08-28)
+
+
+### Bug Fixes
+
+* test ([#86](https://github.com/Zelkonar/hsr-randomizer/issues/86)) ([2033d1c](https://github.com/Zelkonar/hsr-randomizer/commit/2033d1c2b99785bdbe3c66a779998297346d0f6f))
+
 ## [0.2.3](https://github.com/Zelkonar/hsr-randomizer/compare/v0.2.2...v0.2.3) (2026-08-28)
 
 
