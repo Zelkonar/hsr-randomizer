@@ -1,0 +1,54 @@
+# Ships a cut version to production by fast-forwarding release to main.
+#
+# Production tracks the release branch, so moving the branch is the deploy.
+# Vercel builds from its own webhook, which fires on any push, including one
+# made by GITHUB_TOKEN, so nothing extra is needed to kick off the build.
+#
+# The gate is merging the release PR: that is the deliberate step, and this
+# runs only on the commit that merge produces.
+name: Deploy
+
+on:
+    push:
+        branches:
+            - main
+    # Redeploys the current main on demand.
+    workflow_dispatch:
+
+permissions:
+    contents: write
+
+jobs:
+    deploy:
+        # Only a release-please release commit ships. Ordinary pushes to main do
+        # not start a run at all.
+        if: >-
+            github.event_name == 'workflow_dispatch' ||
+            startsWith(github.event.head_commit.message, 'chore(main): release')
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v5
+              with:
+                  fetch-depth: 0
+
+            - name: Fast-forward release to main
+              run: |
+                  set -euo pipefail
+
+                  version=$(git describe --tags --abbrev=0)
+
+                  if [ "$(git rev-parse origin/release)" = "$(git rev-parse HEAD)" ]; then
+                    echo "release is already at $version; nothing to deploy"
+                    exit 0
+                  fi
+
+                  # Refuse to rewrite production history. If this trips, release
+                  # has commits main does not, and someone must reconcile it
+                  # deliberately rather than have a deploy discard them.
+                  if ! git merge-base --is-ancestor origin/release HEAD; then
+                    echo "::error::release is not an ancestor of main; refusing to force-push production."
+                    exit 1
+                  fi
+
+                  git push origin HEAD:release
+                  echo "deployed $version to release"

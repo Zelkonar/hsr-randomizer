@@ -13,6 +13,7 @@ permissions:
 
 jobs:
     lint-title:
+        if: github.base_ref != 'release'
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v5
