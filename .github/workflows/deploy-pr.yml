@@ -1,15 +1,19 @@
 # Opens the main -> release pull request that ships a cut version to production.
 #
 # release-please tags a version but does not deploy it: production tracks the
-# release branch. This fires when that GitHub Release is published, so a deploy
-# PR exists exactly when there is a new version to ship. Merging it stays a
-# deliberate human step, and quality.yml runs on the PR before you do.
+# release branch. Merging the release PR is what this watches for, because the
+# release: published event it emits is created with GITHUB_TOKEN and therefore
+# never triggers a workflow. A human merging that PR does produce a real push.
+#
+# Merging the deploy PR stays a deliberate step, and quality.yml runs on it first.
 name: Deploy PR
 
 on:
-    release:
-        types: [published]
-    # Lets you re-open the deploy PR by hand if it was closed without merging.
+    push:
+        branches:
+            - main
+    # Opens the deploy PR on demand, for a release cut before this existed or a
+    # deploy PR that was closed without merging.
     workflow_dispatch:
 
 permissions:
@@ -27,14 +31,23 @@ jobs:
             - name: Open or update the deploy PR
               env:
                   GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                  # Through the environment, never interpolated into the script.
-                  TAG: ${{ github.event.release.tag_name }}
+                  EVENT: ${{ github.event_name }}
               run: |
                   set -euo pipefail
 
-                  version="${TAG:-$(git describe --tags --abbrev=0 origin/main)}"
+                  subject=$(git log -1 --format=%s)
 
-                  # Nothing to ship if release already contains everything on main.
+                  # Only a release commit marks a new version worth shipping. A
+                  # manual dispatch skips the check.
+                  if [ "$EVENT" != "workflow_dispatch" ]; then
+                    case "$subject" in
+                      "chore(main): release"*) ;;
+                      *) echo "not a release commit, nothing to do: $subject"; exit 0 ;;
+                    esac
+                  fi
+
+                  version=$(git describe --tags --abbrev=0)
+
                   ahead=$(git rev-list --count origin/release..origin/main)
                   if [ "$ahead" -eq 0 ]; then
                     echo "release is already up to date with main; nothing to deploy"
