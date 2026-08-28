@@ -22,6 +22,12 @@ permissions:
 
 jobs:
     open-deploy-pr:
+        # Only a release-please release commit marks a new version worth
+        # shipping. Gating the job means ordinary pushes to main never start a
+        # run at all, rather than starting one that exits immediately.
+        if: >-
+            github.event_name == 'workflow_dispatch' ||
+            startsWith(github.event.head_commit.message, 'chore(main): release')
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v5
@@ -31,20 +37,8 @@ jobs:
             - name: Open or update the deploy PR
               env:
                   GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                  EVENT: ${{ github.event_name }}
               run: |
                   set -euo pipefail
-
-                  subject=$(git log -1 --format=%s)
-
-                  # Only a release commit marks a new version worth shipping. A
-                  # manual dispatch skips the check.
-                  if [ "$EVENT" != "workflow_dispatch" ]; then
-                    case "$subject" in
-                      "chore(main): release"*) ;;
-                      *) echo "not a release commit, nothing to do: $subject"; exit 0 ;;
-                    esac
-                  fi
 
                   version=$(git describe --tags --abbrev=0)
 
