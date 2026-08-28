@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.3](https://github.com/Zelkonar/hsr-randomizer/compare/v0.2.2...v0.2.3) (2026-08-28)
+
+
+### Bug Fixes
+
+* trigger the deploy PR from the release commit ([#82](https://github.com/Zelkonar/hsr-randomizer/issues/82)) ([a7f0cae](https://github.com/Zelkonar/hsr-randomizer/commit/a7f0cae9d652370f2df959d8027f9ea085b44f1d))
+
 ## [0.2.2](https://github.com/Zelkonar/hsr-randomizer/compare/v0.2.1...v0.2.2) (2026-08-27)
 
 
